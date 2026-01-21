@@ -8,7 +8,7 @@ function HomeWall() {
   const t = useTranslations("HomePage");
 
   return (
-    <div className="relative z-0 flex h-[70vh] w-full items-center justify-center overflow-hidden  shadow-lg">
+    <div className="relative z-0 flex h-[50vh] w-full items-center justify-center overflow-hidden  shadow-lg">
       <Image
         className="pointer-events-none absolute top-0 left-0 -z-1 h-full w-full object-cover"
         src="/img/intro_bg.jpg"
