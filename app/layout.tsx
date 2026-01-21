@@ -7,7 +7,7 @@ import { Header } from "@/app/components/header";
 import { Footer } from "@/app/components/footer";
 
 const openSans = Open_Sans({
-  variable: "--font-open-sans",
+  variable: "--font-sans",
   subsets: ["cyrillic", "latin"]
 });
 
@@ -24,8 +24,8 @@ export default function RootLayout({
   return (
     <StrictMode>
       <NextIntlClientProvider>
-        <html lang="en">
-          <body className={`${openSans.variable} antialiased`}>
+        <html lang="en" className={openSans.variable}>
+          <body className="antialiased">
             <Header />
             {children}
             <Footer />

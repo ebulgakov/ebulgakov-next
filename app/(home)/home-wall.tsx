@@ -6,6 +6,7 @@ import { Mouse, ChevronDown } from "lucide-react";
 
 function HomeWall() {
   const t = useTranslations("HomePage");
+
   return (
     <div className="relative z-0 flex h-[70vh] w-full items-center justify-center overflow-hidden  shadow-lg">
       <Image
@@ -17,8 +18,8 @@ function HomeWall() {
         priority
       />
       <div className="space-y-3 rounded bg-black/50 p-4 text-center text-white">
-        <div className="text-5xl font-bold">{t("introTitle")}</div>
-        <div className="text-2xl">{t("introText")}</div>
+        <div className="text-5xl font-bold">{t("intro.title")}</div>
+        <div className="text-2xl">{t("intro.description")}</div>
       </div>
 
       <div className="absolute invert bottom-0 left-0 flex w-full flex-col items-center -space-y-4 pb-10 text-white ">
