@@ -3,6 +3,8 @@ import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import { StrictMode } from "react";
 import { NextIntlClientProvider } from "next-intl";
+import { Header } from "@/app/components/header";
+import { Footer } from "@/app/components/footer";
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
@@ -23,7 +25,11 @@ export default function RootLayout({
     <StrictMode>
       <NextIntlClientProvider>
         <html lang="en">
-          <body className={`${openSans.variable} antialiased`}>{children}</body>
+          <body className={`${openSans.variable} antialiased`}>
+            <Header />
+            {children}
+            <Footer />
+          </body>
         </html>
       </NextIntlClientProvider>
     </StrictMode>
