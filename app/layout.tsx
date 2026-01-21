@@ -1,3 +1,5 @@
+import { authClient } from "@/app/lib/auth/client";
+import { NeonAuthUIProvider } from "@neondatabase/auth/react";
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
@@ -24,13 +26,15 @@ export default function RootLayout({
   return (
     <StrictMode>
       <NextIntlClientProvider>
-        <html lang="en" className={openSans.variable}>
-          <body className="antialiased">
-            <Header />
-            {children}
-            <Footer />
-          </body>
-        </html>
+        <NeonAuthUIProvider authClient={authClient} redirectTo="/admin" emailOTP>
+          <html lang="en" className={openSans.variable} suppressHydrationWarning>
+            <body className="antialiased">
+              <Header />
+              {children}
+              <Footer />
+            </body>
+          </html>
+        </NeonAuthUIProvider>
       </NextIntlClientProvider>
     </StrictMode>
   );

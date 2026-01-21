@@ -5,7 +5,7 @@ import { HomeLastWork } from "@/app/(home)/home-last-work";
 import { HomeContacts } from "@/app/(home)/home-contacts";
 import { Divide } from "@/app/components/ui/divide";
 
-export default async function Home() {
+async function Home() {
   return (
     <div>
       <HomeWall />
@@ -26,3 +26,5 @@ export default async function Home() {
     </div>
   );
 }
+
+export default Home;
