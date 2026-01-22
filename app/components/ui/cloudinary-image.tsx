@@ -6,7 +6,7 @@ import { Cloudinary } from "@cloudinary/url-gen";
 import type { ComponentProps } from "react";
 
 type CloudinaryImageProps = Omit<ComponentProps<typeof AdvancedImage>, "cldImg"> & {
-  publicId: string;
+  src: string;
 };
 
 function CloudinaryImage(props: CloudinaryImageProps) {
@@ -16,7 +16,7 @@ function CloudinaryImage(props: CloudinaryImageProps) {
     }
   });
 
-  const myImage = cld.image(props.publicId);
+  const myImage = cld.image(props.src);
 
   return <AdvancedImage {...props} cldImg={myImage} />;
 }
