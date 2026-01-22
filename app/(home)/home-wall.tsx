@@ -1,8 +1,8 @@
 "use client";
 
+import { Mouse, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "use-intl";
-import { Mouse, ChevronDown } from "lucide-react";
 
 function HomeWall() {
   const t = useTranslations("HomePage");

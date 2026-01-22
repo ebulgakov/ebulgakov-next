@@ -1,1 +1,3 @@
-export type LocaleList = Record<string, Record<string, string>>;
+export type LocaleList = {
+  [key: string]: string | LocaleList;
+};

@@ -1,12 +1,14 @@
-import { authClient } from "@/app/lib/auth/client";
 import { NeonAuthUIProvider } from "@neondatabase/auth/react";
-import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
-import { StrictMode } from "react";
 import { NextIntlClientProvider } from "next-intl";
-import { Header } from "@/app/components/header";
+import { StrictMode } from "react";
+
 import { Footer } from "@/app/components/footer";
+import { Header } from "@/app/components/header";
+import { authClient } from "@/app/lib/auth/client";
+
+import type { Metadata } from "next";
 
 const openSans = Open_Sans({
   variable: "--font-sans",

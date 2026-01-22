@@ -1,4 +1,23 @@
 {
   "metadata": {},
-  "HomePage": {}
+  "HomePage": {
+    "intro": {
+      "title": "Eugene Bulgakov",
+      "description": "Frontend Developer, Open Source guy \n\n and just a good man"
+    },
+    "competencies": {
+      "adaptation": {
+        "title": "Design adaptation",
+        "description": "Sometimes, the layouts do not entirely match the actual site data. I have a considerable experience with adaptation and correction design in business. I can draw skipped elements or adapt current them to current business tasks."
+      },
+      "development": {
+        "title": "Frontend development",
+        "description": "I have more than 15 years of experience with front-end technologies. I like to do it, and I every time learn something new. In my work, I use only proven technologies and best practices for web engineering. Anyway, if I do not know something, I will learn it as fast as I can."
+      },
+      "ecommerce": {
+        "title": "E-commerce",
+        "description": "I work with e-commerce last 6 years. During this time I have studied to work with many CMS including Shopify, BigCommerce, Spree, Bitrix, and others. It is hard, but it interesting process with a lot of nuances, which allows for creating a working shop for selling goods."
+      }
+    }
+  }
 }

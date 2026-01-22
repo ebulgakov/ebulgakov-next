@@ -18,10 +18,18 @@ export default getRequestConfig(async () => {
     locale,
     messages: (await import(`./locates/${locale}.json`)).default,
     getMessageFallback: ({ key, namespace }: { key: string; namespace?: string }): string => {
-      if (!namespace) return key; // No namespace provided, return key as is
+      const keys = namespace ? `${namespace}.${key}`.split('.') : key.split('.');
+      let current: string | LocaleList = defaultLocateList;
 
-      const namespaceObj = defaultLocateList[namespace];
-      return namespaceObj.hasOwnProperty(key) ? namespaceObj[key] : key;
+      for (const k of keys) {
+        if (typeof current === 'object' && current !== null && k in current) {
+          current = current[k];
+        } else {
+          return key;
+        }
+      }
+
+      return typeof current === 'string' ? current : key;
     }
   };
 });

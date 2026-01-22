@@ -1,9 +1,9 @@
 "use client";
 
+import { Group, ShoppingCart, SquareChartGantt } from "lucide-react";
 import { useTranslations } from "use-intl";
 
 import { Title } from "@/app/components/ui/title";
-import { Group, ShoppingCart, SquareChartGantt } from "lucide-react";
 
 function HomeCompetencies() {
   const t = useTranslations("HomePage");
