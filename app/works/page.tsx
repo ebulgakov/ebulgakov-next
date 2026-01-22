@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
 import { getWorks } from "@/db/queries/get-works";
 
@@ -10,10 +12,8 @@ async function WorksPage() {
         <div key={work.id}>
           <h2>{work.title}</h2>
           <p>{work.previewDescription}</p>
-          {work.previewImageUrl && (
-            <CloudinaryImage src={work.previewImageUrl} alt={work.title} />
-          )}
-          <a href={`/works/${work.slug}`}>View Work</a>
+          {work.previewImageUrl && <CloudinaryImage src={work.previewImageUrl} alt={work.title} />}
+          <Link href={`/works/${work.slug}`}>View Work</Link>
         </div>
       ))}
     </div>

@@ -1,5 +1,40 @@
-function WorkPage() {
-  return <div>Work Page</div>;
+import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
+import { getWorkBySlug } from "@/db/queries/get-works";
+
+type WorkPageProps = {
+  params: {
+    id: string;
+  };
+};
+async function WorkPage({ params }: WorkPageProps) {
+  const { id } = await params;
+
+  const workResponse = await getWorkBySlug(id);
+
+  console.log(workResponse);
+
+  if (!workResponse) {
+    return <div>Work not found</div>;
+  }
+
+  return (
+    <div>
+      <h1>{workResponse.title}</h1>
+
+      <p>{workResponse.description}</p>
+
+      {workResponse.tags?.map(tag => (
+        <span key={tag.id}>{tag.name} </span>
+      ))}
+
+      {workResponse.images?.map(image => (
+        <div key={image.id}>
+          {image.id && <CloudinaryImage src={image.id} alt={image.caption || "Work Image"} />}
+          {image.caption && <p>{image.caption}</p>}
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default WorkPage;

@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 
 import db from "@/db";
-import { imageUploads, works } from "@/db/schema";
+import { imageUploads, tags, works, workTags, worksToImages } from "@/db/schema";
 
 async function getWorks() {
   return db
@@ -17,4 +17,42 @@ async function getWorks() {
     .where(eq(works.isPublished, true));
 }
 
-export { getWorks };
+async function getWorkBySlug(slug: string) {
+  const response = await db
+    .select({
+      id: works.id,
+      title: works.title,
+      description: works.previewDescription
+    })
+    .from(works)
+    .where(eq(works.slug, slug))
+    .groupBy(works.id)
+    .limit(1);
+
+  const [result] = response;
+  if (!result) return null;
+
+  const images = await db
+    .select({
+      id: imageUploads.id,
+      caption: imageUploads.caption
+    })
+    .from(works)
+    .leftJoin(worksToImages, eq(works.id, worksToImages.workId))
+    .leftJoin(imageUploads, eq(worksToImages.imageId, imageUploads.id))
+    .where(eq(works.slug, slug));
+
+  const tagsResponse = await db
+    .select({
+      id: tags.id,
+      name: tags.name
+    })
+    .from(works)
+    .leftJoin(workTags, eq(works.id, workTags.workId))
+    .leftJoin(tags, eq(workTags.tagId, tags.id))
+    .where(eq(works.slug, slug));
+
+  return { ...result, images, tags: tagsResponse };
+}
+
+export { getWorks, getWorkBySlug };
