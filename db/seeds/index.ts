@@ -1,8 +1,7 @@
+import db from "@/db";
 import { works, worksToImages, imageUploads, tags, workTags } from "@/db/schema";
 
 import { works as worksData, type Image } from "./works";
-
-import db from "./index";
 
 import type { NewImageUpload, NewWork, NewTag } from "@/db/schema";
 

@@ -19,16 +19,3 @@ const db = drizzle(sql, {
 });
 
 export default db;
-
-export type {
-  Work,
-  NewWork,
-  ImageUpload,
-  NewImageUpload,
-  WorksToImages,
-  NewWorksToImages,
-  Tag,
-  NewTag,
-  WorkTag,
-  NewWorkTag
-} from "./schema";
