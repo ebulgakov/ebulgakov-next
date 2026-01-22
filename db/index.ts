@@ -12,4 +12,11 @@ const db = drizzle(sql, { schema });
 
 export default db;
 
-export type { Work, NewWork, ImageUpload, NewImageUpload } from "./schema";
+export type {
+  Work,
+  NewWork,
+  ImageUpload,
+  NewImageUpload,
+  WorksToImages,
+  NewWorksToImages
+} from "./schema";

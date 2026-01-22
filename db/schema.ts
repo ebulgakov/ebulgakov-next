@@ -1,7 +1,7 @@
-import { pgTable, serial, text, timestamp, boolean } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, timestamp, boolean, primaryKey } from "drizzle-orm/pg-core";
 
 export const imageUploads = pgTable("image_uploads", {
-  id: serial("id").primaryKey(),
+  id: text("id").primaryKey(),
   publicId: text("public_id").notNull(),
   url: text("url").notNull(),
   caption: text("caption"),
@@ -11,9 +11,6 @@ export const imageUploads = pgTable("image_uploads", {
 export const works = pgTable("works", {
   id: serial("id").primaryKey(),
   stack: text("stack").array().notNull(),
-  images: text("images")
-    .array()
-    .references(() => imageUploads.id),
   previewImage: text("preview_image")
     .notNull()
     .references(() => imageUploads.id),
@@ -30,7 +27,22 @@ export const works = pgTable("works", {
   isPublished: boolean("is_published").default(false).notNull()
 });
 
-const schema = { works, imageUploads };
+export const worksToImages = pgTable(
+  "works_to_images",
+  {
+    workId: serial("work_id")
+      .notNull()
+      .references(() => works.id),
+    imageId: text("image_id")
+      .notNull()
+      .references(() => imageUploads.id)
+  },
+  t => ({
+    pk: primaryKey({ columns: [t.workId, t.imageId] }) // Guarantee uniqueness across the combination of workId and imageId
+  })
+);
+
+const schema = { works, imageUploads, worksToImages };
 
 export default schema;
 
@@ -39,3 +51,6 @@ export type NewWork = typeof works.$inferInsert;
 
 export type ImageUpload = typeof imageUploads.$inferSelect;
 export type NewImageUpload = typeof imageUploads.$inferInsert;
+
+export type WorksToImages = typeof worksToImages.$inferSelect;
+export type NewWorksToImages = typeof worksToImages.$inferInsert;
