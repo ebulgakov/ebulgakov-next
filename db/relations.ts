@@ -15,20 +15,6 @@ export const worksRelations = relations(works, ({ one, many }) => ({
 }));
 
 /**
- * Each tag can be associated with many works.
- */
-export const tagsRelations = relations(tags, ({ many }) => ({
-  workTags: many(workTags)
-}));
-
-/**
- * Each image upload can be associated with only one work.
- */
-export const imageUploadsRelations = relations(imageUploads, ({ one }) => ({
-  worksToImages: one(worksToImages)
-}));
-
-/**
  * Each workTag links one work to one tag.
  */
 export const workTagsRelations = relations(workTags, ({ one }) => ({
