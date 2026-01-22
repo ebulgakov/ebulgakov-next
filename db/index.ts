@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 import assert from "node:assert";
 
 import { neon } from "@neondatabase/serverless";

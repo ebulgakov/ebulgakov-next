@@ -8,6 +8,20 @@
       "when": 1769066999713,
       "tag": "0000_foamy_storm",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1769076119673,
+      "tag": "0001_gray_madrox",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1769077859315,
+      "tag": "0002_rare_microbe",
+      "breakpoints": true
     }
   ]
 }

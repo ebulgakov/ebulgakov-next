@@ -1,0 +1,1 @@
+ALTER TABLE "image_uploads" DROP COLUMN "public_id";

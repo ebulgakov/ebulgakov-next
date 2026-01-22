@@ -2,7 +2,6 @@ import { pgTable, serial, text, timestamp, boolean, primaryKey } from "drizzle-o
 
 export const imageUploads = pgTable("image_uploads", {
   id: text("id").primaryKey(),
-  publicId: text("public_id").notNull(),
   url: text("url").notNull(),
   caption: text("caption"),
   createdAt: timestamp("created_at", { mode: "string" }).defaultNow().notNull()
@@ -18,10 +17,10 @@ export const works = pgTable("works", {
   updatedAt: timestamp("updated_at", { mode: "string" }).defaultNow().notNull(),
   category: text("category").notNull(),
   previewDescription: text("preview_description").notNull(),
-  description: text("description").notNull(),
+  description: text("description"),
   title: text("title").notNull(),
-  staticUrl: text("static_url").notNull(),
-  productionUrl: text("production_url").notNull(),
+  staticUrl: text("static_url"),
+  productionUrl: text("production_url"),
   slug: text("slug").notNull().unique(),
   year: text("year").notNull(),
   isPublished: boolean("is_published").default(false).notNull()
