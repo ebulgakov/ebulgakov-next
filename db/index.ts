@@ -20,5 +20,9 @@ export type {
   ImageUpload,
   NewImageUpload,
   WorksToImages,
-  NewWorksToImages
+  NewWorksToImages,
+  Tag,
+  NewTag,
+  WorkTag,
+  NewWorkTag
 } from "./schema";

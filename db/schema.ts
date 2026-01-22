@@ -7,9 +7,13 @@ export const imageUploads = pgTable("image_uploads", {
   createdAt: timestamp("created_at", { mode: "string" }).defaultNow().notNull()
 });
 
+export const tags = pgTable("tags", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull().unique()
+});
+
 export const works = pgTable("works", {
   id: serial("id").primaryKey(),
-  stack: text("stack").array().notNull(),
   previewImage: text("preview_image")
     .notNull()
     .references(() => imageUploads.id),
@@ -26,6 +30,21 @@ export const works = pgTable("works", {
   isPublished: boolean("is_published").default(false).notNull()
 });
 
+export const workTags = pgTable(
+  "work_tags",
+  {
+    workId: serial("work_id")
+      .notNull()
+      .references(() => works.id),
+    tagId: serial("tag_id")
+      .notNull()
+      .references(() => tags.id)
+  },
+  t => ({
+    pk: primaryKey({ columns: [t.workId, t.tagId] }) // Guarantee uniqueness across the combination of workId and tagId
+  })
+);
+
 export const worksToImages = pgTable(
   "works_to_images",
   {
@@ -41,7 +60,7 @@ export const worksToImages = pgTable(
   })
 );
 
-const schema = { works, imageUploads, worksToImages };
+const schema = { works, tags, imageUploads, workTags, worksToImages };
 
 export default schema;
 
@@ -53,3 +72,9 @@ export type NewImageUpload = typeof imageUploads.$inferInsert;
 
 export type WorksToImages = typeof worksToImages.$inferSelect;
 export type NewWorksToImages = typeof worksToImages.$inferInsert;
+
+export type Tag = typeof tags.$inferSelect;
+export type NewTag = typeof tags.$inferInsert;
+
+export type WorkTag = typeof works.$inferInsert;
+export type NewWorkTag = typeof works.$inferInsert;
