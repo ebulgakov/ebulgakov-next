@@ -99,7 +99,11 @@ async function main() {
   process.exit(0);
 }
 
-main().catch(err => {
-  console.error("Error during seeding:", err);
-  process.exit(1);
-});
+console.log("Nope, you do not want to run this accidentally.");
+const allowSeeding = false; // Change to true to enable seeding
+if (allowSeeding) {
+  main().catch(err => {
+    console.error("Error during seeding:", err);
+    process.exit(1);
+  });
+}
