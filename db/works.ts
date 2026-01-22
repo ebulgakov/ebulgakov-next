@@ -36,7 +36,7 @@ export const works: { [key: string]: Work } = {
       public_id: "bulgakov/snixkhmh7gz1cccqduff"
     },
     realLink: "https://ipc2u.ru/",
-    stack: ["HTML", "LESS", "AngularJS"],
+    stack: ["HTML", "Less/Sass", "AngularJS"],
     staticLink: "/static/ipc/",
     title: "IPC2U",
     url: "ipc2u",
@@ -247,7 +247,7 @@ export const works: { [key: string]: Work } = {
       public_id: "bulgakov/bkxlu4p1ibmrhdkwiafm"
     },
     realLink: "https://olmi2000.ru/",
-    stack: ["HTML", "LESS", "AngularJS"],
+    stack: ["HTML", "Less/Sass", "AngularJS"],
     staticLink: "/static/olmi/",
     title: "OLMI 2000",
     url: "olmi",
@@ -420,7 +420,7 @@ export const works: { [key: string]: Work } = {
       public_id: "bulgakov/pq7vd0t0shidckngze2g"
     },
     realLink: "https://wyndham-328a4.web.app",
-    stack: ["HTML", "SASS", "AngularJS"],
+    stack: ["HTML", "Less/Sass", "AngularJS"],
     staticLink: "",
     title: "Wyndham",
     url: "wyndham",
@@ -447,7 +447,7 @@ export const works: { [key: string]: Work } = {
       public_id: "bulgakov/s2ugjmvw4kpdkk0o1rly"
     },
     realLink: "https://www.mybespokeroom.com/",
-    stack: ["HTML", "SASS", "ReactJS"],
+    stack: ["HTML", "Less/Sass", "ReactJS"],
     staticLink: "",
     title: "Mybespokeroom",
     url: "mybespokeroom",
@@ -666,7 +666,7 @@ export const works: { [key: string]: Work } = {
       public_id: "bulgakov/ba3rbzldrxaj70e7eoun"
     },
     realLink: "https://www.egoing.ru/",
-    stack: ["HTML", "AngularJS", "Less"],
+    stack: ["HTML", "AngularJS", "Less/Sass"],
     staticLink: "",
     title: "Ego Engineering",
     url: "egoing",
