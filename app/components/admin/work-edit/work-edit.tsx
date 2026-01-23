@@ -57,13 +57,12 @@ function WorkEdit({ work, tags, workTags, workImages, previewImage }: WorkEditPr
     const category = formData.get("category");
     const isPublished = formData.get("isPublished");
     const selectedTags = formData.getAll("tag[]");
-    const workImages = formData.getAll("workImages[]");
     const slug = formData.get("slug");
     const productionUrl = formData.get("productionUrl");
     const staticUrl = formData.get("staticUrl");
 
     // Handle form submission logic here
-    console.log(
+    console.log({
       title,
       previewDescription,
       description,
@@ -74,8 +73,11 @@ function WorkEdit({ work, tags, workTags, workImages, previewImage }: WorkEditPr
       slug,
       productionUrl,
       staticUrl,
-      workImages
-    );
+      previewImage: pImage,
+      newPreviewImage: pImageN,
+      newWorkImages: wImagesN,
+      workImages: wImages
+    });
   };
 
   return (

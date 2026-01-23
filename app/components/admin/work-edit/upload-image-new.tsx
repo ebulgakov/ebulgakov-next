@@ -2,28 +2,29 @@
 
 import { X } from "lucide-react";
 
-import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
 import { Input } from "@/app/components/ui/input";
 
-import type { ImageUpload } from "@/db/schema";
+import type { PreviewImage } from "@/types/image";
 
 type UploadImagePreviewProps = {
-  image: ImageUpload;
+  image: PreviewImage;
   onUpdateCaption?: (caption?: string) => void;
   onDelete: (id: string) => void;
 };
-function UploadImagePreview({ image, onDelete, onUpdateCaption }: UploadImagePreviewProps) {
+
+function UploadImageNew({ image, onDelete, onUpdateCaption }: UploadImagePreviewProps) {
   return (
     <div className="w-50">
       <div className="relative size-50">
         <button
           type="button"
-          onClick={() => onDelete(image.id)}
+          onClick={() => onDelete(image.preview)}
           className="absolute -top-1 -right-1 z-10 size-5 cursor-pointer rounded-full bg-red-600 p-1 text-white hover:bg-red-700"
         >
           <X className="size-full" />
         </button>
-        <CloudinaryImage className="size-full rounded object-cover" src={image.id} />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="size-full rounded object-cover" src={image.preview} alt="Preview" />
       </div>
       {onUpdateCaption && (
         <Input
@@ -37,4 +38,4 @@ function UploadImagePreview({ image, onDelete, onUpdateCaption }: UploadImagePre
   );
 }
 
-export { UploadImagePreview };
+export { UploadImageNew };
