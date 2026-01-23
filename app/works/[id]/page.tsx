@@ -1,4 +1,5 @@
 import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
+import { FrameContainer } from "@/app/components/ui/frame-container";
 import { getWorkBySlug } from "@/db/queries/get-works";
 
 type WorkPageProps = {
@@ -33,6 +34,8 @@ async function WorkPage({ params }: WorkPageProps) {
           {image.caption && <p>{image.caption}</p>}
         </div>
       ))}
+
+      {workResponse.staticUrl && <FrameContainer link={workResponse.staticUrl} />}
     </div>
   );
 }
