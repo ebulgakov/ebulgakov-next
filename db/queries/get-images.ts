@@ -11,12 +11,4 @@ function getImagesByWorkId(workId: number) {
     }
   });
 }
-async function getPreviewImageByWorkId(workId: number) {
-  return db.query.worksToImages.findFirst({
-    where: eq(worksToImages.workId, workId),
-    with: {
-      image: true
-    }
-  });
-}
-export { getImagesByWorkId, getPreviewImageByWorkId };
+export { getImagesByWorkId };

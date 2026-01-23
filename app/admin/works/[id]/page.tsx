@@ -1,6 +1,6 @@
 import { WorkEdit } from "@/app/components/admin/work-edit";
 import { Container } from "@/app/components/ui/container";
-import { getImagesByWorkId, getPreviewImageByWorkId } from "@/db/queries/get-images";
+import { getImagesByWorkId } from "@/db/queries/get-images";
 import { getAllTags, getTagsByWorkId } from "@/db/queries/get-tags";
 import { getWorkBySlug } from "@/db/queries/get-works";
 
@@ -18,7 +18,6 @@ async function AdminEditWorkPage({ params }: WorkPageProps) {
 
   const tagsByWorkId = await getTagsByWorkId(workResponse.id);
   const imagesByWorkId = await getImagesByWorkId(workResponse.id);
-  const previewImageByWorkId = await getPreviewImageByWorkId(workResponse.id);
 
   return (
     <Container>
@@ -27,7 +26,11 @@ async function AdminEditWorkPage({ params }: WorkPageProps) {
         tags={tagsResponse}
         workTags={tagsByWorkId}
         workImages={imagesByWorkId}
-        previewImage={previewImageByWorkId}
+        previewImage={{
+          imageId: workResponse.preview.id,
+          workId: workResponse.id,
+          image: workResponse.preview
+        }}
       />
     </Container>
   );

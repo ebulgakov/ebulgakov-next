@@ -36,7 +36,8 @@ async function getWorkBySlug(slug: string) {
         with: {
           tag: true
         }
-      }
+      },
+      preview: true
     }
   });
 }
