@@ -6,7 +6,8 @@ import {
   FieldLegend,
   FieldSet,
   FieldDescription,
-  FieldLabel
+  FieldLabel,
+  FieldSeparator
 } from "@/app/components/ui/field";
 import { Input } from "@/app/components/ui/input";
 import {
@@ -17,9 +18,13 @@ import {
   SelectGroup,
   SelectItem
 } from "@/app/components/ui/select";
+import { Textarea } from "@/app/components/ui/textarea";
 import { Title } from "@/app/components/ui/title";
+import { UploadImagePreview } from "@/app/components/upload-image-preview";
+import { getImagesByWorkId, getPreviewImageByWorkId } from "@/db/queries/get-images";
 import { getAllTags, getTagsByWorkId } from "@/db/queries/get-tags";
 import { getWorkBySlug } from "@/db/queries/get-works";
+import { Button } from "@/app/components/ui/button";
 
 type WorkPageProps = {
   params: {
@@ -31,21 +36,18 @@ async function AdminEditWorkPage({ params }: WorkPageProps) {
 
   const workResponse = await getWorkBySlug(id);
   const tagsResponse = await getAllTags();
-
-  console.log(tagsResponse);
-  if (!workResponse) {
-    return <div>Work not found</div>;
-  }
+  if (!workResponse) return <div>Work not found</div>;
 
   const tagsByWorkId = await getTagsByWorkId(workResponse.id);
+  const imagesByWorkId = await getImagesByWorkId(workResponse.id);
+  const previewImageByWorkId = await getPreviewImageByWorkId(workResponse.id);
+
   return (
     <Container>
       <Title>{workResponse.title}</Title>
-
       <FieldGroup>
         <FieldSet>
-          <FieldLegend>Title</FieldLegend>
-          <FieldDescription>Description</FieldDescription>
+          <FieldLegend>Work data</FieldLegend>
           <FieldGroup>
             <Field>
               <FieldLabel htmlFor="input-title">Title</FieldLabel>
@@ -56,17 +58,36 @@ async function AdminEditWorkPage({ params }: WorkPageProps) {
                 required
               />
             </Field>
+
             <Field>
               <FieldLabel htmlFor="input-preview-description">Preview Description</FieldLabel>
               <Input
                 id="input-preview-description"
-                placeholder="1234 5678 9012 3456"
+                placeholder="Preview Description"
                 required
                 defaultValue={workResponse.previewDescription}
               />
               <FieldDescription>You`ll see it on the works/ page</FieldDescription>
             </Field>
 
+            <Field>
+              <FieldLabel htmlFor="input-description">Description</FieldLabel>
+              <Textarea
+                id="input-description"
+                placeholder="Long text description"
+                required
+                defaultValue={workResponse.previewDescription}
+              />
+              <FieldDescription>You`ll see it on the work/[slug] page</FieldDescription>
+            </Field>
+          </FieldGroup>
+        </FieldSet>
+
+        <FieldSeparator />
+
+        <FieldSet>
+          <FieldLegend>Additional info</FieldLegend>
+          <FieldGroup>
             <div className="grid grid-cols-3 gap-4">
               <Field>
                 <FieldLabel htmlFor="input-year">Year</FieldLabel>
@@ -103,6 +124,13 @@ async function AdminEditWorkPage({ params }: WorkPageProps) {
                   </SelectContent>
                 </Select>
               </Field>
+
+              <Field>
+                <FieldLabel htmlFor="input-category">Is published</FieldLabel>
+                <div className="mt-2">
+                  <CheckboxWithLabel label="Published" checked={workResponse.isPublished} />
+                </div>
+              </Field>
             </div>
 
             <Field>
@@ -115,6 +143,65 @@ async function AdminEditWorkPage({ params }: WorkPageProps) {
                     checked={tagsByWorkId.some(({ tag: t }) => t.id === tag.id)}
                   />
                 ))}
+              </div>
+            </Field>
+
+            <div className="grid grid-cols-3 gap-4">
+              <Field>
+                <FieldLabel htmlFor="input-slug">Slug</FieldLabel>
+                <Input
+                  id="input-slug"
+                  placeholder="Slug"
+                  required
+                  defaultValue={workResponse.slug}
+                />
+                <FieldDescription>Link works/[slug] page</FieldDescription>
+              </Field>
+
+              <Field>
+                <FieldLabel htmlFor="input-prod-link">Production Link</FieldLabel>
+                <Input
+                  id="input-prod-link"
+                  placeholder="Production Link"
+                  required
+                  defaultValue={`${workResponse.productionUrl}`}
+                />
+                <FieldDescription>Link to the production site</FieldDescription>
+              </Field>
+
+              <Field>
+                <FieldLabel htmlFor="input-static-link">Static Link</FieldLabel>
+                <Input
+                  id="input-static-link"
+                  placeholder="Static Link"
+                  required
+                  defaultValue={`${workResponse.staticUrl}`}
+                />
+                <FieldDescription>Link to to the static markup</FieldDescription>
+              </Field>
+            </div>
+          </FieldGroup>
+        </FieldSet>
+
+        <FieldSet>
+          <FieldLegend>Media</FieldLegend>
+          <FieldGroup>
+            <Field>
+              <FieldLabel htmlFor="input-static-link">Preview Image</FieldLabel>
+              <div>
+                <UploadImagePreview image={previewImageByWorkId?.image} />
+              </div>
+            </Field>
+          </FieldGroup>
+
+          <FieldGroup>
+            <Field>
+              <FieldLabel htmlFor="input-static-link">Gallery Images</FieldLabel>
+              <div className="flex gap-4">
+                {imagesByWorkId.map(({ image }) => (
+                  <UploadImagePreview key={image.id} image={image} />
+                ))}
+                <UploadImagePreview />
               </div>
             </Field>
           </FieldGroup>

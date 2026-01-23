@@ -7,9 +7,9 @@ async function getAllTags() {
   return db.query.tags.findMany({});
 }
 
-async function getTagsByWorkId(id: number) {
+async function getTagsByWorkId(workId: number) {
   return db.query.workTags.findMany({
-    where: eq(workTags.workId, id),
+    where: eq(workTags.workId, workId),
     with: {
       tag: true
     }
