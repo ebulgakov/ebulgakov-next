@@ -12,7 +12,9 @@ async function WorksPage() {
         <div key={work.id}>
           <h2>{work.title}</h2>
           <p>{work.previewDescription}</p>
-          {work.preview.id && <CloudinaryImage src={work.preview.id} alt={work.title} />}
+          {work.preview.id && (
+            <CloudinaryImage width={400} height={400} src={work.preview.id} alt={work.title} />
+          )}
           <Link href={`/works/${work.slug}`}>View Work</Link>
         </div>
       ))}

@@ -1,24 +1,11 @@
 "use client";
 
-import { AdvancedImage } from "@cloudinary/react";
-import { Cloudinary } from "@cloudinary/url-gen";
+import { CldImage } from "next-cloudinary";
 
 import type { ComponentProps } from "react";
 
-type CloudinaryImageProps = Omit<ComponentProps<typeof AdvancedImage>, "cldImg"> & {
-  src: string;
-};
-
-function CloudinaryImage(props: CloudinaryImageProps) {
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: "dwjzxeiqm"
-    }
-  });
-
-  const myImage = cld.image(props.src);
-
-  return <AdvancedImage {...props} cldImg={myImage} />;
+function CloudinaryImage(props: ComponentProps<typeof CldImage>) {
+  return <CldImage {...props} />;
 }
 
 export { CloudinaryImage };

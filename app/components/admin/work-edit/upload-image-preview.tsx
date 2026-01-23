@@ -23,7 +23,13 @@ function UploadImagePreview({ image, onDelete, onUpdateCaption }: UploadImagePre
         >
           <X className="size-full" />
         </button>
-        <CloudinaryImage className="size-full rounded object-cover" src={image.id} />
+        <CloudinaryImage
+          width={200}
+          height={200}
+          className="size-full rounded object-cover"
+          src={image.id}
+          alt={image.caption || "Uploaded Image"}
+        />
       </div>
       {onUpdateCaption && (
         <Input

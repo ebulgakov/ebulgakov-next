@@ -30,7 +30,14 @@ async function WorkPage({ params }: WorkPageProps) {
 
       {workResponse.worksToImages.map(({ image }) => (
         <div key={image.id}>
-          {image.id && <CloudinaryImage src={image.id} alt={image.caption || "Work Image"} />}
+          {image.id && (
+            <CloudinaryImage
+              width={800}
+              height={600}
+              src={image.id}
+              alt={image.caption || "Work Image"}
+            />
+          )}
           {image.caption && <p>{image.caption}</p>}
         </div>
       ))}
