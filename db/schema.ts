@@ -73,5 +73,5 @@ export type NewWorksToImages = typeof worksToImages.$inferInsert;
 export type Tag = typeof tags.$inferSelect;
 export type NewTag = typeof tags.$inferInsert;
 
-export type WorkTag = typeof works.$inferInsert;
-export type NewWorkTag = typeof works.$inferInsert;
+export type WorkTag = typeof workTags.$inferInsert;
+export type NewWorkTag = typeof workTags.$inferInsert;
