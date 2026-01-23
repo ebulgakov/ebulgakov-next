@@ -1,4 +1,4 @@
-import { WorkEdit } from "@/app/components/admin/work-edit/work-edit";
+import { WorkEdit } from "@/app/components/admin/work-edit";
 import { Container } from "@/app/components/ui/container";
 import { getImagesByWorkId, getPreviewImageByWorkId } from "@/db/queries/get-images";
 import { getAllTags, getTagsByWorkId } from "@/db/queries/get-tags";

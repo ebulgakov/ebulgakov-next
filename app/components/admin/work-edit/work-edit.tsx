@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-import { UploadImagePreview } from "@/app/components/admin/upload-image-preview";
 import { Button } from "@/app/components/ui/button";
 import { CheckboxWithLabel } from "@/app/components/ui/control-with-label";
 import {
@@ -25,6 +24,8 @@ import {
 } from "@/app/components/ui/select";
 import { Textarea } from "@/app/components/ui/textarea";
 import { Title } from "@/app/components/ui/title";
+
+import { UpdateMedia } from "./update-media";
 
 import type { Work, Tag, WorkTag } from "@/db/schema";
 import type { PreviewImage, WorkImage } from "@/types/image";
@@ -228,56 +229,16 @@ function WorkEdit({ work, tags, workTags, workImages, previewImage }: WorkEditPr
           </FieldGroup>
         </FieldSet>
 
-        <FieldSet>
-          <FieldLegend>Media</FieldLegend>
-          <FieldGroup>
-            <Field>
-              <FieldLabel htmlFor="input-static-link">Preview Image</FieldLabel>
-              <div>
-                <UploadImagePreview
-                  onDelete={() => {
-                    setPImageN(undefined);
-                    setPImage(undefined);
-                  }}
-                  onAdd={setPImageN}
-                  image={pImage?.image}
-                  previewImage={pImageN}
-                />
-              </div>
-            </Field>
-          </FieldGroup>
-
-          <FieldGroup>
-            <Field>
-              <FieldLabel htmlFor="input-static-link">Gallery Images</FieldLabel>
-              <div className="flex gap-4">
-                {wImages.map(({ image }) => (
-                  <UploadImagePreview
-                    onDelete={id => {
-                      setWImages(wImages.filter(({ image }) => image.id !== id));
-                    }}
-                    key={image.id}
-                    image={image}
-                  />
-                ))}
-                {wImagesN.map((preview, idx) => (
-                  <UploadImagePreview
-                    onDelete={preview => {
-                      setWImagesM(wImagesN.filter(image => image.preview !== preview));
-                    }}
-                    key={idx}
-                    previewImage={preview}
-                  />
-                ))}
-                <UploadImagePreview
-                  onAdd={data => {
-                    setWImagesM(prev => Array.from(new Set([...prev, data])));
-                  }}
-                />
-              </div>
-            </Field>
-          </FieldGroup>
-        </FieldSet>
+        <UpdateMedia
+          previewImage={pImage}
+          newPreviewImage={pImageN}
+          workImages={wImages}
+          newWorkImages={wImagesN}
+          onSetPreviewImage={setPImage}
+          onSetNewPreviewImage={setPImageN}
+          onSetWorkImages={setWImages}
+          onSetNewWorkImages={setWImagesM}
+        />
 
         <FieldSeparator />
 
