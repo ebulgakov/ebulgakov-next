@@ -71,8 +71,8 @@ function UpdateMedia({
 
             {newWorkImages.map((preview, idx) => (
               <UploadImageNew
-                onDelete={preview => {
-                  onSetNewWorkImages(newWorkImages.filter(image => image.preview !== preview));
+                onDelete={previewStr => {
+                  onSetNewWorkImages(newWorkImages.filter(image => image.preview !== previewStr));
                 }}
                 onUpdateCaption={caption => {
                   const updatedImages = [...newWorkImages];
