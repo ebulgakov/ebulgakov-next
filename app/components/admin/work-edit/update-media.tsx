@@ -35,7 +35,7 @@ function UpdateMedia({
             {previewImage ? (
               <UploadImagePreview
                 onDelete={() => onSetPreviewImage(undefined)}
-                image={previewImage?.image}
+                image={previewImage.image}
               />
             ) : newPreviewImage ? (
               <UploadImageNew
