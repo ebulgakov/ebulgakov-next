@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { UploadImagePreview } from "@/app/components/admin/upload-image-preview";
 import { Button } from "@/app/components/ui/button";
 import { CheckboxWithLabel } from "@/app/components/ui/control-with-label";
@@ -24,17 +26,29 @@ import {
 import { Textarea } from "@/app/components/ui/textarea";
 import { Title } from "@/app/components/ui/title";
 
-import type { Work, Tag, WorkTag, ImageUpload, WorksToImages } from "@/db/schema";
+import type { Work, Tag, WorkTag } from "@/db/schema";
+import type { PreviewImage, WorkImage } from "@/types/image";
 
 type WorkEditProps = {
   work: Work;
   tags: Tag[];
   workTags: (WorkTag & { tag: Tag })[];
-  workImages: (WorksToImages & { image: ImageUpload })[];
-  previewImage?: WorksToImages & { image: ImageUpload };
+  workImages: WorkImage[];
+  previewImage?: WorkImage;
 };
 function WorkEdit({ work, tags, workTags, workImages, previewImage }: WorkEditProps) {
+  const [pImage, setPImage] = useState<WorkImage | undefined>(previewImage);
+  const [pImageN, setPImageN] = useState<PreviewImage | undefined>(undefined);
+  const [wImages, setWImages] = useState<WorkImage[]>(workImages);
+  const [wImagesN, setWImagesM] = useState<PreviewImage[]>([]);
+
   const handleSubmit = (formData: FormData) => {
+    if (!formData) return;
+    if (!pImageN && !pImage) {
+      alert("Please upload a preview image");
+      return;
+    }
+
     const title = formData.get("title");
     const previewDescription = formData.get("previewDescription");
     const description = formData.get("description");
@@ -42,6 +56,7 @@ function WorkEdit({ work, tags, workTags, workImages, previewImage }: WorkEditPr
     const category = formData.get("category");
     const isPublished = formData.get("isPublished");
     const selectedTags = formData.getAll("tag[]");
+    const workImages = formData.getAll("workImages[]");
     const slug = formData.get("slug");
     const productionUrl = formData.get("productionUrl");
     const staticUrl = formData.get("staticUrl");
@@ -57,7 +72,8 @@ function WorkEdit({ work, tags, workTags, workImages, previewImage }: WorkEditPr
       selectedTags,
       slug,
       productionUrl,
-      staticUrl
+      staticUrl,
+      workImages
     );
   };
 
@@ -218,7 +234,15 @@ function WorkEdit({ work, tags, workTags, workImages, previewImage }: WorkEditPr
             <Field>
               <FieldLabel htmlFor="input-static-link">Preview Image</FieldLabel>
               <div>
-                <UploadImagePreview image={previewImage?.image} />
+                <UploadImagePreview
+                  onDelete={() => {
+                    setPImageN(undefined);
+                    setPImage(undefined);
+                  }}
+                  onAdd={setPImageN}
+                  image={pImage?.image}
+                  previewImage={pImageN}
+                />
               </div>
             </Field>
           </FieldGroup>
@@ -227,10 +251,29 @@ function WorkEdit({ work, tags, workTags, workImages, previewImage }: WorkEditPr
             <Field>
               <FieldLabel htmlFor="input-static-link">Gallery Images</FieldLabel>
               <div className="flex gap-4">
-                {workImages.map(({ image }) => (
-                  <UploadImagePreview key={image.id} image={image} />
+                {wImages.map(({ image }) => (
+                  <UploadImagePreview
+                    onDelete={id => {
+                      setWImages(wImages.filter(({ image }) => image.id !== id));
+                    }}
+                    key={image.id}
+                    image={image}
+                  />
                 ))}
-                <UploadImagePreview />
+                {wImagesN.map((preview, idx) => (
+                  <UploadImagePreview
+                    onDelete={preview => {
+                      setWImagesM(wImagesN.filter(image => image.preview !== preview));
+                    }}
+                    key={idx}
+                    previewImage={preview}
+                  />
+                ))}
+                <UploadImagePreview
+                  onAdd={data => {
+                    setWImagesM(prev => Array.from(new Set([...prev, data])));
+                  }}
+                />
               </div>
             </Field>
           </FieldGroup>
