@@ -1,25 +1,23 @@
-import { pgTable, serial, text, timestamp, boolean, primaryKey } from "drizzle-orm/pg-core";
-
-export const imageUploads = pgTable("image_uploads", {
-  id: text("id").primaryKey(),
-  url: text("url").notNull(),
-  caption: text("caption"),
-  createdAt: timestamp("created_at", { mode: "string" }).defaultNow().notNull()
-});
+import { pgTable, serial, text, timestamp, boolean, primaryKey, jsonb } from "drizzle-orm/pg-core";
 
 export const tags = pgTable("tags", {
   id: serial("id").primaryKey(),
   name: text("name").notNull().unique()
 });
 
+export const category = pgTable("categories", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull().unique()
+});
+
 export const works = pgTable("works", {
   id: serial("id").primaryKey(),
-  previewImage: text("preview_image")
-    .notNull()
-    .references(() => imageUploads.id),
+  previewImage: jsonb().notNull().default({}),
+  images: jsonb().default([]),
   createdAt: timestamp("created_at", { mode: "string" }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { mode: "string" }).defaultNow().notNull(),
-  category: text("category").notNull(),
+  category: serial("category").notNull()
+    .references(() => category.id),
   previewDescription: text("preview_description").notNull(),
   description: text("description"),
   title: text("title").notNull(),
@@ -45,30 +43,9 @@ export const workTags = pgTable(
   })
 );
 
-export const worksToImages = pgTable(
-  "works_to_images",
-  {
-    workId: serial("work_id")
-      .notNull()
-      .references(() => works.id),
-    imageId: text("image_id")
-      .notNull()
-      .references(() => imageUploads.id)
-  },
-  t => ({
-    pk: primaryKey({ columns: [t.workId, t.imageId] }) // Guarantee uniqueness across the combination of workId and imageId
-  })
-);
-
 // Infer types
 export type Work = typeof works.$inferSelect;
 export type NewWork = typeof works.$inferInsert;
-
-export type ImageUpload = typeof imageUploads.$inferSelect;
-export type NewImageUpload = typeof imageUploads.$inferInsert;
-
-export type WorksToImages = typeof worksToImages.$inferSelect;
-export type NewWorksToImages = typeof worksToImages.$inferInsert;
 
 export type Tag = typeof tags.$inferSelect;
 export type NewTag = typeof tags.$inferInsert;

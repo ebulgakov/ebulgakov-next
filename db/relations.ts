@@ -1,17 +1,12 @@
 import { relations } from "drizzle-orm";
 
-import { works, workTags, worksToImages, imageUploads, tags } from "./schema";
+import { works, workTags, tags } from "./schema";
 
 /**
  * Each work has one preview image, many tags, and many associated images.
  */
-export const worksRelations = relations(works, ({ one, many }) => ({
-  preview: one(imageUploads, {
-    fields: [works.previewImage],
-    references: [imageUploads.id]
-  }),
-  workTags: many(workTags),
-  worksToImages: many(worksToImages)
+export const worksRelations = relations(works, ({ many }) => ({
+  workTags: many(workTags)
 }));
 
 /**
@@ -25,19 +20,5 @@ export const workTagsRelations = relations(workTags, ({ one }) => ({
   tag: one(tags, {
     fields: [workTags.tagId],
     references: [tags.id]
-  })
-}));
-
-/**
- * Each worksToImages links one work to one image.
- */
-export const worksToImagesRelations = relations(worksToImages, ({ one }) => ({
-  work: one(works, {
-    fields: [worksToImages.workId],
-    references: [works.id]
-  }),
-  image: one(imageUploads, {
-    fields: [worksToImages.imageId],
-    references: [imageUploads.id]
   })
 }));

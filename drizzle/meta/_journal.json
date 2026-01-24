@@ -29,6 +29,20 @@
       "when": 1769087130392,
       "tag": "0003_short_sentinel",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1769282599354,
+      "tag": "0004_brief_leper_queen",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1769282735380,
+      "tag": "0005_yielding_ted_forrester",
+      "breakpoints": true
     }
   ]
 }
