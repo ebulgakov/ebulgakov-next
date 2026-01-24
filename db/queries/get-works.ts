@@ -23,6 +23,25 @@ async function getWorks() {
   });
 }
 
+async function getAllWorks() {
+  return db.query.works.findMany({
+    columns: {
+      id: true,
+      title: true,
+      previewDescription: true,
+      slug: true,
+      previewImage: true
+    },
+    with: {
+      preview: {
+        columns: {
+          id: true
+        }
+      }
+    }
+  });
+}
+
 async function getWorkBySlug(slug: string) {
   return db.query.works.findFirst({
     where: eq(works.slug, slug),
@@ -42,4 +61,4 @@ async function getWorkBySlug(slug: string) {
   });
 }
 
-export { getWorks, getWorkBySlug };
+export { getWorks, getWorkBySlug, getAllWorks };

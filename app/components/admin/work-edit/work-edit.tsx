@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { Button } from "@/app/components/ui/button";
@@ -24,6 +25,7 @@ import {
 } from "@/app/components/ui/select";
 import { Textarea } from "@/app/components/ui/textarea";
 import { Title } from "@/app/components/ui/title";
+import { updateWork } from "@/db/mutations/update-work";
 
 import { UpdateMedia } from "./update-media";
 
@@ -38,12 +40,13 @@ type WorkEditProps = {
   previewImage?: WorkImage;
 };
 function WorkEdit({ work, tags, workTags, workImages, previewImage }: WorkEditProps) {
+  const router = useRouter();
   const [pImage, setPImage] = useState<WorkImage | undefined>(previewImage);
   const [pImageN, setPImageN] = useState<PreviewImage | undefined>(undefined);
   const [wImages, setWImages] = useState<WorkImage[]>(workImages);
   const [wImagesN, setWImagesM] = useState<PreviewImage[]>([]);
 
-  const handleSubmit = (formData: FormData) => {
+  const handleSubmit = async (formData: FormData) => {
     if (!formData) return;
     if (!pImageN && !pImage) {
       alert("Please upload a preview image");
@@ -56,28 +59,34 @@ function WorkEdit({ work, tags, workTags, workImages, previewImage }: WorkEditPr
     const year = formData.get("year");
     const category = formData.get("category");
     const isPublished = formData.get("isPublished");
-    const selectedTags = formData.getAll("tag[]");
+    const tags = formData.getAll("tag[]");
     const slug = formData.get("slug");
     const productionUrl = formData.get("productionUrl");
     const staticUrl = formData.get("staticUrl");
 
-    // Handle form submission logic here
-    console.log({
-      title,
-      previewDescription,
-      description,
-      year,
-      category,
-      isPublished,
-      selectedTags,
-      slug,
-      productionUrl,
-      staticUrl,
-      previewImage: pImage,
-      newPreviewImage: pImageN,
-      newWorkImages: wImagesN,
-      workImages: wImages
-    });
+    try {
+      await updateWork(work.id, {
+        title,
+        previewDescription,
+        description,
+        year,
+        category,
+        isPublished,
+        tags,
+        slug,
+        productionUrl,
+        staticUrl,
+        previewImage: pImage,
+        newPreviewImage: pImageN,
+        newWorkImages: wImagesN,
+        workImages: wImages
+      });
+
+      //router.push("/admin/works");
+    } catch (error) {
+      console.error("Failed to update work:", error);
+      alert("Failed to update work. Please try again.");
+    }
   };
 
   return (
@@ -117,7 +126,7 @@ function WorkEdit({ work, tags, workTags, workImages, previewImage }: WorkEditPr
                 id="input-description"
                 placeholder="Long text description"
                 required
-                defaultValue={work.previewDescription}
+                defaultValue={`${work.description}`}
               />
               <FieldDescription>You`ll see it on the work/[slug] page</FieldDescription>
             </Field>
