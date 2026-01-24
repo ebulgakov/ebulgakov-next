@@ -1,4 +1,13 @@
-import { pgTable, serial, text, timestamp, boolean, primaryKey, jsonb } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  serial,
+  text,
+  timestamp,
+  boolean,
+  primaryKey,
+  jsonb,
+  integer
+} from "drizzle-orm/pg-core";
 
 export const tags = pgTable("tags", {
   id: serial("id").primaryKey(),
@@ -16,7 +25,9 @@ export const works = pgTable("works", {
   images: jsonb().default([]),
   createdAt: timestamp("created_at", { mode: "string" }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { mode: "string" }).defaultNow().notNull(),
-  category: serial("category").notNull()
+  category: integer("category")
+    .notNull()
+    .default(1)
     .references(() => category.id),
   previewDescription: text("preview_description").notNull(),
   description: text("description"),
