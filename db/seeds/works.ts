@@ -1,16 +1,17 @@
-export type Image = {
-  caption?: string;
-  preview: string;
-  public_id: string;
-};
-
 type Work = {
   addedAt: { __time__: string };
   category: string;
   description: string;
-  images: Image[];
+  images: {
+    caption?: string;
+    preview: string;
+    public_id: string;
+  }[];
   previewDescription: string;
-  previewImage: Image;
+  previewImage: {
+    preview: string;
+    public_id: string;
+  };
   realLink: string;
   stack: string[];
   staticLink?: string;
@@ -23,7 +24,7 @@ type Work = {
 export const works: { [key: string]: Work } = {
   "34HSzs3DHGFQCQ3YY8VG": {
     addedAt: { __time__: "2019-07-28T05:30:53.493Z" },
-    category: "formatting",
+    category: "Formatting",
     description:
       "The IPC2U Group is an international supplier and manufacturer of industrial computer systems with more than 20 years of experience and is represented in more than 14 countries in the EMEA space with offices, qualified partners and distributors.",
 
@@ -37,7 +38,7 @@ export const works: { [key: string]: Work } = {
     },
     realLink: "https://ipc2u.ru/",
     stack: ["HTML", "Less/Sass", "AngularJS"],
-    staticLink: "/static/ipc/",
+    staticLink: "https://static.ebulgakov.com/works/ipc/",
     title: "IPC2U",
     url: "ipc2u",
     visible: true,
@@ -45,7 +46,7 @@ export const works: { [key: string]: Work } = {
   },
   "3SKeXNDCe30PozAJVAQb": {
     addedAt: { __time__: "2019-07-28T06:11:35.677Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [],
@@ -58,7 +59,7 @@ export const works: { [key: string]: Work } = {
     },
     realLink: "http://www.osnova-telecom.ru/",
     stack: ["HTML", "CSS"],
-    staticLink: "/static/osnova-telekom/",
+    staticLink: "https://static.ebulgakov.com/works/osnova-telekom/",
     title: "Osnova Telekom",
     url: "osnova-telekom",
     year: "2011"
@@ -76,7 +77,7 @@ export const works: { [key: string]: Work } = {
       public_id: "bulgakov/e4qe2qaw36ae2ib4l8o8"
     },
     realLink: "",
-    staticLink: "/static/glass-bg/",
+    staticLink: "https://static.ebulgakov.com/works/glass-bg/",
     title: "Interactive background",
     url: "glass-bg",
     visible: true,
@@ -84,7 +85,7 @@ export const works: { [key: string]: Work } = {
   },
   "8CmW1b5FAc7d4wyEv4ZA": {
     addedAt: { __time__: "2019-07-28T06:13:39.226Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
     images: [],
     previewDescription: "2009. Blog for online store of  gadgets",
@@ -95,14 +96,14 @@ export const works: { [key: string]: Work } = {
     },
     realLink: "",
     stack: ["HTML", "CSS"],
-    staticLink: "/static/on-up-2/",
+    staticLink: "https://static.ebulgakov.com/works/on-up-2/",
     title: "On-UP",
     url: "on-up",
     year: "2000"
   },
   "9f3XlCd8v5nlhAWWKUtf": {
     addedAt: { __time__: "2019-07-28T17:12:45.000Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [
@@ -135,7 +136,7 @@ export const works: { [key: string]: Work } = {
   },
   AArKFaoNMiewRW8WR4t3: {
     addedAt: { __time__: "2018-05-05T14:25:51.438Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
     stack: ["HTML", "CSS", "JS"],
     images: [
@@ -174,7 +175,7 @@ export const works: { [key: string]: Work } = {
     },
     realLink: "",
     stack: ["Three.js"],
-    staticLink: "/static/circles/",
+    staticLink: "https://static.ebulgakov.com/works/circles/",
     title: "Particles cloud",
     url: "circles",
     visible: true,
@@ -182,7 +183,7 @@ export const works: { [key: string]: Work } = {
   },
   An4dgmIdadp4ROUZByrZ: {
     addedAt: { __time__: "2019-07-28T14:29:48.639Z" },
-    category: "formatting",
+    category: "Formatting",
     description:
       'Shopping and entertainment center "Domodedovo" is a favorite place for leisure and shopping for residents of the southern district of the capital and the Moscow region.',
 
@@ -216,7 +217,7 @@ export const works: { [key: string]: Work } = {
   },
   DgvIofVsI1UyjrKhAvpC: {
     addedAt: { __time__: "2019-07-28T05:16:23.319Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [],
@@ -228,7 +229,7 @@ export const works: { [key: string]: Work } = {
     },
     realLink: "",
     stack: ["HTML", "CSS", "JS"],
-    staticLink: "/static/gfd/",
+    staticLink: "https://static.ebulgakov.com/works/gfd/",
     title: "Global Functional Drinks",
     url: "gfd",
     visible: true,
@@ -236,7 +237,7 @@ export const works: { [key: string]: Work } = {
   },
   E5pINpKdaFPdvFnI4GPU: {
     addedAt: { __time__: "2019-07-28T05:45:50.539Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [],
@@ -248,7 +249,7 @@ export const works: { [key: string]: Work } = {
     },
     realLink: "https://olmi2000.ru/",
     stack: ["HTML", "Less/Sass", "AngularJS"],
-    staticLink: "/static/olmi/",
+    staticLink: "https://static.ebulgakov.com/works/olmi/",
     title: "OLMI 2000",
     url: "olmi",
     visible: true,
@@ -256,7 +257,7 @@ export const works: { [key: string]: Work } = {
   },
   EsOkyClssS7HHObEAozb: {
     addedAt: { __time__: "2019-07-28T07:30:13.089Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [
@@ -289,7 +290,7 @@ export const works: { [key: string]: Work } = {
   },
   OoIrn1keV9SqcZTC23DS: {
     addedAt: { __time__: "2019-07-28T05:34:41.300Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [],
@@ -301,14 +302,14 @@ export const works: { [key: string]: Work } = {
     },
     realLink: "http://www.irissamara.ru/",
     stack: ["HTML", "CSS", "jQuery"],
-    staticLink: "/static/iris/",
+    staticLink: "https://static.ebulgakov.com/works/iris/",
     title: "Iris Flowers",
     url: "iris",
     year: "2000"
   },
   S2U7H7wJeT7tsJmeQEZi: {
     addedAt: { __time__: "2018-07-18T14:57:57.742Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [
@@ -335,7 +336,7 @@ export const works: { [key: string]: Work } = {
   },
   U6MHPQciqYNIzhVZvKnG: {
     addedAt: { __time__: "2019-07-28T14:51:54.839Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [
@@ -368,7 +369,7 @@ export const works: { [key: string]: Work } = {
   },
   Ve0Ke5Rh6sfWIwPrOCF8: {
     addedAt: { __time__: "2019-07-28T15:06:17.133Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [
@@ -401,7 +402,7 @@ export const works: { [key: string]: Work } = {
   },
   XxG9wxhUMLFy25Xoyp9K: {
     addedAt: { __time__: "2019-07-28T16:30:43.888Z" },
-    category: "full stack",
+    category: "Full stack",
     description: "",
 
     images: [
@@ -429,7 +430,7 @@ export const works: { [key: string]: Work } = {
   },
   Y4WQgLmXgw8horaHWnrD: {
     addedAt: { __time__: "2019-07-28T16:28:11.536Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [
@@ -456,7 +457,7 @@ export const works: { [key: string]: Work } = {
   },
   ZTSV2T92X4Ui71hyaPUx: {
     addedAt: { __time__: "2019-07-28T05:20:16.157Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [],
@@ -468,7 +469,7 @@ export const works: { [key: string]: Work } = {
     },
     realLink: "",
     stack: ["HTML", "CSS"],
-    staticLink: "/static/interlab/",
+    staticLink: "https://static.ebulgakov.com/works/interlab/",
     title: "internet Lab",
     url: "interlab",
     visible: true,
@@ -476,7 +477,7 @@ export const works: { [key: string]: Work } = {
   },
   ZiMiCz6sF73hTQwnSpst: {
     addedAt: { __time__: "2019-07-28T06:57:47.568Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [],
@@ -489,14 +490,14 @@ export const works: { [key: string]: Work } = {
     },
     realLink: "https://patsamara.ru/",
     stack: ["HTML", "CSS"],
-    staticLink: "/static/pat/",
+    staticLink: "https://static.ebulgakov.com/works/pat/",
     title: 'Municipal Corporation "Passenger Transport"',
     url: "pat",
     year: "2000"
   },
   bNuc5h0yemMFXHXFZX0C: {
     addedAt: { __time__: "2018-07-18T15:07:21.893Z" },
-    category: "full stack",
+    category: "Full stack",
     description: "",
 
     images: [
@@ -523,7 +524,7 @@ export const works: { [key: string]: Work } = {
   },
   cMQcY2BGGou5KTUIitig: {
     addedAt: { __time__: "2019-07-28T14:35:48.126Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [
@@ -556,7 +557,7 @@ export const works: { [key: string]: Work } = {
   },
   cnzPOnzB9r3xuTVV3BCw: {
     addedAt: { __time__: "2019-07-28T05:38:38.009Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [],
@@ -568,14 +569,14 @@ export const works: { [key: string]: Work } = {
     },
     realLink: "",
     stack: ["HTML", "CSS"],
-    staticLink: "/static/makurin/",
+    staticLink: "https://static.ebulgakov.com/works/makurin/",
     title: "Anton Makurin",
     url: "makurin",
     year: "2102"
   },
   cuQgqjY3ttrZGB1BDHuo: {
     addedAt: { __time__: "2019-07-26T12:42:04.930Z" },
-    category: "full stack",
+    category: "Full stack",
     description: "",
 
     images: [
@@ -607,7 +608,7 @@ export const works: { [key: string]: Work } = {
   },
   eIza6VmroYwpLjBe0623: {
     addedAt: { __time__: "2019-07-28T14:41:06.117Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [
@@ -641,7 +642,7 @@ export const works: { [key: string]: Work } = {
   },
   jGkt2EhoNu3JII1EcNID: {
     addedAt: { __time__: "2019-07-28T16:20:53.348Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [
@@ -675,7 +676,7 @@ export const works: { [key: string]: Work } = {
   },
   k0HFlrxmpjUMORFwmTgM: {
     addedAt: { __time__: "2019-07-26T13:01:20.496Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [],
@@ -687,7 +688,7 @@ export const works: { [key: string]: Work } = {
     },
     realLink: "",
     stack: ["HTML", "CSS"],
-    staticLink: "/static/kvartal/",
+    staticLink: "https://static.ebulgakov.com/works/kvartal/",
     title: "Kvartal",
     url: "kvartal",
     year: "2000"
@@ -707,7 +708,7 @@ export const works: { [key: string]: Work } = {
     },
     realLink: "",
     stack: ["Three.js"],
-    staticLink: "/static/earth",
+    staticLink: "https://static.ebulgakov.com/works/earth",
     title: "The Earth 3D",
     url: "earth",
     visible: true,
@@ -715,7 +716,7 @@ export const works: { [key: string]: Work } = {
   },
   lX0JhdKeFaYYfGH8VGbP: {
     addedAt: { __time__: "2019-07-28T05:01:52.709Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [],
@@ -727,14 +728,14 @@ export const works: { [key: string]: Work } = {
     },
     realLink: "",
     stack: ["HTML", "CSS", "JS"],
-    staticLink: "/static/countrypost/",
+    staticLink: "https://static.ebulgakov.com/works/countrypost/",
     title: "Country Post",
     url: "countrypost",
     year: "2000"
   },
   mUviFeRfzzWwFuQXo1ci: {
     addedAt: { __time__: "2019-07-28T15:11:12.066Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [
@@ -773,7 +774,7 @@ export const works: { [key: string]: Work } = {
   },
   nNytYCr0VFdl1Uh9Z1P0: {
     addedAt: { __time__: "2019-07-28T07:14:37.807Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [
@@ -811,7 +812,7 @@ export const works: { [key: string]: Work } = {
   },
   r0reRnF9v2nsA7zq6wah: {
     addedAt: { __time__: "2018-07-18T15:03:50.128Z" },
-    category: "full stack",
+    category: "Full stack",
     description: "",
 
     images: [
@@ -849,7 +850,7 @@ export const works: { [key: string]: Work } = {
       public_id: "bulgakov/ywf1h8q3nbhoktl7efoq"
     },
     realLink: "",
-    staticLink: "/static/demo-castle/",
+    staticLink: "https://static.ebulgakov.com/works/demo-castle/",
     title: "Demo 3D",
     url: "demo-castle",
     visible: true,
@@ -857,7 +858,7 @@ export const works: { [key: string]: Work } = {
   },
   tEYT5p6oAzF9aaHL55j6: {
     addedAt: { __time__: "2019-07-28T07:08:20.120Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [],
@@ -869,7 +870,7 @@ export const works: { [key: string]: Work } = {
     },
     realLink: "",
     stack: ["HTML", "CSS", "JS"],
-    staticLink: "/static/terasale/",
+    staticLink: "https://static.ebulgakov.com/works/terasale/",
     title: "TeraSale",
     url: "terasale",
     visible: true,
@@ -877,7 +878,7 @@ export const works: { [key: string]: Work } = {
   },
   wmhnPwO3zEO3cFaHW4sB: {
     addedAt: { __time__: "2019-07-28T05:41:16.087Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [],
@@ -889,7 +890,7 @@ export const works: { [key: string]: Work } = {
     },
     realLink: "",
     stack: ["HTML", "CSS", "JS"],
-    staticLink: "/static/nevesta-fm/",
+    staticLink: "https://static.ebulgakov.com/works/nevesta-fm/",
     title: "Nevesta FM",
     url: "nevesta-fm",
     visible: true,
@@ -897,7 +898,7 @@ export const works: { [key: string]: Work } = {
   },
   xFRwzdhZLQdHP2to5trs: {
     addedAt: { __time__: "2019-07-28T04:55:34.529Z" },
-    category: "formatting",
+    category: "Formatting",
     description: "",
 
     images: [],
@@ -909,14 +910,14 @@ export const works: { [key: string]: Work } = {
     },
     realLink: "",
     stack: ["HTML", "CSS", "jQuery"],
-    staticLink: "/static/coffeeclub/",
+    staticLink: "https://static.ebulgakov.com/works/coffeeclub/",
     title: "Coffee Club",
     url: "coffeeclub",
     year: "2000"
   },
   xh7BC72Jak0nVjt1V9i4: {
     addedAt: { __time__: "2018-05-05T14:42:10.547Z" },
-    category: "full stack",
+    category: "Full stack",
     description: "",
     stack: ["HTML", "CSS", "JS", "RoR", "BigCommerce"],
     images: [

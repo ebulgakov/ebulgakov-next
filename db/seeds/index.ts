@@ -1,21 +1,30 @@
 import db from "@/db";
-import { works, worksToImages, imageUploads, tags, workTags } from "@/db/schema";
+import { works, tags, workTags, category } from "@/db/schema";
 
-import { works as worksData, type Image } from "./works";
+import { works as worksData } from "./works";
 
-import type { NewImageUpload, NewWork, NewTag } from "@/db/schema";
+import type { NewCategory, NewWork, NewTag } from "@/db/schema";
 
 async function main() {
   console.log("Seeding started...");
 
   // Clear existing data to prevent duplicates
-  await db.delete(worksToImages);
   await db.delete(workTags);
   await db.delete(works);
-  await db.delete(imageUploads);
+  await db.delete(category);
   await db.delete(tags);
 
   console.log("Cleared existing data.");
+
+  // Collect all unique categories from the JSON
+  const allCategoriesSet = new Set<string>();
+  Object.values(worksData).forEach(work => {
+    allCategoriesSet.add(work.category);
+  });
+
+  const allCategories: NewCategory[] = Array.from(allCategoriesSet).map(cat => ({ name: cat }));
+  const insertedCategories = await db.insert(category).values(allCategories).returning();
+  console.log(`Inserted ${insertedCategories.length} unique categories.`);
 
   // Collect all unique tags from the JSON
   const allTagsSet = new Set<string>();
@@ -29,31 +38,15 @@ async function main() {
   const insertedTags = await db.insert(tags).values(allTags).returning();
   console.log(`Inserted ${insertedTags.length} unique tags.`);
 
-  // Collect all unique images from the JSON
-  const allImagesSet = new Set<Image>();
-  Object.values(worksData).forEach(work => {
-    work.images.forEach(image => {
-      allImagesSet.add(image);
-    });
-    allImagesSet.add(work.previewImage);
-  });
-
-  const allImages: NewImageUpload[] = Array.from(allImagesSet).map(img => ({
-    id: img.public_id,
-    url: img.preview,
-    caption: img.caption || ""
-  }));
-  const insertedImages = await db.insert(imageUploads).values(allImages).returning();
-  console.log(`Inserted ${insertedImages.length} unique images.`);
-
   const allWorks: NewWork[] = Object.values(worksData).map(work => ({
     title: work.title,
     description: work.description,
     previewDescription: work.previewDescription,
     year: work.year,
     stack: work.stack,
-    previewImage: work.previewImage.public_id,
-    category: work.category,
+    previewImage: work.previewImage,
+    images: work.images,
+    category: insertedCategories.find(cat => cat.name === work.category)?.id,
     slug: work.url,
     isPublished: work.visible,
     productionUrl: work.realLink,
@@ -85,10 +78,6 @@ async function main() {
       });
     }
   }
-
-  const worksToImagesArray = Array.from(worksToImagesMap.values());
-  await db.insert(worksToImages).values(worksToImagesArray);
-  console.log(`Inserted ${worksToImagesArray.length} work-image relationships.`);
 
   const worksTagsArray = Array.from(worksTagsMap.values());
   await db.insert(workTags).values(worksTagsArray);
