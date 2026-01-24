@@ -5,6 +5,7 @@ import { getWorks } from "@/db/queries/get-works";
 
 async function WorksPage() {
   const worksResponse = await getWorks();
+  console.log(worksResponse);
   return (
     <div>
       Works Page
@@ -12,9 +13,12 @@ async function WorksPage() {
         <div key={work.id}>
           <h2>{work.title}</h2>
           <p>{work.previewDescription}</p>
-          {work.preview.id && (
-            <CloudinaryImage width={400} height={400} src={work.preview.id} alt={work.title} />
-          )}
+          <CloudinaryImage
+            width={400}
+            height={400}
+            src={work.previewImage.public_id}
+            alt={work.title}
+          />
           <Link href={`/works/${work.slug}`}>View Work</Link>
         </div>
       ))}

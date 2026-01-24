@@ -12,13 +12,6 @@ async function getWorks() {
       previewDescription: true,
       slug: true,
       previewImage: true
-    },
-    with: {
-      preview: {
-        columns: {
-          id: true
-        }
-      }
     }
   });
 }
@@ -31,13 +24,6 @@ async function getAllWorks() {
       previewDescription: true,
       slug: true,
       previewImage: true
-    },
-    with: {
-      preview: {
-        columns: {
-          id: true
-        }
-      }
     }
   });
 }
@@ -46,17 +32,11 @@ async function getWorkBySlug(slug: string) {
   return db.query.works.findFirst({
     where: eq(works.slug, slug),
     with: {
-      worksToImages: {
-        with: {
-          image: true
-        }
-      },
       workTags: {
         with: {
           tag: true
         }
-      },
-      preview: true
+      }
     }
   });
 }

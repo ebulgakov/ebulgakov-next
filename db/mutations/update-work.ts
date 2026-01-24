@@ -24,7 +24,8 @@ async function updateWork(workId: number, workData: any) {
   }
 
   const updateResult = {
-    previewImage: workData.previewImage.image.id,
+    previewImage: workData.previewImage,
+    images: workData.images,
     category: workData.category,
     previewDescription: workData.previewDescription,
     description: workData.description,
@@ -36,7 +37,7 @@ async function updateWork(workId: number, workData: any) {
     isPublished: workData.isPublished === "on"
   };
 
-  await db.update(works).set(updateResult).where(eq(works.id, workId));
+  //await db.update(works).set(updateResult).where(eq(works.id, workId));
 
   return {
     success: true,

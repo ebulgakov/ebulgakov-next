@@ -1,0 +1,1 @@
+ALTER TABLE "works" ALTER COLUMN "previewImage" SET DEFAULT '{"preview":"","public_id":""}'::jsonb;

@@ -36,14 +36,12 @@ type WorkEditProps = {
   work: Work;
   tags: Tag[];
   workTags: (WorkTag & { tag: Tag })[];
-  workImages: WorkImage[];
-  previewImage?: WorkImage;
 };
-function WorkEdit({ work, tags, workTags, workImages, previewImage }: WorkEditProps) {
+function WorkEdit({ work, tags, workTags }: WorkEditProps) {
   const router = useRouter();
-  const [pImage, setPImage] = useState<WorkImage | undefined>(previewImage);
+  const [pImage, setPImage] = useState<WorkImage | undefined>(work.previewImage);
   const [pImageN, setPImageN] = useState<PreviewImage | undefined>(undefined);
-  const [wImages, setWImages] = useState<WorkImage[]>(workImages);
+  const [wImages, setWImages] = useState(work.images);
   const [wImagesN, setWImagesM] = useState<PreviewImage[]>([]);
 
   const handleSubmit = async (formData: FormData) => {
@@ -159,7 +157,7 @@ function WorkEdit({ work, tags, workTags, workImages, previewImage }: WorkEditPr
 
               <Field>
                 <FieldLabel htmlFor="input-category">Category</FieldLabel>
-                <Select name="category" defaultValue={work.category}>
+                <Select name="category" defaultValue={`${work.category}`}>
                   <SelectTrigger id="input-category">
                     <SelectValue placeholder="Category" />
                   </SelectTrigger>

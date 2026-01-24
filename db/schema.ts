@@ -9,6 +9,8 @@ import {
   integer
 } from "drizzle-orm/pg-core";
 
+import type { WorkImage } from "@/types/image";
+
 export const tags = pgTable("tags", {
   id: serial("id").primaryKey(),
   name: text("name").notNull().unique()
@@ -21,8 +23,11 @@ export const category = pgTable("categories", {
 
 export const works = pgTable("works", {
   id: serial("id").primaryKey(),
-  previewImage: jsonb().notNull().default({}),
-  images: jsonb().default([]),
+  previewImage: jsonb().$type<WorkImage>().notNull().default({
+    preview: "",
+    public_id: ""
+  }),
+  images: jsonb().$type<WorkImage[]>().default([]),
   createdAt: timestamp("created_at", { mode: "string" }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { mode: "string" }).defaultNow().notNull(),
   category: integer("category")

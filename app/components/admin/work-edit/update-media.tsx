@@ -8,7 +8,7 @@ import type { PreviewImage, WorkImage } from "@/types/image";
 type UpdateMediaProps = {
   previewImage?: WorkImage;
   newPreviewImage?: PreviewImage;
-  workImages: WorkImage[];
+  workImages: WorkImage[] | null;
   newWorkImages: PreviewImage[];
   onSetPreviewImage: (image?: WorkImage) => void;
   onSetNewPreviewImage: (image?: PreviewImage) => void;
@@ -35,7 +35,7 @@ function UpdateMedia({
             {previewImage ? (
               <UploadImagePreview
                 onDelete={() => onSetPreviewImage(undefined)}
-                image={previewImage.image}
+                image={previewImage}
               />
             ) : newPreviewImage ? (
               <UploadImageNew
@@ -53,18 +53,18 @@ function UpdateMedia({
         <Field>
           <FieldLabel htmlFor="input-static-link">Gallery Images</FieldLabel>
           <div className="flex gap-4">
-            {workImages.map(({ image }) => (
+            {workImages?.map(image => (
               <UploadImagePreview
                 onDelete={id => {
-                  onSetWorkImages(workImages.filter(({ image }) => image.id !== id));
+                  onSetWorkImages(workImages.filter(image => image.public_id !== id));
                 }}
                 onUpdateCaption={caption => {
                   const updatedImages = workImages.map(img =>
-                    img.image.id === image.id ? { ...img, caption } : img
+                    img.public_id === image.public_id ? { ...img, caption } : img
                   );
                   onSetWorkImages(updatedImages);
                 }}
-                key={image.id}
+                key={image.public_id}
                 image={image}
               />
             ))}
