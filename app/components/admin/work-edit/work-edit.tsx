@@ -29,24 +29,23 @@ import { updateWork } from "@/db/mutations/update-work";
 
 import { UpdateMedia } from "./update-media";
 
-import type { Work, Tag, WorkTag } from "@/db/schema";
-import type { PreviewImage, WorkImage } from "@/types/image";
+import type { Work, Tag, WorkTag, Category } from "@/db/schema";
+import type { WorkImage } from "@/types/image";
 
 type WorkEditProps = {
   work: Work;
+  categories: Category[];
   tags: Tag[];
   workTags: (WorkTag & { tag: Tag })[];
 };
-function WorkEdit({ work, tags, workTags }: WorkEditProps) {
+function WorkEdit({ work, tags, workTags, categories }: WorkEditProps) {
   const router = useRouter();
   const [pImage, setPImage] = useState<WorkImage | undefined>(work.previewImage);
-  const [pImageN, setPImageN] = useState<PreviewImage | undefined>(undefined);
-  const [wImages, setWImages] = useState(work.images);
-  const [wImagesN, setWImagesM] = useState<PreviewImage[]>([]);
+  const [wImages, setWImages] = useState(work.images || []);
 
   const handleSubmit = async (formData: FormData) => {
     if (!formData) return;
-    if (!pImageN && !pImage) {
+    if (!pImage) {
       alert("Please upload a preview image");
       return;
     }
@@ -56,7 +55,7 @@ function WorkEdit({ work, tags, workTags }: WorkEditProps) {
     const description = formData.get("description");
     const year = formData.get("year");
     const category = formData.get("category");
-    const isPublished = formData.get("isPublished");
+    const isPublished = formData.get("isPublished") === "on";
     const tags = formData.getAll("tag[]");
     const slug = formData.get("slug");
     const productionUrl = formData.get("productionUrl");
@@ -64,23 +63,21 @@ function WorkEdit({ work, tags, workTags }: WorkEditProps) {
 
     try {
       await updateWork(work.id, {
-        title,
-        previewDescription,
-        description,
-        year,
-        category,
+        title: `${title}`,
+        previewDescription: `${previewDescription}`,
+        description: `${description}`,
+        year: `${year}`,
+        category: Number(category),
         isPublished,
-        tags,
-        slug,
-        productionUrl,
-        staticUrl,
+        tags: tags.map(tag => Number(tag)),
+        slug: `${slug}`,
+        productionUrl: `${productionUrl}`,
+        staticUrl: `${staticUrl}`,
         previewImage: pImage,
-        newPreviewImage: pImageN,
-        newWorkImages: wImagesN,
-        workImages: wImages
+        images: wImages
       });
 
-      //router.push("/admin/works");
+      router.push("/admin/works");
     } catch (error) {
       console.error("Failed to update work:", error);
       alert("Failed to update work. Please try again.");
@@ -163,9 +160,9 @@ function WorkEdit({ work, tags, workTags }: WorkEditProps) {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      {["3D", "formatting", "full stack"].map(item => (
-                        <SelectItem key={item} value={item}>
-                          {item}
+                      {categories.map(item => (
+                        <SelectItem key={item.id} value={`${item.id}`}>
+                          {item.name}
                         </SelectItem>
                       ))}
                     </SelectGroup>
@@ -240,13 +237,9 @@ function WorkEdit({ work, tags, workTags }: WorkEditProps) {
 
         <UpdateMedia
           previewImage={pImage}
-          newPreviewImage={pImageN}
           workImages={wImages}
-          newWorkImages={wImagesN}
           onSetPreviewImage={setPImage}
-          onSetNewPreviewImage={setPImageN}
           onSetWorkImages={setWImages}
-          onSetNewWorkImages={setWImagesM}
         />
 
         <FieldSeparator />

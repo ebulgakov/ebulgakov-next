@@ -1,10 +1,10 @@
 "use client";
 
-import type { PreviewImage } from "@/types/image";
+import type { WorkImage } from "@/types/image";
 import type { ChangeEvent } from "react";
 
 type UploadImagePlaceholderProps = {
-  onAdd: (image: PreviewImage) => void;
+  onAdd: (image: WorkImage) => void;
 };
 
 function UploadImagePlaceholder({ onAdd }: UploadImagePlaceholderProps) {
@@ -15,10 +15,11 @@ function UploadImagePlaceholder({ onAdd }: UploadImagePlaceholderProps) {
     const [file] = event.target.files;
 
     reader.addEventListener("load", () => {
-      onAdd?.({
-        preview: reader.result as string,
-        source: file
-      });
+      // TODO: Upload the image to Cloudinary and get the public_id
+      // onAdd?.({
+      //   preview: reader.result as string,
+      //   source: file
+      // });
     });
 
     reader.readAsDataURL(file);

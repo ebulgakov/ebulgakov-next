@@ -1,29 +1,20 @@
-import { UploadImageNew } from "@/app/components/admin/work-edit/upload-image-new";
 import { UploadImagePlaceholder } from "@/app/components/admin/work-edit/upload-image-placeholder";
 import { UploadImagePreview } from "@/app/components/admin/work-edit/upload-image-preview";
 import { Field, FieldGroup, FieldLabel, FieldLegend, FieldSet } from "@/app/components/ui/field";
 
-import type { PreviewImage, WorkImage } from "@/types/image";
+import type { WorkImage } from "@/types/image";
 
 type UpdateMediaProps = {
   previewImage?: WorkImage;
-  newPreviewImage?: PreviewImage;
-  workImages: WorkImage[] | null;
-  newWorkImages: PreviewImage[];
+  workImages: WorkImage[];
   onSetPreviewImage: (image?: WorkImage) => void;
-  onSetNewPreviewImage: (image?: PreviewImage) => void;
   onSetWorkImages: (images: WorkImage[]) => void;
-  onSetNewWorkImages: (images: PreviewImage[]) => void;
 };
 function UpdateMedia({
   previewImage,
-  newPreviewImage,
   workImages,
-  newWorkImages,
   onSetPreviewImage,
-  onSetNewPreviewImage,
-  onSetWorkImages,
-  onSetNewWorkImages
+  onSetWorkImages
 }: UpdateMediaProps) {
   return (
     <FieldSet>
@@ -37,13 +28,8 @@ function UpdateMedia({
                 onDelete={() => onSetPreviewImage(undefined)}
                 image={previewImage}
               />
-            ) : newPreviewImage ? (
-              <UploadImageNew
-                onDelete={() => onSetNewPreviewImage(undefined)}
-                image={newPreviewImage}
-              />
             ) : (
-              <UploadImagePlaceholder onAdd={onSetNewPreviewImage} />
+              <UploadImagePlaceholder onAdd={onSetPreviewImage} />
             )}
           </div>
         </Field>
@@ -53,7 +39,7 @@ function UpdateMedia({
         <Field>
           <FieldLabel htmlFor="input-static-link">Gallery Images</FieldLabel>
           <div className="flex gap-4">
-            {workImages?.map(image => (
+            {workImages.map(image => (
               <UploadImagePreview
                 onDelete={id => {
                   onSetWorkImages(workImages.filter(image => image.public_id !== id));
@@ -69,24 +55,9 @@ function UpdateMedia({
               />
             ))}
 
-            {newWorkImages.map((preview, idx) => (
-              <UploadImageNew
-                onDelete={previewStr => {
-                  onSetNewWorkImages(newWorkImages.filter(image => image.preview !== previewStr));
-                }}
-                onUpdateCaption={caption => {
-                  const updatedImages = [...newWorkImages];
-                  updatedImages[idx].caption = caption;
-                  onSetNewWorkImages(updatedImages);
-                }}
-                key={idx}
-                image={preview}
-              />
-            ))}
-
             <UploadImagePlaceholder
               onAdd={data => {
-                onSetNewWorkImages(Array.from(new Set([...newWorkImages, data])));
+                onSetWorkImages(Array.from(new Set([...workImages, data])));
               }}
             />
           </div>

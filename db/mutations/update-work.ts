@@ -6,13 +6,15 @@ import { eq } from "drizzle-orm";
 import db from "@/db";
 import { works, workTags } from "@/db/schema";
 
-async function updateWork(workId: number, workData: any) {
+import type { NewWork } from "@/db/schema";
+
+async function updateWork(workId: number, workData: NewWork & { tags: number[] }) {
   const { user } = await neonAuth();
 
   if (!user) throw new Error("Unauthorized");
 
   // Update work tags
-  const tags = workData.tags;
+  const { tags, ...updatedWork } = workData;
   await db.delete(workTags).where(eq(workTags.workId, workId));
   if (Array.isArray(tags)) {
     for (const tagId of tags) {
@@ -23,21 +25,7 @@ async function updateWork(workId: number, workData: any) {
     }
   }
 
-  const updateResult = {
-    previewImage: workData.previewImage,
-    images: workData.images,
-    category: workData.category,
-    previewDescription: workData.previewDescription,
-    description: workData.description,
-    title: workData.title,
-    staticUrl: workData.staticUrl,
-    productionUrl: workData.productionUrl,
-    slug: workData.slug,
-    year: workData.year,
-    isPublished: workData.isPublished === "on"
-  };
-
-  //await db.update(works).set(updateResult).where(eq(works.id, workId));
+  await db.update(works).set(updatedWork).where(eq(works.id, workId));
 
   return {
     success: true,
