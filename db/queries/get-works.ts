@@ -21,7 +21,10 @@ async function getWorks() {
 async function getRandomWork() {
   return db.query.works.findFirst({
     where: eq(works.isPublished, true),
-    orderBy: sql`RANDOM()`
+    orderBy: sql`RANDOM()`,
+    with: {
+      category: true
+    }
   }) as unknown as Work;
 }
 

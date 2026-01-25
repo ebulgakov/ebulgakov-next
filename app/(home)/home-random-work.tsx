@@ -4,13 +4,14 @@ import Link from "next/link";
 import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
 import { Title } from "@/app/components/ui/title";
 
-import type { Work } from "@/db/schema";
+import type { Work, Category } from "@/db/schema";
 
 type HomeRandomWorkProps = {
   work: Work;
 };
 function HomeRandomWork({ work }: HomeRandomWorkProps) {
   const linkToWork = `/works/${work.slug}`;
+  const workCategory = work.category as unknown as Category;
   return (
     <section>
       <Title variant="h1">Random work from the portfolio</Title>
@@ -73,7 +74,7 @@ function HomeRandomWork({ work }: HomeRandomWorkProps) {
 
             <dl>
               <dt className="text-xl font-medium">Category:</dt>
-              <dd>{work.category}</dd>
+              <dd>{workCategory.name}</dd>
             </dl>
           </div>
 
