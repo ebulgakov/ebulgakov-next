@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useState } from "react";
+
 import { cn } from "@/app/lib/utils";
 
 function Header() {

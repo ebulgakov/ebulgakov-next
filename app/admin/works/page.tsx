@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 import { Title } from "@/app/components/ui/title";
-import { getAllWorks } from "@/db/queries/get-works";
+import { getWorks } from "@/db/queries/get-works";
 
 async function AdminWorksPage() {
-  const worksResponse = await getAllWorks();
+  const worksResponse = await getWorks();
 
   return (
     <div>

@@ -1,13 +1,15 @@
-import { eq, sql } from "drizzle-orm";
+import { eq, sql, asc } from "drizzle-orm";
 
 import db from "@/db";
 import { works } from "@/db/schema";
 
+import { createWorkFilter, type Filter } from "./helpers";
+
 import type { Work, Category } from "@/db/schema";
 
-async function getWorks() {
+async function getWorks(filter: Filter = {}) {
   return db.query.works.findMany({
-    where: eq(works.isPublished, true),
+    where: createWorkFilter(filter),
     columns: {
       id: true,
       title: true,
@@ -21,23 +23,11 @@ async function getWorks() {
 async function getRandomWork() {
   return db.query.works.findFirst({
     where: eq(works.isPublished, true),
-    orderBy: sql`RANDOM()`,
+    orderBy: sql`RANDOM()`, // https://www.answeroverflow.com/m/1242514893878591488
     with: {
       categoryName: true
     }
   }) as unknown as Work & { categoryName: Category };
-}
-
-async function getAllWorks() {
-  return db.query.works.findMany({
-    columns: {
-      id: true,
-      title: true,
-      previewDescription: true,
-      slug: true,
-      previewImage: true
-    }
-  });
 }
 
 async function getWorkBySlug(slug: string) {
@@ -53,4 +43,13 @@ async function getWorkBySlug(slug: string) {
   });
 }
 
-export { getWorks, getWorkBySlug, getAllWorks, getRandomWork };
+async function getUniqueWorkYears(filter: Filter = {}) {
+  return db
+    .selectDistinct({ year: works.year })
+    .from(works)
+    .where(createWorkFilter(filter))
+    .orderBy(asc(works.year))
+    .then(results => results.map(result => result.year));
+}
+
+export { getWorks, getWorkBySlug, getRandomWork, getUniqueWorkYears };
