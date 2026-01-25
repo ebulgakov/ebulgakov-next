@@ -18,8 +18,8 @@ function HomeWall() {
         priority
       />
       <div className="space-y-3 rounded bg-black/50 p-4 text-center text-white">
-        <div className="text-5xl font-bold">{t("intro.title")}</div>
-        <div className="text-2xl">{t("intro.description")}</div>
+        <h1 className="text-5xl font-bold">{t("intro.title")}</h1>
+        <p className="text-2xl">{t("intro.description")}</p>
       </div>
 
       <div className="absolute invert bottom-0 left-0 flex w-full flex-col items-center -space-y-4 pb-10 text-white ">

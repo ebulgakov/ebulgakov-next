@@ -10,7 +10,7 @@ function HomeJobPosition() {
 
       <div className="flex gap-8">
         <div className="flex-1 space-y-3">
-          <Title variant="h3" className="mt-0">
+          <Title variant="h3" className="mt-0 mb-6">
             Senior Frontend Developer
           </Title>
 
@@ -38,16 +38,17 @@ function HomeJobPosition() {
             <dt className="font-medium">Employed: </dt>
             <dd>November 2019 &mdash; December 2025</dd>
           </dl>
+
           <dl className="current-job_info">
             <dt className="font-medium">Location: </dt>
             <dd>Remote</dd>
           </dl>
         </div>
         <div className="flex-2">
-          <Title variant="h3" className="mt-0">
+          <Title variant="h3" className="mt-0 mb-6">
             My responsibility:
           </Title>
-          <ul className="list-disc pl-5">
+          <ul className="list-disc pl-5 space-y-1">
             <li>Develop and maintain a large-scale e-commerce site with 100k+ users per day</li>
             <li>
               Implement, take care of the website cache, and clean up large A/B-tests on the site.
@@ -75,7 +76,7 @@ function HomeJobPosition() {
             </li>
           </ul>
 
-          <div className="mt-4 flex justify-end gap-4">
+          <div className="mt-4 flex justify-end gap-6">
             <a
               className="text-primary flex gap-1"
               href="https://static.ebulgakov.com/resume/CV-Eugene-Bulgakov.pdf"
