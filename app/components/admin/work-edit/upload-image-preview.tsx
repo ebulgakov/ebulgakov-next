@@ -1,5 +1,7 @@
 "use client";
 
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import { X } from "lucide-react";
 
 import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
@@ -7,21 +9,31 @@ import { Input } from "@/app/components/ui/input";
 import { WorkImage } from "@/types/image";
 
 type UploadImagePreviewProps = {
+  id: string;
   image: WorkImage;
   onUpdateCaption?: (caption?: string) => void;
   onDelete: (id: string) => void;
 };
 function UploadImagePreview({ image, onDelete, onUpdateCaption }: UploadImagePreviewProps) {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+    id: image.public_id
+  });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition
+  };
+
   return (
-    <div className="w-50">
-      <div className="relative size-50">
-        <button
-          type="button"
-          onClick={() => onDelete(image.public_id)}
-          className="absolute -top-1 -right-1 z-10 size-5 cursor-pointer rounded-full bg-red-600 p-1 text-white hover:bg-red-700"
-        >
-          <X className="size-full" />
-        </button>
+    <div className="relative w-50 bg-white" ref={setNodeRef} style={style} {...attributes}>
+      <button
+        type="button"
+        onClick={() => onDelete(image.public_id)}
+        className="absolute -top-1 -right-1 z-10 size-5 cursor-pointer rounded-full bg-red-600 p-1 text-white hover:bg-red-700"
+      >
+        <X className="size-full" />
+      </button>
+      <div className="size-50" {...listeners}>
         <CloudinaryImage
           width={200}
           height={200}
@@ -32,6 +44,7 @@ function UploadImagePreview({ image, onDelete, onUpdateCaption }: UploadImagePre
       </div>
       {onUpdateCaption && (
         <Input
+          className="mt-2"
           placeholder="Caption"
           defaultValue={`${image.caption}`}
           onBlur={e => onUpdateCaption(e.target.value)}

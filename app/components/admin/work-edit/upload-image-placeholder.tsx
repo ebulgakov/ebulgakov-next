@@ -17,7 +17,8 @@ function UploadImagePlaceholder({ onAdd }: UploadImagePlaceholderProps) {
         if (typeof result.info === "object" && "secure_url" in result.info) {
           onAdd({
             public_id: result.info.public_id,
-            preview: result.info.secure_url
+            preview: result.info.secure_url,
+            caption: ""
           });
         }
       }}
@@ -31,6 +32,7 @@ function UploadImagePlaceholder({ onAdd }: UploadImagePlaceholderProps) {
       {({ open }) => {
         return (
           <button
+            type="button"
             onClick={() => open()}
             className="flex size-50 cursor-pointer items-center justify-center rounded border-2 border-dashed border-gray-300 transition hover:border-gray-800"
           >
