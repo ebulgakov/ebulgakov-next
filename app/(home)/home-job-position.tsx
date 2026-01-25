@@ -10,7 +10,9 @@ function HomeJobPosition() {
 
       <div className="flex gap-8">
         <div className="flex-1 space-y-3">
-          <Title variant="h3" className="mt-0">Senior Frontend Developer</Title>
+          <Title variant="h3" className="mt-0">
+            Senior Frontend Developer
+          </Title>
 
           <a
             className="flex flex-col gap-3"
@@ -50,10 +52,7 @@ function HomeJobPosition() {
             <li>
               Implement, take care of the website cache, and clean up large A/B-tests on the site.
             </li>
-            <li>
-              I’am a top performer from the dev team for implementation and quality (I can send you
-              recommendations from team-leads)
-            </li>
+            <li>I’am a top performer from the dev team for implementation and quality</li>
             <li>Build new product features using React, Vue, and ES6</li>
             <li>
               Convert static design from Figma, Sketch and text description to performance
@@ -81,7 +80,7 @@ function HomeJobPosition() {
             </li>
           </ul>
 
-          <div className="flex justify-end mt-4">
+          <div className="mt-4 flex justify-end gap-4">
             <a
               className="text-primary flex gap-1"
               href="https://static.ebulgakov.com/resume/CV-Eugene-Bulgakov.pdf"
@@ -91,6 +90,16 @@ function HomeJobPosition() {
             >
               <CirclePlay />
               <span className="underline hover:no-underline">Read my CV</span>
+            </a>
+            <a
+              className="text-primary flex gap-1"
+              href="https://static.ebulgakov.com/resume/Application-Letter-Eugene-Bulgakov-EN.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="JiffyShirts"
+            >
+              <CirclePlay />
+              <span className="underline hover:no-underline">Read my Application Letter</span>
             </a>
           </div>
         </div>
