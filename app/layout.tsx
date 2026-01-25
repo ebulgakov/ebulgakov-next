@@ -27,17 +27,17 @@ export default function RootLayout({
 }>) {
   return (
     <StrictMode>
-      <NextIntlClientProvider>
-        <NeonAuthUIProvider authClient={authClient} redirectTo="/admin" emailOTP>
-          <html lang="en" className={openSans.variable} suppressHydrationWarning>
-            <body className="antialiased">
+      <html lang="en" className={openSans.variable} suppressHydrationWarning>
+        <NextIntlClientProvider>
+          <body className="antialiased">
+            <NeonAuthUIProvider authClient={authClient} redirectTo="/admin" emailOTP>
               <Header />
               {children}
               <Footer />
-            </body>
-          </html>
-        </NeonAuthUIProvider>
-      </NextIntlClientProvider>
+            </NeonAuthUIProvider>
+          </body>
+        </NextIntlClientProvider>
+      </html>
     </StrictMode>
   );
 }

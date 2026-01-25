@@ -10,17 +10,17 @@ function HomeCompetencies() {
 
   const competencies = [
     {
-      icon: <Group />,
+      icon: <Group className="size-full" />,
       title: t("competencies.adaptation.title"),
       description: t("competencies.adaptation.description")
     },
     {
-      icon: <SquareChartGantt />,
+      icon: <SquareChartGantt className="size-full" />,
       title: t("competencies.development.title"),
       description: t("competencies.development.description")
     },
     {
-      icon: <ShoppingCart />,
+      icon: <ShoppingCart className="size-full" />,
       title: t("competencies.ecommerce.title"),
       description: t("competencies.ecommerce.description")
     }
@@ -30,11 +30,13 @@ function HomeCompetencies() {
     <section>
       <Title variant="h1">My competencies</Title>
 
-      <div className="flex">
+      <div className="flex justify-between gap-10">
         {competencies.map((competency, index) => (
-          <div key={index} className="mb-6">
-            <div className="mb-4">{competency.icon}</div>
-            <h2 className="mb-2 text-2xl font-semibold">{competency.title}</h2>
+          <div key={index} className="max-w-md">
+            <div className="mb-4 flex flex-col items-center gap-2">
+              <div className="text-primary size-12">{competency.icon}</div>
+              <Title variant="h2">{competency.title}</Title>
+            </div>
             <p className="text-base text-gray-700">{competency.description}</p>
           </div>
         ))}
