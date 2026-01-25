@@ -5,7 +5,7 @@ import { Container } from "@/app/components/ui/container";
 
 function Footer() {
   return (
-    <footer className="mt-12 bg-gray-900 py-6 text-white">
+    <footer className="mt-auto bg-gray-900 py-6 text-white">
       <Container>
         <div className="flex items-center gap-4">
           <Link href="/">

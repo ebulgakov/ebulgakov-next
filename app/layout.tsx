@@ -72,9 +72,13 @@ export default function RootLayout({
         <NextIntlClientProvider>
           <body className="antialiased">
             <NeonAuthUIProvider authClient={authClient} redirectTo="/admin" emailOTP>
-              <Header />
-              {children}
-              <Footer />
+              <div className="grid min-h-screen">
+                <div className="pb-12">
+                  <Header />
+                  {children}
+                </div>
+                <Footer />
+              </div>
             </NeonAuthUIProvider>
           </body>
         </NextIntlClientProvider>
