@@ -7,7 +7,7 @@ import { works, workTags, tags, category } from "./schema";
  */
 export const worksRelations = relations(works, ({ many, one }) => ({
   workTags: many(workTags),
-  category: one(category, {
+  categoryName: one(category, {
     fields: [works.category],
     references: [category.id]
   })

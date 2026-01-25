@@ -3,7 +3,7 @@ import { eq, sql } from "drizzle-orm";
 import db from "@/db";
 import { works } from "@/db/schema";
 
-import type { Work } from "@/db/schema";
+import type { Work, Category } from "@/db/schema";
 
 async function getWorks() {
   return db.query.works.findMany({
@@ -23,9 +23,9 @@ async function getRandomWork() {
     where: eq(works.isPublished, true),
     orderBy: sql`RANDOM()`,
     with: {
-      category: true
+      categoryName: true
     }
-  }) as unknown as Work;
+  }) as unknown as Work & { categoryName: Category };
 }
 
 async function getAllWorks() {

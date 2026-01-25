@@ -7,11 +7,10 @@ import { Title } from "@/app/components/ui/title";
 import type { Work, Category } from "@/db/schema";
 
 type HomeRandomWorkProps = {
-  work: Work;
+  work: Work & { categoryName: Category };
 };
 function HomeRandomWork({ work }: HomeRandomWorkProps) {
   const linkToWork = `/works/${work.slug}`;
-  const workCategory = work.category as unknown as Category;
   return (
     <section>
       <Title variant="h1">Random work from the portfolio</Title>
@@ -74,7 +73,7 @@ function HomeRandomWork({ work }: HomeRandomWorkProps) {
 
             <dl>
               <dt className="text-xl font-medium">Category:</dt>
-              <dd>{workCategory.name}</dd>
+              <dd>{work.categoryName.name}</dd>
             </dl>
           </div>
 
