@@ -52,7 +52,6 @@ function HomeJobPosition() {
             <li>
               Implement, take care of the website cache, and clean up large A/B-tests on the site.
             </li>
-            <li>I’am a top performer from the dev team for implementation and quality</li>
             <li>Build new product features using React, Vue, and ES6</li>
             <li>
               Convert static design from Figma, Sketch and text description to performance
@@ -73,10 +72,6 @@ function HomeJobPosition() {
             <li>
               Collaborate closely with backend engineers, designers, and product managers for a
               better user experience on the site
-            </li>
-            <li>
-              I created a PoC-application in two weeks, which is now one of the main focuses for the
-              company.
             </li>
           </ul>
 

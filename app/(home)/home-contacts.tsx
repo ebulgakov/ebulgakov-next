@@ -7,37 +7,37 @@ function HomeContacts() {
     {
       label: "Email",
       href: "mailto:me@ebulgakov.com",
-      icon: <AtSign />,
+      icon: <AtSign className="size-full" />,
       display: "me@ebulgakov.com"
     },
     {
       label: "Telegram",
       href: "https://t.me/ebulgakov",
-      icon: <Send />,
+      icon: <Send className="size-full" />,
       display: "@ebulgakov"
     },
     {
       label: "LinkedIn",
       href: "https://www.linkedin.com/in/ebulgakov/",
-      icon: <Linkedin />,
+      icon: <Linkedin className="size-full" />,
       display: "ebulgakov"
     },
     {
       label: "Github",
       href: "https://github.com/ebulgakov",
-      icon: <Github />,
+      icon: <Github className="size-full" />,
       display: "ebulgakov"
     },
     {
       label: "Facebook",
       href: "https://www.facebook.com/profile.php?id=100000705951180",
-      icon: <Facebook />,
+      icon: <Facebook className="size-full" />,
       display: "Eugene Bulgakov"
     },
     {
       label: "Location",
       href: "https://www.google.com/maps/@41.7321292,44.7613927,14z",
-      icon: <FlagTriangleRight />,
+      icon: <FlagTriangleRight className="size-full" />,
       display: "Tbilisi, Georgia"
     }
   ];
@@ -47,12 +47,15 @@ function HomeContacts() {
 
       <div className="grid grid-cols-3 gap-y-2">
         {list.map(item => (
-          <div key={item.label}>
+          <div key={item.label} className="flex items-center gap-4">
+            <a className="size-10" rel="noopener noreferrer" target="_blank" href={item.href}>
+              {item.icon}
+            </a>
+
             <dl className="">
               <dt>{item.label}:</dt>
               <dd>
-                <a rel="noopener noreferrer" target="_blank" href={item.href}>
-                  {item.icon}
+                <a className="text-primary hover:underline" rel="noopener noreferrer" target="_blank" href={item.href}>
                   {item.display}
                 </a>
               </dd>
