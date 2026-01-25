@@ -7,6 +7,7 @@ import db from "@/db";
 import { works, workTags } from "@/db/schema";
 
 import type { NewWork } from "@/db/schema";
+import type { PayloadWork } from "@/types/common";
 
 async function updateWork(workId: number, workData: NewWork & { tags: number[] }) {
   const { user } = await neonAuth();
@@ -33,4 +34,28 @@ async function updateWork(workId: number, workData: NewWork & { tags: number[] }
   };
 }
 
-export { updateWork };
+async function addWork(workData: PayloadWork) {
+  const { user } = await neonAuth();
+
+  if (!user) throw new Error("Unauthorized");
+
+  // Update work tags
+  const { tags, ...updatedWork } = workData;
+  const [newWork] = await db.insert(works).values(updatedWork).returning({ insertedId: works.id });
+
+  if (Array.isArray(tags)) {
+    for (const tagId of tags) {
+      await db.insert(workTags).values({
+        workId: newWork.insertedId,
+        tagId: Number(tagId)
+      });
+    }
+  }
+
+  return {
+    success: true,
+    message: `Work created successfully`
+  };
+}
+
+export { updateWork, addWork };

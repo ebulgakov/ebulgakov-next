@@ -6,7 +6,7 @@ import { X } from "lucide-react";
 
 import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
 import { Input } from "@/app/components/ui/input";
-import { WorkImage } from "@/types/image";
+import { WorkImage } from "@/types/common";
 
 type UploadImagePreviewProps = {
   id: string;

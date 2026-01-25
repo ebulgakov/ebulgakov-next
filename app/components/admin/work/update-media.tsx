@@ -4,11 +4,11 @@ import { DndContext } from "@dnd-kit/core";
 import { restrictToHorizontalAxis } from "@dnd-kit/modifiers";
 import { SortableContext, horizontalListSortingStrategy, arrayMove } from "@dnd-kit/sortable";
 
-import { UploadImagePlaceholder } from "@/app/components/admin/work-edit/upload-image-placeholder";
-import { UploadImagePreview } from "@/app/components/admin/work-edit/upload-image-preview";
+import { UploadImagePlaceholder } from "@/app/components/admin/work/upload-image-placeholder";
+import { UploadImagePreview } from "@/app/components/admin/work/upload-image-preview";
 import { Field, FieldGroup, FieldLabel, FieldLegend, FieldSet } from "@/app/components/ui/field";
 
-import type { WorkImage } from "@/types/image";
+import type { WorkImage } from "@/types/common";
 import type { DragEndEvent } from "@dnd-kit/core/dist/types";
 
 type UpdateMediaProps = {

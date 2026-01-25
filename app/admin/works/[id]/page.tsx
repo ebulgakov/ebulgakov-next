@@ -1,4 +1,4 @@
-import { WorkEdit } from "@/app/components/admin/work-edit";
+import { AdminEditWork } from "@/app/components/admin/work";
 import { Container } from "@/app/components/ui/container";
 import { getAllCategories } from "@/db/queries/get-categories";
 import { getAllTags, getTagsByWorkId } from "@/db/queries/get-tags";
@@ -15,13 +15,15 @@ async function AdminEditWorkPage({ params }: WorkPageProps) {
   const workResponse = await getWorkBySlug(id);
   const tagsResponse = await getAllTags();
   const categoriesResponse = await getAllCategories();
+
+  console.log(workResponse)
   if (!workResponse) return <div>Work not found</div>;
 
   const tagsByWorkId = await getTagsByWorkId(workResponse.id);
 
   return (
     <Container>
-      <WorkEdit
+      <AdminEditWork
         work={workResponse}
         categories={categoriesResponse}
         tags={tagsResponse}

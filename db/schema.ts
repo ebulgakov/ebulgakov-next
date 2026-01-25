@@ -9,7 +9,7 @@ import {
   integer
 } from "drizzle-orm/pg-core";
 
-import type { WorkImage } from "@/types/image";
+import type { WorkImage } from "@/types/common";
 
 export const tags = pgTable("tags", {
   id: serial("id").primaryKey(),

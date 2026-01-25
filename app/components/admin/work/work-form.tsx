@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import { formatDataToWork } from "@/app/components/admin/work/helper";
 import { Button } from "@/app/components/ui/button";
 import { CheckboxWithLabel } from "@/app/components/ui/control-with-label";
 import {
@@ -25,20 +26,21 @@ import {
 } from "@/app/components/ui/select";
 import { Textarea } from "@/app/components/ui/textarea";
 import { Title } from "@/app/components/ui/title";
-import { updateWork } from "@/db/mutations/update-work";
 
 import { UpdateMedia } from "./update-media";
 
-import type { Work, Tag, WorkTag, Category } from "@/db/schema";
-import type { WorkImage } from "@/types/image";
+import type { NewWork, Tag, WorkTag, Category } from "@/db/schema";
+import type { PayloadWork, WorkImage } from "@/types/common";
 
-type WorkEditProps = {
-  work: Work;
+type WorkFormProps = {
+  work: NewWork;
   categories: Category[];
   tags: Tag[];
   workTags: (WorkTag & { tag: Tag })[];
+  onSubmit: (payload: PayloadWork) => Promise<void>;
 };
-function WorkEdit({ work, tags, workTags, categories }: WorkEditProps) {
+
+function WorkForm({ work, tags, workTags, categories, onSubmit }: WorkFormProps) {
   const router = useRouter();
   const [pImage, setPImage] = useState<WorkImage | undefined>(work.previewImage);
   const [wImages, setWImages] = useState(work.images || []);
@@ -50,37 +52,13 @@ function WorkEdit({ work, tags, workTags, categories }: WorkEditProps) {
       return;
     }
 
-    const title = formData.get("title");
-    const previewDescription = formData.get("previewDescription");
-    const description = formData.get("description");
-    const year = formData.get("year");
-    const category = formData.get("category");
-    const isPublished = formData.get("isPublished") === "on";
-    const tags = formData.getAll("tag[]");
-    const slug = formData.get("slug");
-    const productionUrl = formData.get("productionUrl");
-    const staticUrl = formData.get("staticUrl");
-
     try {
-      await updateWork(work.id, {
-        title: `${title}`,
-        previewDescription: `${previewDescription}`,
-        description: `${description}`,
-        year: `${year}`,
-        category: Number(category),
-        isPublished,
-        tags: tags.map(tag => Number(tag)),
-        slug: `${slug}`,
-        productionUrl: `${productionUrl}`,
-        staticUrl: `${staticUrl}`,
-        previewImage: pImage,
-        images: wImages
-      });
-
+      await onSubmit(formatDataToWork(formData, pImage, wImages));
       router.push("/admin/works");
     } catch (error) {
-      console.error("Failed to update work:", error);
-      alert("Failed to update work. Please try again.");
+      console.error("Failed to submit work:", error);
+      alert("Failed to submit work. Please try again.");
+      return;
     }
   };
 
@@ -252,4 +230,4 @@ function WorkEdit({ work, tags, workTags, categories }: WorkEditProps) {
   );
 }
 
-export { WorkEdit };
+export { WorkForm };

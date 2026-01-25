@@ -2,7 +2,7 @@
 
 import { CldUploadWidget } from "next-cloudinary";
 
-import type { WorkImage } from "@/types/image";
+import type { WorkImage } from "@/types/common";
 
 type UploadImagePlaceholderProps = {
   onAdd: (image: WorkImage) => void;
