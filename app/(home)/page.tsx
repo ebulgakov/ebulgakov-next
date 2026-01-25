@@ -11,7 +11,7 @@ async function Home() {
   const randomWork = await getRandomWork();
 
   return (
-    <div>
+    <main>
       <HomeWall />
 
       <Container>
@@ -35,7 +35,7 @@ async function Home() {
       <Container>
         <HomeContacts />
       </Container>
-    </div>
+    </main>
   );
 }
 
