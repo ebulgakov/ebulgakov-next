@@ -80,7 +80,7 @@ function HomeRandomWork({ work }: HomeRandomWorkProps) {
           <h3 className="mt-4 text-xl font-medium">Short description</h3>
           <p>{work.previewDescription}</p>
 
-          <div className="flex justify-end">
+          <div className="mt-4 flex justify-end">
             <Link href="/works" className="text-primary flex gap-1">
               <CirclePlay />
               <span className="underline hover:no-underline">Show all works</span>
