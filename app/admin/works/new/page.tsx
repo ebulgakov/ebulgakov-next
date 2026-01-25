@@ -3,6 +3,10 @@ import { Container } from "@/app/components/ui/container";
 import { getAllCategories } from "@/db/queries/get-categories";
 import { getAllTags } from "@/db/queries/get-tags";
 
+export async function generateMetadata() {
+  return { title: `${"Add New Work"}` };
+}
+
 async function AdminNewWorkPage() {
   const tagsResponse = await getAllTags();
   const categoriesResponse = await getAllCategories();

@@ -5,6 +5,12 @@ import { Container } from "@/app/components/ui/container";
 import { Title } from "@/app/components/ui/title";
 import { getWorks } from "@/db/queries/get-works";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Eugene Bulgakov - Works"
+};
+
 async function WorksPage() {
   const worksResponse = await getWorks();
   return (

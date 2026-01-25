@@ -2,11 +2,18 @@ import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
 import { FrameContainer } from "@/app/components/ui/frame-container";
 import { getWorkBySlug } from "@/db/queries/get-works";
 
+import type { Metadata } from "next";
+
 type WorkPageProps = {
   params: {
     id: string;
   };
 };
+
+export const metadata: Metadata = {
+  title: "Eugene Bulgakov - Work"
+};
+
 async function WorkPage({ params }: WorkPageProps) {
   const { id } = await params;
 

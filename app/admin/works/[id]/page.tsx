@@ -9,6 +9,19 @@ type WorkPageProps = {
     id: string;
   };
 };
+
+export async function generateMetadata({ params }: WorkPageProps) {
+  const { id } = await params;
+
+  const workResponse = await getWorkBySlug(id);
+  if (!workResponse)
+    return {
+      title: "Work not found"
+    };
+
+  return { title: `${"Edit Work - "}${workResponse.title}` };
+}
+
 async function AdminEditWorkPage({ params }: WorkPageProps) {
   const { id } = await params;
 
