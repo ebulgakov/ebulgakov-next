@@ -25,12 +25,7 @@ function AdminNewWork({ categories, tags }: AdminNewWorkProps) {
   };
 
   const onSubmit = async (payload: PayloadWork) => {
-    try {
-      await addWork(payload);
-    } catch (error) {
-      console.error("Failed to update work:", error);
-      alert("Failed to update work. Please try again.");
-    }
+    return addWork(payload);
   };
 
   return (

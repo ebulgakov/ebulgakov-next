@@ -58,4 +58,18 @@ async function addWork(workData: PayloadWork) {
   };
 }
 
-export { updateWork, addWork };
+async function deleteWork(workId: number) {
+  const { user } = await neonAuth();
+
+  if (!user) throw new Error("Unauthorized");
+
+  await db.delete(workTags).where(eq(workTags.workId, workId));
+  await db.delete(works).where(eq(works.id, workId));
+
+  return {
+    success: true,
+    message: `Work ${workId} deleted successfully`
+  };
+}
+
+export { updateWork, addWork, deleteWork };

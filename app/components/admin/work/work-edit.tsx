@@ -1,6 +1,6 @@
 "use client";
 
-import { updateWork } from "@/db/mutations/work";
+import { updateWork, deleteWork } from "@/db/mutations/work";
 
 import { WorkForm } from "./work-form";
 
@@ -15,12 +15,11 @@ type AdminEditWorkProps = {
 };
 function AdminEditWork({ work, categories, tags, workTags }: AdminEditWorkProps) {
   const onSubmit = async (payload: PayloadWork) => {
-    try {
-      await updateWork(work.id, payload);
-    } catch (error) {
-      console.error("Failed to update work:", error);
-      alert("Failed to update work. Please try again.");
-    }
+    return updateWork(work.id, payload);
+  };
+
+  const onRemove = async () => {
+    return deleteWork(work.id);
   };
 
   return (
@@ -30,6 +29,7 @@ function AdminEditWork({ work, categories, tags, workTags }: AdminEditWorkProps)
       tags={tags}
       workTags={workTags}
       onSubmit={onSubmit}
+      onRemove={onRemove}
     />
   );
 }

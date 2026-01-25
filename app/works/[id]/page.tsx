@@ -12,8 +12,6 @@ async function WorkPage({ params }: WorkPageProps) {
 
   const workResponse = await getWorkBySlug(id);
 
-  console.log(workResponse);
-
   if (!workResponse) {
     return <div>Work not found</div>;
   }

@@ -15,8 +15,6 @@ async function AdminEditWorkPage({ params }: WorkPageProps) {
   const workResponse = await getWorkBySlug(id);
   const tagsResponse = await getAllTags();
   const categoriesResponse = await getAllCategories();
-
-  console.log(workResponse)
   if (!workResponse) return <div>Work not found</div>;
 
   const tagsByWorkId = await getTagsByWorkId(workResponse.id);

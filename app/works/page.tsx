@@ -5,7 +5,6 @@ import { getWorks } from "@/db/queries/get-works";
 
 async function WorksPage() {
   const worksResponse = await getWorks();
-  console.log(worksResponse);
   return (
     <div>
       Works Page

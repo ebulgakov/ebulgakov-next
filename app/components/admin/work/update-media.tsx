@@ -24,8 +24,6 @@ function UpdateMedia({
   onSetWorkImages
 }: UpdateMediaProps) {
   const handleDragEnd = (event: DragEndEvent) => {
-
-    console.log('Drag End Event:', event);
     const { active, over } = event;
 
     const oldIndex = workImages.findIndex(image => image.public_id === active.id);

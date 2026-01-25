@@ -37,10 +37,17 @@ type WorkFormProps = {
   categories: Category[];
   tags: Tag[];
   workTags: (WorkTag & { tag: Tag })[];
-  onSubmit: (payload: PayloadWork) => Promise<void>;
+  onSubmit: (payload: PayloadWork) => Promise<{
+    message: string;
+    success: boolean;
+  }>;
+  onRemove?: () => Promise<{
+    message: string;
+    success: boolean;
+  }>;
 };
 
-function WorkForm({ work, tags, workTags, categories, onSubmit }: WorkFormProps) {
+function WorkForm({ work, tags, workTags, categories, onSubmit, onRemove }: WorkFormProps) {
   const router = useRouter();
   const [pImage, setPImage] = useState<WorkImage | undefined>(work.previewImage);
   const [wImages, setWImages] = useState(work.images || []);
@@ -59,6 +66,19 @@ function WorkForm({ work, tags, workTags, categories, onSubmit }: WorkFormProps)
       console.error("Failed to submit work:", error);
       alert("Failed to submit work. Please try again.");
       return;
+    }
+  };
+
+  const handleRemove = async () => {
+    if (window.confirm("Do you really want to delete Work?")) {
+      try {
+        await onRemove?.();
+        router.push("/admin/works");
+      } catch (error) {
+        console.error("Failed to remove work:", error);
+        alert("Failed to remove work. Please try again.");
+        return;
+      }
     }
   };
 
@@ -223,7 +243,17 @@ function WorkForm({ work, tags, workTags, categories, onSubmit }: WorkFormProps)
         <FieldSeparator />
 
         <FieldGroup>
-          <Button type="submit">Save Work</Button>
+          <div className="flex gap-4">
+            <Button className="flex-1" type="submit">
+              Save Work
+            </Button>
+
+            {onRemove && (
+              <Button type="button" variant="destructive" onClick={handleRemove}>
+                Remove Work
+              </Button>
+            )}
+          </div>
         </FieldGroup>
       </FieldGroup>
     </form>
