@@ -1,7 +1,8 @@
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 
 import db from "@/db";
 import { works } from "@/db/schema";
+import type { Work } from "@/db/schema";
 
 async function getWorks() {
   return db.query.works.findMany({
@@ -14,6 +15,13 @@ async function getWorks() {
       previewImage: true
     }
   });
+}
+
+async function getRandomWork() {
+  return db.query.works.findFirst({
+    where: eq(works.isPublished, true),
+    orderBy: sql`RANDOM()`
+  }) as unknown as Work;
 }
 
 async function getAllWorks() {
@@ -41,4 +49,4 @@ async function getWorkBySlug(slug: string) {
   });
 }
 
-export { getWorks, getWorkBySlug, getAllWorks };
+export { getWorks, getWorkBySlug, getAllWorks, getRandomWork };

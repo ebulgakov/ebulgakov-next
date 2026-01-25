@@ -1,12 +1,15 @@
 import { HomeCompetencies } from "@/app/(home)/home-competencies";
 import { HomeContacts } from "@/app/(home)/home-contacts";
 import { HomeJobPosition } from "@/app/(home)/home-job-position";
-import { HomeLastWork } from "@/app/(home)/home-last-work";
+import { HomeRandomWork } from "@/app/(home)/home-random-work";
 import { HomeWall } from "@/app/(home)/home-wall";
 import { Container } from "@/app/components/ui/container";
 import { Divide } from "@/app/components/ui/divide";
+import { getRandomWork } from "@/db/queries/get-works";
 
 async function Home() {
+  const randomWork = await getRandomWork();
+
   return (
     <div>
       <HomeWall />
@@ -18,7 +21,7 @@ async function Home() {
       <Divide />
 
       <Container>
-        <HomeLastWork />
+        <HomeRandomWork work={randomWork} />
       </Container>
 
       <Divide />
