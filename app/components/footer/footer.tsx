@@ -12,9 +12,23 @@ function Footer() {
             <Image width={33} height={30} src="/img/logo.svg" alt="Ebulgakov Logo" />
           </Link>
 
-          <div>
+          <a
+            href="https://github.com/ebulgakov/ebulgakov-next"
+            className="underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Made with love &copy; 2026
-          </div>
+          </a>
+
+          <a
+            href="https://old.ebulgakov.com/"
+            className="ml-auto underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Old Version
+          </a>
         </div>
       </Container>
     </footer>
