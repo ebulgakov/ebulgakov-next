@@ -20,7 +20,7 @@ function WorkPreview({ work, slugPrefix }: WorkPreviewProps) {
         <div className="relative size-full pt-[100%]">
           <CloudinaryImage
             plugins={["lazyLoad"]}
-            className="absolute inset-0 size-full object-cover"
+            className="absolute inset-0 size-full bg-gray-900/70 object-cover"
             width={400}
             height={400}
             src={work.previewImage.public_id}
@@ -28,7 +28,7 @@ function WorkPreview({ work, slugPrefix }: WorkPreviewProps) {
           />
         </div>
         <figcaption className="bg-opacity-50 flex-1 bg-gray-900/70 p-2 text-white transition-opacity group-hover:opacity-100 md:p-4 lg:absolute lg:inset-0 lg:opacity-0">
-          <div className="text-lg lg:text-2xl font-medium">{work.title}</div>
+          <div className="text-lg font-medium lg:text-2xl">{work.title}</div>
           <p>{work.previewDescription}</p>
         </figcaption>
       </figure>

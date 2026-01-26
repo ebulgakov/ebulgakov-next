@@ -18,11 +18,11 @@ function HomeWall() {
         priority
       />
       <div className="space-y-3 rounded bg-black/50 p-4 text-center text-white">
-        <h1 className="text-3xl md:text-5xl font-bold">{t("intro.title")}</h1>
-        <p className="text-lg md:text-2xl">{t("intro.description")}</p>
+        <h1 className="text-3xl lg:text-5xl font-bold">{t("intro.title")}</h1>
+        <p className="text-lg lg:text-2xl">{t("intro.description")}</p>
       </div>
 
-      <div className="hidden md:flex absolute invert bottom-0 left-0 w-full flex-col items-center -space-y-4 pb-10 text-white ">
+      <div className="hidden lg:flex absolute invert bottom-0 left-0 w-full flex-col items-center -space-y-4 pb-10 text-white ">
         <Mouse className="mb-0 size-8 rotate-180" />
         <ChevronDown className="animate-pulse duration-300" />
         <ChevronDown className="animate-pulse delay-150 duration-300" />

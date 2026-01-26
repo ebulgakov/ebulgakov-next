@@ -56,7 +56,7 @@ async function WorkPage({ params }: WorkPageProps) {
           {title}
         </Title>
 
-        <div className="flex flex-col md:flex-row gap-2 md:gap-8">
+        <div className="flex flex-col lg:flex-row gap-2 lg:gap-8">
           <dl className="flex gap-2">
             <dt className="font-medium">Category:</dt>
             <dd>

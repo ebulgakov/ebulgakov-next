@@ -16,7 +16,7 @@ function HomeRandomWork({ work }: HomeRandomWorkProps) {
       <Title variant="h1">Random work from the portfolio</Title>
 
       <div className="flex flex-col gap-10 md:flex-row">
-        <Link href={linkToWork} className="h-50 w-70 flex-none">
+        <Link href={linkToWork} className="h-50 w-full md:w-70 flex-none">
           <CloudinaryImage
             className="size-full object-cover"
             width={350}
