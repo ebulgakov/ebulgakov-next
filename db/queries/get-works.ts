@@ -1,15 +1,16 @@
-import { eq, sql, asc } from "drizzle-orm";
+import { eq, sql, asc, desc } from "drizzle-orm";
 
 import db from "@/db";
 import { works } from "@/db/schema";
 
 import { createWorkFilter, type Filter } from "./helpers";
 
-import type { Work, Category } from "@/db/schema";
+import type { Work, Category, WorkTag, Tag } from "@/db/schema";
 
 async function getWorks(filter: Filter = {}) {
   return db.query.works.findMany({
     where: createWorkFilter(filter),
+    orderBy: desc(works.year),
     columns: {
       id: true,
       title: true,
@@ -34,13 +35,19 @@ async function getWorkBySlug(slug: string) {
   return db.query.works.findFirst({
     where: eq(works.slug, slug),
     with: {
+      categoryName: true,
       workTags: {
         with: {
           tag: true
         }
       }
     }
-  });
+  }) as unknown as Work & {
+    categoryName: Category;
+    workTags: (WorkTag & {
+      tag: Tag;
+    })[];
+  };
 }
 
 async function getUniqueWorkYears(filter: Filter = {}) {

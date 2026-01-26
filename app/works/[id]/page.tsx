@@ -1,8 +1,16 @@
+import Link from "next/link";
+import ReactMarkdown from "react-markdown";
+
+import { ArrowLeft } from "lucide-react";
+
 import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
+import { Container } from "@/app/components/ui/container";
 import { FrameContainer } from "@/app/components/ui/frame-container";
+import { Title } from "@/app/components/ui/title";
 import { getWorkBySlug } from "@/db/queries/get-works";
 
 import type { Metadata } from "next";
+import { Divide } from "@/app/components/ui/divide";
 
 type WorkPageProps = {
   params: {
@@ -23,30 +31,119 @@ async function WorkPage({ params }: WorkPageProps) {
     return <div>Work not found</div>;
   }
 
+  const {
+    year,
+    title,
+    category,
+    categoryName,
+    productionUrl,
+    description,
+    workTags,
+    images,
+    staticUrl
+  } = workResponse;
+
   return (
-    <div>
-      <h1>{workResponse.title}</h1>
-
-      <p>{workResponse.description}</p>
-
-      {workResponse.workTags.map(({ tag }) => (
-        <span key={tag.id}>{tag.name} </span>
-      ))}
-
-      {workResponse.images?.map(image => (
-        <div key={image.public_id}>
-          <CloudinaryImage
-            width={800}
-            height={600}
-            src={image.public_id}
-            alt={image.caption || "Work Image"}
-          />
-          {image.caption && <p>{image.caption}</p>}
+    <main>
+      <Container>
+        <div className="mt-8">
+          <Link href="/works" className="text-primary inline-flex gap-2 hover:underline">
+            <ArrowLeft />
+            Back to all works
+          </Link>
         </div>
-      ))}
 
-      {workResponse.staticUrl && <FrameContainer link={workResponse.staticUrl} />}
-    </div>
+        <Title variant="h1" className="mt-3">
+          {title}
+        </Title>
+
+        <div className="flex gap-8">
+          <dl className="flex gap-2">
+            <dt className="font-medium">Category:</dt>
+            <dd>
+              <Link href={`/works?category=${category}`} className="text-primary hover:underline">
+                {categoryName.name}
+              </Link>
+            </dd>
+          </dl>
+
+          <dl className="flex gap-2">
+            <dt className="font-medium">Year:</dt>
+            <dd>
+              <Link className="text-primary hover:underline" href={`/works?year=${year}`}>
+                {year === "2000" ? "…–2010" : year}
+              </Link>
+            </dd>
+          </dl>
+
+          {productionUrl && (
+            <dl className="flex gap-2">
+              <dt className="font-medium">Link to site:</dt>
+              <dd>
+                <a
+                  href={productionUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  {productionUrl}
+                </a>
+              </dd>
+            </dl>
+          )}
+
+          {staticUrl && (
+            <dl className="flex gap-2">
+              <dt className="font-medium">Link to live code:</dt>
+              <dd>
+                <a
+                  href={staticUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  https://static.ebulgakov.com/
+                </a>
+              </dd>
+            </dl>
+          )}
+
+          <dl className="flex gap-2">
+            <dt className="font-medium">Used technologies:</dt>
+            <dd>{workTags.map(({ tag }) => tag.name).join(", ")}</dd>
+          </dl>
+        </div>
+
+        <div className="my-6">
+          <Title variant="h3">Description</Title>
+          <ReactMarkdown>{description}</ReactMarkdown>
+        </div>
+
+        {images?.map(image => (
+          <figure key={image.public_id} className="mb-10">
+            <CloudinaryImage
+              className="block w-full"
+              width={1280}
+              height={720}
+              src={image.public_id}
+              alt={image.caption || "Work Image"}
+            />
+            {image.caption && (
+              <figcaption className="mt-2 text-center text-2xl font-bold">
+                {image.caption}
+              </figcaption>
+            )}
+          </figure>
+        ))}
+      </Container>
+
+      {staticUrl && (
+        <div className="-mb-12">
+          <Divide className="my-0" />
+          <FrameContainer link={staticUrl} />
+        </div>
+      )}
+    </main>
   );
 }
 
