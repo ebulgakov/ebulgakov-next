@@ -1,4 +1,6 @@
 import { NeonAuthUIProvider } from "@neondatabase/auth/react";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
@@ -80,7 +82,9 @@ export default function RootLayout({
                 <Footer />
               </div>
             </NeonAuthUIProvider>
+            <SpeedInsights />
           </body>
+          {process.env.GA_ID && <GoogleAnalytics gaId={process.env.GA_ID} />}
         </NextIntlClientProvider>
       </html>
     </StrictMode>
