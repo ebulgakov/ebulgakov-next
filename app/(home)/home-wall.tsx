@@ -1,22 +1,13 @@
 "use client";
 
 import { Mouse, ChevronDown } from "lucide-react";
-import Image from "next/image";
 import { useTranslations } from "use-intl";
 
 function HomeWall() {
   const t = useTranslations("HomePage");
 
   return (
-    <div className="relative z-0 flex h-[50vh] w-full items-center justify-center overflow-hidden p-4 shadow-lg">
-      <Image
-        className="pointer-events-none absolute top-0 left-0 -z-1 h-full w-full object-cover"
-        src="/img/intro_bg.jpg"
-        alt="Intro Background"
-        width={1920}
-        height={1080}
-        priority
-      />
+    <div className="relative z-0 flex h-[50vh] w-full items-center justify-center overflow-hidden p-4 shadow-lg bg-[url('/img/intro_bg.jpg')] bg-cover bg-center bg-fixed">
       <div className="space-y-3 rounded bg-black/50 p-4 text-center text-white">
         <h1 className="text-3xl lg:text-5xl font-bold">{t("intro.title")}</h1>
         <p className="text-lg lg:text-2xl">{t("intro.description")}</p>
