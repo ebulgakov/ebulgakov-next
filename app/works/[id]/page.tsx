@@ -1,16 +1,15 @@
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 
-import { ArrowLeft } from "lucide-react";
-
 import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
 import { Container } from "@/app/components/ui/container";
+import { Divide } from "@/app/components/ui/divide";
 import { FrameContainer } from "@/app/components/ui/frame-container";
 import { Title } from "@/app/components/ui/title";
 import { getWorkBySlug } from "@/db/queries/get-works";
 
 import type { Metadata } from "next";
-import { Divide } from "@/app/components/ui/divide";
 
 type WorkPageProps = {
   params: {
