@@ -1,24 +1,28 @@
 import Link from "next/link";
 
+import { Container } from "@/app/components/ui/container";
 import { Title } from "@/app/components/ui/title";
+import { WorkPreview } from "@/app/components/work-preview";
 import { getWorks } from "@/db/queries/get-works";
 
 async function AdminWorksPage() {
   const worksResponse = await getWorks();
 
   return (
-    <div>
-      <Title>Admin Works Page</Title>
-
-      {worksResponse.map(work => (
-        <div key={work.id}>
-          <h2>{work.title}</h2>
-          <Link href={`/admin/works/${work.slug}`} className="text-primary">
-            Edit Work
-          </Link>
+    <main>
+      <Container>
+        <div className="flex justify-between items-baseline">
+          <Title variant="h1">Admin Works Page</Title>
+          <Link href="/admin/works/new" className="text-primary text-lg font-bold hover:underline">Add New Work</Link>
         </div>
-      ))}
-    </div>
+
+        <div className="grid grid-cols-3 gap-2">
+          {worksResponse.map(work => (
+            <WorkPreview key={work.id} work={work} slugPrefix="/admin/works/" />
+          ))}
+        </div>
+      </Container>
+    </main>
   );
 }
 

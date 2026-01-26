@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
 import { Container } from "@/app/components/ui/container";
 import { Title } from "@/app/components/ui/title";
+import { WorkPreview } from "@/app/components/work-preview";
 import { getCategories } from "@/db/queries/get-categories";
 import { getUniqueWorkYears, getWorks } from "@/db/queries/get-works";
 
@@ -26,7 +26,7 @@ async function WorksPage({ searchParams }: WorksPageProps) {
   const filters = { year, category: Number(category), isPublished: true };
   const works = await getWorks(filters);
 
-  console.log( await getUniqueWorkYears())
+  console.log(await getUniqueWorkYears());
   const years = await getUniqueWorkYears(filters).then(years =>
     years.map(year => ({
       value: year,
@@ -88,22 +88,7 @@ async function WorksPage({ searchParams }: WorksPageProps) {
         </div>
         <div className="grid grid-cols-3 gap-2">
           {works.map(work => (
-            <Link href={`/works/${work.slug}`} className="group relative pt-[100%]" key={work.id}>
-              <figure className="absolute inset-0 size-full">
-                <CloudinaryImage
-                  plugins={["lazyLoad"]}
-                  className="size-full object-cover"
-                  width={400}
-                  height={400}
-                  src={work.previewImage.public_id}
-                  alt={work.title}
-                />
-                <figcaption className="bg-opacity-50 absolute inset-0 bg-gray-900/70 p-4 text-white opacity-0 transition-opacity group-hover:opacity-100">
-                  <div className="text-2xl">{work.title}</div>
-                  <p>{work.previewDescription}</p>
-                </figcaption>
-              </figure>
-            </Link>
+            <WorkPreview slugPrefix="/works/" key={work.id} work={work} />
           ))}
         </div>
       </Container>
