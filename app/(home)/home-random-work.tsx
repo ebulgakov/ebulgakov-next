@@ -15,7 +15,7 @@ function HomeRandomWork({ work }: HomeRandomWorkProps) {
     <section>
       <Title variant="h1">Random work from the portfolio</Title>
 
-      <div className="flex gap-10">
+      <div className="flex flex-col gap-10 md:flex-row">
         <Link href={linkToWork} className="h-50 w-70 flex-none">
           <CloudinaryImage
             className="size-full object-cover"
@@ -33,10 +33,10 @@ function HomeRandomWork({ work }: HomeRandomWorkProps) {
             </Link>
           </Title>
 
-          <div className="my-3 flex gap-10">
+          <div className="my-3 flex flex-col gap-4 md:flex-row md:gap-10">
             {work.productionUrl && (
               <dl>
-                <dt className="text-xl font-medium">Link to site:</dt>
+                <dt className="text-lg md:text-xl font-medium">Link to site:</dt>
                 <dd>
                   <a
                     href={work.productionUrl}
@@ -52,7 +52,7 @@ function HomeRandomWork({ work }: HomeRandomWorkProps) {
 
             {work.staticUrl && (
               <dl>
-                <dt className="text-xl font-medium">Link to live code:</dt>
+                <dt className="text-lg md:text-xl font-medium">Link to live code:</dt>
                 <dd>
                   <a
                     href={work.staticUrl}
@@ -67,17 +67,17 @@ function HomeRandomWork({ work }: HomeRandomWorkProps) {
             )}
 
             <dl>
-              <dt className="text-xl font-medium">Year:</dt>
+              <dt className="text-lg md:text-xl font-medium">Year:</dt>
               <dd>{work.year}</dd>
             </dl>
 
             <dl>
-              <dt className="text-xl font-medium">Category:</dt>
+              <dt className="text-lg md:text-xl font-medium">Category:</dt>
               <dd>{work.categoryName.name}</dd>
             </dl>
           </div>
 
-          <h3 className="mt-4 text-xl font-medium">Short description</h3>
+          <h3 className="mt-4 text-lg md:text-xl font-medium">Short description</h3>
           <p>{work.previewDescription}</p>
 
           <div className="mt-4 flex justify-end">

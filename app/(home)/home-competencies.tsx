@@ -30,7 +30,7 @@ function HomeCompetencies() {
     <section>
       <Title variant="h1">My competencies</Title>
 
-      <div className="flex justify-between gap-10">
+      <div className="flex flex-col md:flex-row justify-between gap-6 lg:gap-10">
         {competencies.map((competency, index) => (
           <div key={index} className="max-w-md">
             <div className="mb-4 flex flex-col items-center gap-2">

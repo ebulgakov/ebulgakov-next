@@ -8,7 +8,7 @@ function HomeJobPosition() {
     <section>
       <Title variant="h1">My last job position</Title>
 
-      <div className="flex gap-8">
+      <div className="flex flex-col md:flex-row gap-8">
         <div className="flex-1 space-y-3">
           <Title variant="h3" className="mt-0 mb-6">
             Senior Frontend Developer

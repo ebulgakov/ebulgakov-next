@@ -45,7 +45,7 @@ function HomeContacts() {
     <section>
       <Title variant="h1">Contacts and social</Title>
 
-      <div className="grid grid-cols-3 gap-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-4">
         {list.map(item => (
           <div key={item.label} className="flex items-center gap-4">
             <a className="size-10" rel="noopener noreferrer" target="_blank" href={item.href}>
