@@ -1,4 +1,4 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 
@@ -83,9 +83,9 @@ async function WorkPage({ params }: WorkPageProps) {
                   href={productionUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary hover:underline"
+                  className="text-primary inline-flex hover:underline"
                 >
-                  {productionUrl}
+                  {productionUrl} <ExternalLink className="size-4 ml-1 self-center" />
                 </a>
               </dd>
             </dl>
@@ -99,9 +99,9 @@ async function WorkPage({ params }: WorkPageProps) {
                   href={staticUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary hover:underline"
+                  className="text-primary inline-flex hover:underline"
                 >
-                  https://static.ebulgakov.com/
+                  https://static.ebulgakov.com/ <ExternalLink className="size-4 ml-1 self-center" />
                 </a>
               </dd>
             </dl>
