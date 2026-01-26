@@ -32,7 +32,7 @@ function HomeCompetencies() {
 
       <div className="flex flex-col md:flex-row justify-between gap-6 lg:gap-10">
         {competencies.map((competency, index) => (
-          <div key={index} className="max-w-md">
+          <div key={index}>
             <div className="mb-4 flex flex-col items-center gap-2">
               <div className="text-primary size-12">{competency.icon}</div>
               <Title variant="h2">{competency.title}</Title>

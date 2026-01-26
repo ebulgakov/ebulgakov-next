@@ -49,7 +49,7 @@ function Header() {
         })}
       >
         <button className="absolute inset-0" onClick={handleToggleMenu} />
-        <nav className="relative w-80 rounded-sm rounded-tr-none bg-white shadow-lg p-2">
+        <nav className="relative w-70 md:w-80 rounded-sm rounded-tr-none bg-white shadow-lg p-2">
           <button
             className="absolute -top-8 -right-8 size-8 cursor-pointer rounded-md rounded-bl-none bg-white p-1 transition hover:bg-gray-200"
             aria-label="Close Menu"

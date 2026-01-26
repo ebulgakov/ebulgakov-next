@@ -16,7 +16,7 @@ type FilterRowProps = {
 function FilterRow({ items, title, getUrl, selectedItem, prop }: FilterRowProps) {
   return (
     <div className="flex flex-wrap">
-      <div className="mr-4 mb-2 flex self-center text-lg">{title}</div>
+      <div className="mr-4 self-center text-lg w-full md:w-auto">{title}</div>
       {items.map(item => (
         <Link
           href={getUrl({ [prop]: item.value === selectedItem ? "-" : item.value })}

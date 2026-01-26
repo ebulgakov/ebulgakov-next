@@ -86,7 +86,7 @@ async function WorksPage({ searchParams }: WorksPageProps) {
             getUrl={getUrl}
           />
         </div>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
           {works.map(work => (
             <WorkPreview slugPrefix="/works/" key={work.id} work={work} />
           ))}
