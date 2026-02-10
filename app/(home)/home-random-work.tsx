@@ -13,7 +13,7 @@ function HomeRandomWork({ work }: HomeRandomWorkProps) {
   const linkToWork = `/works/${work.slug}`;
   return (
     <section>
-      <Title variant="h1">Random work from the portfolio</Title>
+      <Title variant="h1">Selected Work</Title>
 
       <div className="flex flex-col gap-10 md:flex-row">
         <Link href={linkToWork} className="h-50 w-full md:w-70 flex-none">

@@ -8,8 +8,9 @@ function HomeWall() {
 
   return (
     <div className="relative z-0 flex h-[50vh] w-full items-center justify-center overflow-hidden p-4 shadow-lg bg-[url('/img/intro_bg.jpg')] bg-cover bg-center bg-fixed">
-      <div className="space-y-3 rounded bg-black/50 p-4 text-center text-white">
+      <div className="space-y-3 rounded bg-black/50 p-4 text-center text-white max-w-256">
         <h1 className="text-3xl lg:text-5xl font-bold">{t("intro.title")}</h1>
+        <p className="text-lg lg:text-2xl"><b>{t("intro.subtitle")}</b></p>
         <p className="text-lg lg:text-2xl">{t("intro.description")}</p>
       </div>
 

@@ -17,7 +17,7 @@ function Header() {
   const menuLinks = [
     { name: "Works", url: "/works" },
     { name: "LinkedIn Profile", url: "https://www.linkedin.com/in/eugene-bulgakov" },
-    { name: "Curriculum Vitae", url: "https://static.ebulgakov.com/resume/CV-Eugene-Bulgakov.pdf" },
+    { name: "Curriculum Vitae", url: "https://static.ebulgakov.com/resume/CV_Evgenii_Bulgakov_Senior_Frontend.pdf" },
     {
       name: "Application Letter",
       url: "https://static.ebulgakov.com/resume/Application-Letter-Eugene-Bulgakov-EN.pdf"

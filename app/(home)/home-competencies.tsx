@@ -1,6 +1,6 @@
 "use client";
 
-import { Group, ShoppingCart, SquareChartGantt } from "lucide-react";
+import { Group, ShoppingCart, SquareChartGantt, BrainCog } from "lucide-react";
 import { useTranslations } from "use-intl";
 
 import { Title } from "@/app/components/ui/title";
@@ -23,19 +23,23 @@ function HomeCompetencies() {
       icon: <ShoppingCart className="size-full" />,
       title: t("competencies.ecommerce.title"),
       description: t("competencies.ecommerce.description")
+    },
+    {
+      icon: <BrainCog className="size-full" />,
+      title: t("competencies.approach.title"),
+      description: t("competencies.approach.description")
     }
   ];
 
   return (
     <section>
-      <Title variant="h1">My competencies</Title>
-
-      <div className="flex flex-col md:flex-row justify-between gap-6 lg:gap-10">
+      <Title variant="h1">Competencies</Title>
+      <div className="grid md:grid-cols-2 gap-6 lg:gap-20">
         {competencies.map((competency, index) => (
           <div key={index}>
-            <div className="mb-4 flex flex-col items-center gap-2">
+            <div className="mb-4 flex flex-col items-center gap-4">
               <div className="text-primary size-12">{competency.icon}</div>
-              <Title variant="h2">{competency.title}</Title>
+              <Title variant="h3" className="mt-0 text-center">{competency.title}</Title>
             </div>
             <p className="text-base text-gray-700">{competency.description}</p>
           </div>

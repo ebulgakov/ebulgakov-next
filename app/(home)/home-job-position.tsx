@@ -6,9 +6,9 @@ import { Title } from "@/app/components/ui/title";
 function HomeJobPosition() {
   return (
     <section>
-      <Title variant="h1">My last job position</Title>
+      <Title variant="h1">Recent Experience</Title>
 
-      <div className="flex flex-col md:flex-row gap-8">
+      <div className="flex flex-col gap-8 md:flex-row">
         <div className="flex-1 space-y-3">
           <Title variant="h3" className="mt-0 mb-6">
             Senior Frontend Developer
@@ -48,38 +48,22 @@ function HomeJobPosition() {
           <Title variant="h3" className="mt-0 mb-6">
             My responsibility:
           </Title>
-          <ul className="list-disc pl-5 space-y-1">
-            <li>Develop and maintain a large-scale e-commerce site with 100k+ users per day</li>
+          <ul className="list-disc space-y-1 pl-5">
             <li>
-              Implement, take care of the website cache, and clean up large A/B-tests on the site.
-            </li>
-            <li>Build new product features using React, Vue, and ES6</li>
-            <li>
-              Convert static design from Figma, Sketch and text description to performance
-              UI-components with good quality in PageSpeed and maintainability.
+              Developed a Print-on-Demand PoC in just two weeks, which evolved into a primary
+              revenue stream.
             </li>
             <li>
-              Maintain Code Review from 70+ developers every day, and often 1:1 to help them improve
-              their code
+              Revamped frontend architecture, improving critical metrics by 2x in PageSpeed
+              Insights.
             </li>
-            <li>
-              Define and enforce frontend code quality standards (ESLint, Jest, best practices)
-            </li>
-            <li>
-              I almost fully replaced the FE on the site - replaced infrastructure with modern
-              Webpack, reshaked deps, implemented performance tricks, and I’ve improved the critical
-              metrics twice in PageSpeed Insights.
-            </li>
-            <li>
-              Collaborate closely with backend engineers, designers, and product managers for a
-              better user experience on the site
-            </li>
+            <li>Maintained a large-scale e-commerce site with 100k+ users per day.</li>
           </ul>
 
           <div className="mt-4 flex justify-end gap-6">
             <a
               className="text-primary flex gap-1"
-              href="https://static.ebulgakov.com/resume/CV-Eugene-Bulgakov.pdf"
+              href="https://static.ebulgakov.com/resume/CV_Evgenii_Bulgakov_Senior_Frontend.pdf"
               target="_blank"
               rel="noopener noreferrer"
               title="JiffyShirts"
