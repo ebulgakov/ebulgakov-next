@@ -9,6 +9,8 @@ import { FrameContainer } from "@/app/components/ui/frame-container";
 import { Title } from "@/app/components/ui/title";
 import { getWorkBySlug } from "@/db/queries/get-works";
 
+import styles from "./work.module.css";
+
 import type { Metadata } from "next";
 
 type WorkPageProps = {
@@ -56,7 +58,7 @@ async function WorkPage({ params }: WorkPageProps) {
           {title}
         </Title>
 
-        <div className="flex flex-col lg:flex-row gap-2 lg:gap-8">
+        <div className="flex flex-col gap-2 lg:flex-row lg:gap-8">
           <dl className="flex gap-2">
             <dt className="font-medium">Category:</dt>
             <dd>
@@ -85,7 +87,7 @@ async function WorkPage({ params }: WorkPageProps) {
                   rel="noopener noreferrer"
                   className="text-primary inline-flex hover:underline"
                 >
-                  {productionUrl} <ExternalLink className="size-4 ml-1 self-center" />
+                  {productionUrl} <ExternalLink className="ml-1 size-4 self-center" />
                 </a>
               </dd>
             </dl>
@@ -101,7 +103,7 @@ async function WorkPage({ params }: WorkPageProps) {
                   rel="noopener noreferrer"
                   className="text-primary inline-flex hover:underline"
                 >
-                  https://static.ebulgakov.com/ <ExternalLink className="size-4 ml-1 self-center" />
+                  https://static.ebulgakov.com/ <ExternalLink className="ml-1 size-4 self-center" />
                 </a>
               </dd>
             </dl>
@@ -115,11 +117,18 @@ async function WorkPage({ params }: WorkPageProps) {
 
         <div className="my-6">
           <Title variant="h3">Description</Title>
-          <ReactMarkdown>{description}</ReactMarkdown>
+          <div className={styles.wrapper}>
+            <ReactMarkdown>{description}</ReactMarkdown>
+          </div>
         </div>
 
         {images?.map(image => (
           <figure key={image.public_id} className="mb-10">
+            {image.caption && (
+              <figcaption className="mt-2 text-center text-2xl font-bold">
+                {image.caption}
+              </figcaption>
+            )}
             <CloudinaryImage
               className="block w-full"
               width={1280}
@@ -127,11 +136,6 @@ async function WorkPage({ params }: WorkPageProps) {
               src={image.public_id}
               alt={image.caption || "Work Image"}
             />
-            {image.caption && (
-              <figcaption className="mt-2 text-center text-2xl font-bold">
-                {image.caption}
-              </figcaption>
-            )}
           </figure>
         ))}
       </Container>
