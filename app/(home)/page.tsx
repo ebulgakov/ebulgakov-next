@@ -5,10 +5,10 @@ import { HomeRandomWork } from "@/app/(home)/home-random-work";
 import { HomeWall } from "@/app/(home)/home-wall";
 import { Container } from "@/app/components/ui/container";
 import { Divide } from "@/app/components/ui/divide";
-import { getRandomWork } from "@/db/queries/get-works";
+import { getFeaturedWork } from "@/db/queries/get-works";
 
 async function Home() {
-  const randomWork = await getRandomWork();
+  const featuredWork = await getFeaturedWork();
 
   return (
     <main>
@@ -21,7 +21,7 @@ async function Home() {
       <Divide />
 
       <Container>
-        <HomeRandomWork work={randomWork} />
+        <HomeRandomWork work={featuredWork} />
       </Container>
 
       <Divide />
