@@ -31,6 +31,15 @@ async function getRandomWork() {
   }) as unknown as Work & { categoryName: Category };
 }
 
+async function getFeaturedWork() {
+  return db.query.works.findFirst({
+    where: eq(works.slug, 'dns'),
+    with: {
+      categoryName: true
+    }
+  }) as unknown as Work & { categoryName: Category };
+}
+
 async function getWorkBySlug(slug: string) {
   return db.query.works.findFirst({
     where: eq(works.slug, slug),
@@ -59,4 +68,4 @@ async function getUniqueWorkYears(filter: Filter = {}) {
     .then(results => results.map(result => result.year));
 }
 
-export { getWorks, getWorkBySlug, getRandomWork, getUniqueWorkYears };
+export { getWorks, getWorkBySlug, getRandomWork, getUniqueWorkYears, getFeaturedWork };

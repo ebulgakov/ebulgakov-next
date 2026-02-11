@@ -29,7 +29,7 @@ function HomeJobPosition() {
             />
 
             <em>
-              JiffyShirts.com &mdash; is a large e-commerce site for custom printed apparel and
+              JiffyShirts.com &mdash; a large e-commerce site for custom printed apparel and
               accessories.
             </em>
           </a>
