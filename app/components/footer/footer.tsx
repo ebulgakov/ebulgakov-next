@@ -20,15 +20,6 @@ function Footer() {
           >
             Made with love &copy; 2026
           </a>
-
-          <a
-            href="https://old.ebulgakov.com/"
-            className="ml-auto underline"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Old Version
-          </a>
         </div>
       </Container>
     </footer>
