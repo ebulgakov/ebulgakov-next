@@ -23,52 +23,17 @@ function proxyMiddleware(req: NextRequest & { ip?: string }) {
     proxyUrl.protocol = "https";
     proxyUrl.pathname = proxyUrl.pathname.replace("/__clerk", "");
 
-    // 1. Создаем ответ через rewrite
-    const res = NextResponse.rewrite(proxyUrl, {
+    return NextResponse.rewrite(proxyUrl, {
       request: {
         headers: proxyHeaders
       }
     });
-
-    // 2. ДОБАВЛЯЕМ CORS ЗАГОЛОВКИ
-    // Это критически важно для работы между поддоменами (dns.ebulgakov.com -> ebulgakov.com)
-    const origin = req.headers.get("origin");
-
-    // Проверяем, что запрос идет с вашего домена (безопасность)
-    if (origin) {
-      res.headers.set("Access-Control-Allow-Origin", origin);
-      res.headers.set("Access-Control-Allow-Credentials", "true");
-      res.headers.set("Access-Control-Allow-Methods", "GET,POST,OPTIONS,PUT,DELETE,PATCH");
-      res.headers.set(
-        "Access-Control-Allow-Headers",
-        "Content-Type, Authorization, Clerk-Proxy-Url, Clerk-Secret-Key, X-Requested-With"
-      );
-    }
-
-    return res;
   }
 
   return null;
 }
 
 export default function middleware(req: NextRequest) {
-  // Обработка Preflight запросов (OPTIONS) для CORS
-  // Если браузер делает предварительную проверку, отвечаем сразу OK
-  if (req.nextUrl.pathname.match("__clerk") && req.method === "OPTIONS") {
-    const res = new NextResponse(null, { status: 200 });
-    const origin = req.headers.get("origin");
-    if (origin) {
-      res.headers.set("Access-Control-Allow-Origin", origin);
-      res.headers.set("Access-Control-Allow-Credentials", "true");
-      res.headers.set("Access-Control-Allow-Methods", "GET,POST,OPTIONS,PUT,DELETE,PATCH");
-      res.headers.set(
-        "Access-Control-Allow-Headers",
-        "Content-Type, Authorization, Clerk-Proxy-Url, Clerk-Secret-Key, X-Requested-With"
-      );
-    }
-    return res;
-  }
-
   const proxyResponse = proxyMiddleware(req);
   if (proxyResponse) {
     return proxyResponse;
