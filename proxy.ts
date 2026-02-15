@@ -35,12 +35,14 @@ function proxyMiddleware(req: NextRequest & { ip?: string }) {
     const origin = req.headers.get("origin");
 
     // Проверяем, что запрос идет с вашего домена (безопасность)
-    // Можно упростить до if (origin) res.headers.set..., если хотите разрешить всем
-    if (origin && origin.endsWith("ebulgakov.com")) {
+    if (origin) {
       res.headers.set("Access-Control-Allow-Origin", origin);
       res.headers.set("Access-Control-Allow-Credentials", "true");
       res.headers.set("Access-Control-Allow-Methods", "GET,POST,OPTIONS,PUT,DELETE,PATCH");
-      res.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization, Clerk-Proxy-Url, Clerk-Secret-Key, X-Requested-With");
+      res.headers.set(
+        "Access-Control-Allow-Headers",
+        "Content-Type, Authorization, Clerk-Proxy-Url, Clerk-Secret-Key, X-Requested-With"
+      );
     }
 
     return res;
@@ -52,14 +54,17 @@ function proxyMiddleware(req: NextRequest & { ip?: string }) {
 export default function middleware(req: NextRequest) {
   // Обработка Preflight запросов (OPTIONS) для CORS
   // Если браузер делает предварительную проверку, отвечаем сразу OK
-  if (req.nextUrl.pathname.match("__clerk") && req.method === 'OPTIONS') {
+  if (req.nextUrl.pathname.match("__clerk") && req.method === "OPTIONS") {
     const res = new NextResponse(null, { status: 200 });
     const origin = req.headers.get("origin");
-    if (origin && origin.endsWith("ebulgakov.com")) {
+    if (origin) {
       res.headers.set("Access-Control-Allow-Origin", origin);
       res.headers.set("Access-Control-Allow-Credentials", "true");
       res.headers.set("Access-Control-Allow-Methods", "GET,POST,OPTIONS,PUT,DELETE,PATCH");
-      res.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization, Clerk-Proxy-Url, Clerk-Secret-Key, X-Requested-With");
+      res.headers.set(
+        "Access-Control-Allow-Headers",
+        "Content-Type, Authorization, Clerk-Proxy-Url, Clerk-Secret-Key, X-Requested-With"
+      );
     }
     return res;
   }
