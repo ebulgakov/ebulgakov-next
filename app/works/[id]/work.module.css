@@ -21,4 +21,11 @@
       text-decoration: underline;
     }
   }
+
+  h2 {
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
 }

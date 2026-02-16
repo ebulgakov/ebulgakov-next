@@ -5,9 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useState } from "react";
 
+import { ChangeLocationSelector } from "@/app/components/change-location-selector";
 import { cn } from "@/app/lib/utils";
 
-function Header() {
+type HeaderProps = {
+  locate?: string;
+};
+
+function Header({ locate }: HeaderProps) {
   const [showMenu, setShowMenu] = useState(false);
 
   const handleToggleMenu = () => {
@@ -17,7 +22,10 @@ function Header() {
   const menuLinks = [
     { name: "Works", url: "/works" },
     { name: "LinkedIn Profile", url: "https://www.linkedin.com/in/eugene-bulgakov" },
-    { name: "Curriculum Vitae", url: "https://static.ebulgakov.com/resume/CV_Evgenii_Bulgakov_Senior_Frontend.pdf" },
+    {
+      name: "Curriculum Vitae",
+      url: "https://static.ebulgakov.com/resume/CV_Evgenii_Bulgakov_Senior_Frontend.pdf"
+    },
     {
       name: "Application Letter",
       url: "https://static.ebulgakov.com/resume/Application-Letter-Eugene-Bulgakov-EN.pdf"
@@ -31,6 +39,8 @@ function Header() {
           <Link href="/">
             <Image width={33} height={30} src="/img/logo.svg" alt="Ebulgakov Logo" />
           </Link>
+
+          <ChangeLocationSelector locate={locate} />
 
           <button
             className="group relative size-8 cursor-pointer rounded-md p-1 transition hover:bg-gray-900"
@@ -49,7 +59,7 @@ function Header() {
         })}
       >
         <button className="absolute inset-0" onClick={handleToggleMenu} />
-        <nav className="relative w-70 md:w-80 rounded-sm rounded-tr-none bg-white shadow-lg p-2">
+        <nav className="relative w-70 rounded-sm rounded-tr-none bg-white p-2 shadow-lg md:w-80">
           <button
             className="absolute -top-8 -right-8 size-8 cursor-pointer rounded-md rounded-bl-none bg-white p-1 transition hover:bg-gray-200"
             aria-label="Close Menu"
@@ -63,7 +73,7 @@ function Header() {
               <li key={link.name} className="text-center">
                 {link.url.startsWith("http") ? (
                   <a
-                    className="block text-lg py-3 hover:bg-gray-900 hover:text-white"
+                    className="block py-3 text-lg hover:bg-gray-900 hover:text-white"
                     href={link.url}
                     rel="noopener noreferrer"
                     target="_blank"
@@ -72,7 +82,7 @@ function Header() {
                   </a>
                 ) : (
                   <Link
-                    className="block  text-lg py-3 hover:bg-gray-900 hover:text-white"
+                    className="block py-3 text-lg hover:bg-gray-900 hover:text-white"
                     onClick={handleToggleMenu}
                     href={link.url}
                   >
