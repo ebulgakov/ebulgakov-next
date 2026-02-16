@@ -18,7 +18,8 @@ export const tags = pgTable("tags", {
 
 export const category = pgTable("categories", {
   id: serial("id").primaryKey(),
-  name: text("name").notNull().unique()
+  name: text("name").notNull().unique(),
+  nameRu: text("name_ru")
 });
 
 export const works = pgTable("works", {
@@ -35,8 +36,11 @@ export const works = pgTable("works", {
     .default(1)
     .references(() => category.id),
   previewDescription: text("preview_description").notNull(),
+  previewDescriptionRu: text("preview_description_ru"),
   description: text("description"),
+  descriptionRu: text("description_ru"),
   title: text("title").notNull(),
+  titleRu: text("title_ru"),
   staticUrl: text("static_url"),
   productionUrl: text("production_url"),
   slug: text("slug").notNull().unique(),

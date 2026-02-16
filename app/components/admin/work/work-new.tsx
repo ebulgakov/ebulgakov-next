@@ -3,7 +3,7 @@
 import { WorkForm } from "@/app/components/admin/work/work-form";
 import { addWork } from "@/db/mutations/work";
 
-import type { Category, Tag } from "@/db/schema";
+import type { Category, NewWork, Tag } from "@/db/schema";
 import type { PayloadWork } from "@/types/common";
 
 type AdminNewWorkProps = {
@@ -12,10 +12,13 @@ type AdminNewWorkProps = {
 };
 
 function AdminNewWork({ categories, tags }: AdminNewWorkProps) {
-  const newWork = {
+  const newWork: NewWork = {
     title: "",
+    titleRu: "",
     previewDescription: "",
+    previewDescriptionRu: "",
     description: "",
+    descriptionRu: "",
     year: "",
     isPublished: false,
     slug: "",

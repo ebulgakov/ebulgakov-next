@@ -90,30 +90,47 @@ function WorkForm({ work, tags, workTags, categories, onSubmit, onRemove }: Work
           <FieldLegend>Work data</FieldLegend>
           <FieldGroup>
             <Field>
-              <FieldLabel htmlFor="input-title">Title</FieldLabel>
+              <FieldLabel htmlFor="input-title">Title En</FieldLabel>
               <Input
                 name="title"
                 id="input-title"
                 placeholder="Title"
-                defaultValue={work.title}
+                defaultValue={`${work.title}`}
+                required
+              />
+              <FieldLabel htmlFor="input-title-ru">Title Ru</FieldLabel>
+              <Input
+                name="titleRu"
+                id="input-title-ru"
+                placeholder="TitleRu"
+                defaultValue={`${work.titleRu}`}
                 required
               />
             </Field>
 
             <Field>
-              <FieldLabel htmlFor="input-preview-description">Preview Description</FieldLabel>
+              <FieldLabel htmlFor="input-preview-description">Preview Description En</FieldLabel>
               <Input
                 name="previewDescription"
                 id="input-preview-description"
                 placeholder="Preview Description"
                 required
-                defaultValue={work.previewDescription}
+                defaultValue={`${work.previewDescription}`}
               />
+
+              <FieldLabel htmlFor="input-preview-description-ru">Preview Description Ru</FieldLabel>
+              <Input
+                name="previewDescriptionRu"
+                id="input-preview-description-ru"
+                placeholder="Preview Description"
+                defaultValue={`${work.previewDescriptionRu}`}
+              />
+
               <FieldDescription>You`ll see it on the works/ page</FieldDescription>
             </Field>
 
             <Field>
-              <FieldLabel htmlFor="input-description">Description</FieldLabel>
+              <FieldLabel htmlFor="input-description">Description En</FieldLabel>
               <Textarea
                 name="description"
                 id="input-description"
@@ -121,6 +138,15 @@ function WorkForm({ work, tags, workTags, categories, onSubmit, onRemove }: Work
                 required
                 defaultValue={`${work.description}`}
               />
+
+              <FieldLabel htmlFor="input-description">Description Ru</FieldLabel>
+              <Textarea
+                name="descriptionRu"
+                id="input-description-ru"
+                placeholder="Long text description"
+                defaultValue={`${work.descriptionRu}`}
+              />
+
               <FieldDescription>You`ll see it on the work/[slug] page</FieldDescription>
             </Field>
           </FieldGroup>

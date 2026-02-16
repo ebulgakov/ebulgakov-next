@@ -6,8 +6,11 @@ export const formatDataToWork = (
   images: WorkImage[]
 ): PayloadWork => {
   const title = formData.get("title");
+  const titleRu = formData.get("titleRu");
   const previewDescription = formData.get("previewDescription");
+  const previewDescriptionRu = formData.get("previewDescriptionRu");
   const description = formData.get("description");
+  const descriptionRu = formData.get("descriptionRu");
   const year = formData.get("year");
   const category = formData.get("category");
   const isPublished = formData.get("isPublished") === "on";
@@ -18,8 +21,11 @@ export const formatDataToWork = (
 
   return {
     title: `${title}`,
+    titleRu: `${titleRu}`,
     previewDescription: `${previewDescription}`,
+    previewDescriptionRu: `${previewDescriptionRu}`,
     description: `${description}`,
+    descriptionRu: `${descriptionRu}`,
     year: `${year}`,
     category: Number(category),
     isPublished,
