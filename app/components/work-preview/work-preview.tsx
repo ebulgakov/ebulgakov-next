@@ -3,17 +3,20 @@ import Link from "next/link";
 import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
 
 type WorkPreviewProps = {
+  locale: string;
   slugPrefix?: string;
   work: {
     slug: string;
     title: string;
+    titleRu: string | null;
     previewDescription: string;
+    previewDescriptionRu: string | null;
     previewImage: {
       public_id: string;
     };
   };
 };
-function WorkPreview({ work, slugPrefix }: WorkPreviewProps) {
+function WorkPreview({ work, slugPrefix, locale }: WorkPreviewProps) {
   return (
     <Link href={`${slugPrefix}${work.slug}`} className="group relative">
       <figure className="flex min-h-full flex-col">
@@ -24,12 +27,14 @@ function WorkPreview({ work, slugPrefix }: WorkPreviewProps) {
             width={400}
             height={400}
             src={work.previewImage.public_id}
-            alt={work.title}
+            alt={`${locale === "en" ? work.title : work.titleRu}`}
           />
         </div>
         <figcaption className="bg-opacity-50 flex-1 bg-gray-900/70 p-2 text-white transition-opacity group-hover:opacity-100 md:p-4 lg:absolute lg:inset-0 lg:opacity-0">
-          <div className="text-lg font-medium lg:text-2xl">{work.title}</div>
-          <p>{work.previewDescription}</p>
+          <div className="text-lg font-medium lg:text-2xl">
+            {locale === "en" ? work.title : work.titleRu}
+          </div>
+          <p>{locale === "en" ? work.previewDescription : work.previewDescriptionRu}</p>
         </figcaption>
       </figure>
     </Link>

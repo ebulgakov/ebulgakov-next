@@ -7,6 +7,7 @@
       "description": "10+ years of experience building scalable, high-load e-commerce platforms with 100k+ daily users. I turn complex business requirements into high-performance web solutions."
     },
     "competencies": {
+      "title": "Competencies",
       "adaptation": {
         "title": "Bridging Design & Engineering",
         "description": "I don't just implement layouts; I bridge the gap between product managers, designers, and developers. I transform static designs into pixel-perfect, maintainable UI components, ensuring the final product matches the vision even when specs are incomplete."
@@ -23,6 +24,54 @@
         "title": "My Approach",
         "description": "You can provide me with a task description written on a napkin, and I will personally organize the milestones, stories, and tasks. I am not a 'text-box programmer' — I solve business problems through technology."
       }
+    },
+    "featuredWork": {
+      "title": "Selected Work",
+      "showAllWorks": "Show all works"
+    },
+    "experience": {
+      "title": "Recent Experience",
+      "jobTitle": "Senior Frontend Developer",
+      "companyLink": "https://www.jiffyshirts.com/",
+      "companyLogoSrc": "bulgakov/jiffyshirts",
+      "company": "JiffyShirts.com",
+      "companyDescription": "JiffyShirts.com — a large e-commerce site for custom printed apparel and accessories.",
+      "employedTitle": "Employed:",
+      "employedDescription": "November 2019 — December 2025",
+      "locationTitle": "Location:",
+      "locationDescription": "Remote",
+      "responsibilityTitle": " My responsibility:",
+      "responsibilityDescription": "* Developed a Print-on-Demand PoC in just two weeks, which evolved into a primary revenue stream.\n* Revamped frontend architecture, improving critical metrics by 2x in PageSpeed Insights.\n* Maintained a large-scale e-commerce site with 100k+ users per day."
+    },
+    "contacts": {
+      "title": "Contacts and social",
+      "locationTitle": "Location",
+      "locationDescription": "Tbilisi, Georgia"
     }
+  },
+  "CVAL": {
+    "cvShortTitle": "Curriculum Vitae",
+    "cvTitle": "Read my CV",
+    "alShortTitle": "Application Letter",
+    "alTitle": "Read my Application Letter",
+    "cvLink": "https://static.ebulgakov.com/resume/CV_Evgenii_Bulgakov_Senior_Frontend_en.pdf",
+    "alLink": "https://static.ebulgakov.com/resume/AL_Evgenii_Bulgakov_Senior_Frontend_en.pdf"
+  },
+  "Header": {
+    "logoAlt": "Evgenii Bulgakov Logo",
+    "closeMenu": "Close Menu",
+    "changeLanguage": "Change Language",
+    "worksTitle": "Works",
+    "linkedinTitle": "LinkedIn Profile"
+  },
+  "Footer": {
+    "copyright": "Made with love © 2026"
+  },
+  "Work": {
+    "linkToSite": "Link to site:",
+    "linkToLiveCode": "Link to live code:",
+    "year": "Year:",
+    "category": "Category:",
+    "shortDescription": "Short description"
   }
 }

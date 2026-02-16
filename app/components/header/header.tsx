@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useState } from "react";
+import { useTranslations } from "use-intl";
 
 import { ChangeLocationSelector } from "@/app/components/change-location-selector";
 import { cn } from "@/app/lib/utils";
@@ -13,6 +14,8 @@ type HeaderProps = {
 };
 
 function Header({ locate }: HeaderProps) {
+  const t = useTranslations("Header");
+  const tCVAL = useTranslations("CVAL");
   const [showMenu, setShowMenu] = useState(false);
 
   const handleToggleMenu = () => {
@@ -20,24 +23,30 @@ function Header({ locate }: HeaderProps) {
   };
 
   const menuLinks = [
-    { name: "Works", url: "/works" },
-    { name: "LinkedIn Profile", url: "https://www.linkedin.com/in/eugene-bulgakov" },
+    { name: t("worksTitle"), url: "/works" },
+    { name: t("linkedinTitle"), url: "https://www.linkedin.com/in/ebulgakov/" },
     {
-      name: "Curriculum Vitae",
-      url: "https://static.ebulgakov.com/resume/CV_Evgenii_Bulgakov_Senior_Frontend.pdf"
+      name: tCVAL("cvShortTitle"),
+      url: tCVAL("cvLink")
     },
     {
-      name: "Application Letter",
-      url: "https://static.ebulgakov.com/resume/Application-Letter-Eugene-Bulgakov-EN.pdf"
+      name: tCVAL("alShortTitle"),
+      url: tCVAL("alLink")
     }
   ];
 
   return (
     <Fragment>
       <header className="sticky top-0 z-20 bg-gray-900/70 text-white backdrop-blur">
-        <div className="flex justify-between items-center p-4 gap-4">
+        <div className="flex items-center justify-between gap-4 p-4">
           <Link href="/">
-            <Image className="block" width={33} height={30} src="/img/logo.svg" alt="Ebulgakov Logo" />
+            <Image
+              className="block"
+              width={33}
+              height={30}
+              src="/img/logo.svg"
+              alt={t("logoAlt")}
+            />
           </Link>
 
           <div className="mr-auto">
@@ -63,7 +72,7 @@ function Header({ locate }: HeaderProps) {
         <nav className="relative w-70 rounded-sm rounded-tr-none bg-white p-2 shadow-lg md:w-80">
           <button
             className="absolute -top-8 -right-8 size-8 cursor-pointer rounded-md rounded-bl-none bg-white p-1 transition hover:bg-gray-200"
-            aria-label="Close Menu"
+            aria-label={t("closeMenu")}
             onClick={handleToggleMenu}
           >
             <X className="size-full" />

@@ -33,7 +33,7 @@ function HomeCompetencies() {
 
   return (
     <section>
-      <Title variant="h1">Competencies</Title>
+      <Title variant="h1">{t("competencies.title")}</Title>
       <div className="grid md:grid-cols-2 gap-6 lg:gap-20">
         {competencies.map((competency, index) => (
           <div key={index}>

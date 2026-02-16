@@ -1,7 +1,7 @@
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import ReactMarkdown from "react-markdown";
 import { getLocale } from "next-intl/server";
+import ReactMarkdown from "react-markdown";
 
 import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
 import { Container } from "@/app/components/ui/container";

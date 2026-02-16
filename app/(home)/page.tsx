@@ -1,3 +1,5 @@
+import { getLocale } from "next-intl/server";
+
 import { HomeCompetencies } from "@/app/(home)/home-competencies";
 import { HomeContacts } from "@/app/(home)/home-contacts";
 import { HomeJobPosition } from "@/app/(home)/home-job-position";
@@ -8,6 +10,7 @@ import { Divide } from "@/app/components/ui/divide";
 import { getFeaturedWork } from "@/db/queries/get-works";
 
 async function Home() {
+  const locale = await getLocale();
   const featuredWork = await getFeaturedWork();
 
   return (
@@ -21,7 +24,7 @@ async function Home() {
       <Divide />
 
       <Container>
-        <HomeRandomWork work={featuredWork} />
+        <HomeRandomWork locale={locale} work={featuredWork} />
       </Container>
 
       <Divide />

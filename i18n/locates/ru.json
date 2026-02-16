@@ -4,25 +4,74 @@
     "intro": {
       "title": "Евгений Булгаков",
       "subtitle": "Senior Frontend Engineer & System Architect",
-      "description": "10+ years of experience building scalable, high-load e-commerce platforms with 100k+ daily users. I turn complex business requirements into high-performance web solutions."
+      "description": "Более 10 лет опыта разработки масштабируемых, высоконагруженных e-commerce платформ с аудиторией 100k+ в день. Превращаю сложные бизнес-требования в производительные веб-решения."
     },
     "competencies": {
+      "title": "Компетенции",
       "adaptation": {
-        "title": "Bridging Design & Engineering",
-        "description": "I don't just implement layouts; I bridge the gap between product managers, designers, and developers. I transform static designs into pixel-perfect, maintainable UI components, ensuring the final product matches the vision even when specs are incomplete."
+        "title": "Связь дизайна и инжиниринга",
+        "description": "Я не просто внедряю макеты — я навожу мосты между продактами, дизайнерами и разработчиками. Превращаю статику в pixel-perfect, поддерживаемые UI-компоненты, гарантируя, что финальный продукт соответствует видению, даже если спецификации неполны."
       },
       "development": {
-        "title": "Performance & Architecture",
-        "description": "My focus is on web performance and scalability. I have experience revamping frontend architectures to improve critical metrics by 2x in PageSpeed Insights. Whether it's a monolith or microservices, I choose the best tool for the product's needs."
+        "title": "Производительность и архитектура",
+        "description": "Мой фокус — веб-производительность и масштабируемость. У меня есть опыт рефакторинга архитектуры, который улучшил критические метрики PageSpeed Insights в 2 раза. Монолит или микросервисы — я выбираю инструмент, подходящий потребностям продукта."
       },
       "ecommerce": {
-        "title": "Business-Critical Solutions",
-        "description": "I build solutions that drive revenue. From creating a Print-on-Demand PoC in two weeks that became a primary revenue stream to maintaining large-scale B2B platforms. I understand the cost of a UI mistake and prioritize testing and stability."
+        "title": "Бизнес-критичные решения",
+        "description": "Я создаю решения, приносящие прибыль. От создания PoC для Print-on-Demand за две недели, ставшего основным источником дохода, до поддержки крупных B2B платформ. Я понимаю цену ошибки в UI, поэтому ставлю в приоритет тестирование и стабильность."
       },
       "approach": {
-        "title": "My Approach",
-        "description": "You can provide me with a task description written on a napkin, and I will personally organize the milestones, stories, and tasks. I am not a 'text-box programmer' — I solve business problems through technology."
+        "title": "Мой подход",
+        "description": "Вы можете дать мне задачу, описанную на салфетке, и я самостоятельно организую этапы, истории и задачи. Я не «программист по тикетам» — я решаю проблемы бизнеса с помощью технологий."
       }
+    },
+    "featuredWork": {
+      "title": "Избранные проекты",
+      "showAllWorks": "Показать все работы"
+    },
+    "experience": {
+      "title": "Последний опыт",
+      "jobTitle": "Senior Frontend Developer",
+      "companyLink": "https://www.jiffyshirts.com/",
+      "companyLogoSrc": "bulgakov/jiffyshirts",
+      "company": "JiffyShirts.com",
+      "companyDescription": "JiffyShirts.com — крупная e-commerce площадка по продаже одежды и аксессуаров с кастомными принтами.",
+      "employedTitle": "Период:",
+      "employedDescription": "Ноябрь 2019 — Декабрь 2025",
+      "locationTitle": "Локация:",
+      "locationDescription": "Удаленно",
+      "responsibilityTitle": " Моя зона ответственности:",
+      "responsibilityDescription": "* Разработал PoC (прототип) системы Print-on-Demand всего за две недели; проект вырос в основной канал выручки компании.\n* Полностью обновил фронтенд-архитектуру, улучшив критические метрики в PageSpeed Insights в 2 раза.\n* Поддерживал и развивал крупный e-commerce сайт с посещаемостью более 100 000 пользователей в день."
+    },
+    "contacts": {
+      "title": "Контакты и соцсети",
+      "locationTitle": "Локация",
+      "locationDescription": "Тбилиси, Грузия"
     }
+  },
+  "CVAL": {
+    "cvShortTitle": "Резюме (CV)",
+    "cvTitle": "Читать резюме",
+    "alShortTitle": "Сопроводительное письмо",
+    "alTitle": "Читать сопроводительное письмо",
+    "cvLink": "https://static.ebulgakov.com/resume/CV_Evgenii_Bulgakov_Senior_Frontend_en.pdf",
+    "alLink": "https://static.ebulgakov.com/resume/AL_Evgenii_Bulgakov_Senior_Frontend_en.pdf"
+  },
+  "Header": {
+    "logoAlt": "Логотип Евгения Булгакова",
+    "closeMenu": "Закрыть меню",
+    "changeLanguage": "Сменить язык",
+    "worksTitle": "Работы",
+    "linkedinTitle": "Профиль LinkedIn"
+  },
+  "Footer": {
+    "copyright": "Сделано с любовью © 2026"
+  },
+  "Work": {
+    "linkToSite": "Сайт:",
+    "linkToLiveCode": "Вёрстка:",
+    "year": "Год:",
+    "category": "Категория:",
+    "shortDescription": "Краткое описание"
   }
 }

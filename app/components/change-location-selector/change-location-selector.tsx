@@ -1,5 +1,6 @@
 "use client";
 import { ChevronDown } from "lucide-react";
+import { useTranslations } from "use-intl";
 
 import {
   DropdownMenu,
@@ -15,6 +16,7 @@ type ChangeLocationSelectorProps = {
 };
 
 function ChangeLocationSelector({ locate = "ru" }: ChangeLocationSelectorProps) {
+  const t = useTranslations("Header");
   const handleChangeLanguage = (value: string) => {
     document.cookie = `locale=${value}; path=/; max-age=31536000`;
     window.location.reload();
@@ -29,7 +31,7 @@ function ChangeLocationSelector({ locate = "ru" }: ChangeLocationSelectorProps) 
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-40">
         <DropdownMenuGroup>
-          <DropdownMenuLabel>Change Language</DropdownMenuLabel>
+          <DropdownMenuLabel>{t('changeLanguage')}</DropdownMenuLabel>
           <DropdownMenuCheckboxItem
             checked={locate === "en"}
             disabled={locate === "en"}
