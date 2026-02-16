@@ -28,14 +28,14 @@ function HomeRandomWork({ work, locale }: HomeRandomWorkProps) {
             width={350}
             height={350}
             src={work.previewImage.public_id}
-            alt={`${locale === "en" ? work.title : work.titleRu}`}
+            alt={locale === "en" ? work.title : (work.titleRu ?? work.title)}
           />
         </Link>
 
         <div className="flex-1">
           <Title variant="h2">
             <Link href={linkToWork} className="text-primary hover:underline">
-              {locale === "en" ? work.title : work.titleRu}
+              {locale === "en" ? work.title : (work.titleRu ?? work.title)}
             </Link>
           </Title>
 
@@ -84,7 +84,7 @@ function HomeRandomWork({ work, locale }: HomeRandomWorkProps) {
           </div>
 
           <h3 className="mt-4 text-lg font-medium md:text-xl">{tWork("shortDescription")}</h3>
-          <p>{locale === "en" ? work.previewDescription : work.previewDescriptionRu}</p>
+          <p>{locale === "en" ? work.previewDescription : (work.previewDescriptionRu ?? work.previewDescription)}</p>
 
           <div className="mt-4 flex justify-end">
             <Link href="/works" className="text-primary flex gap-1">

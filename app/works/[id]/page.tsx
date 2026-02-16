@@ -59,7 +59,7 @@ async function WorkPage({ params }: WorkPageProps) {
         </div>
 
         <Title variant="h1" className="mt-3">
-          {locale === "en" ? title : titleRu}
+          {locale === "en" ? title : (titleRu ?? title)}
         </Title>
 
         <div className="flex flex-col gap-2 lg:flex-row lg:gap-8">
@@ -122,7 +122,7 @@ async function WorkPage({ params }: WorkPageProps) {
         <div className="my-6">
           <Title variant="h3">Description</Title>
           <div className={styles.wrapper}>
-            <ReactMarkdown>{locale === "en" ? description : descriptionRu}</ReactMarkdown>
+            <ReactMarkdown>{locale === "en" ? description : (descriptionRu ?? description)}</ReactMarkdown>
           </div>
         </div>
 

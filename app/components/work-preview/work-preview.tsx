@@ -27,14 +27,14 @@ function WorkPreview({ work, slugPrefix, locale }: WorkPreviewProps) {
             width={400}
             height={400}
             src={work.previewImage.public_id}
-            alt={`${locale === "en" ? work.title : work.titleRu}`}
+            alt={locale === "en" ? work.title : (work.titleRu ?? work.title)}
           />
         </div>
         <figcaption className="bg-opacity-50 flex-1 bg-gray-900/70 p-2 text-white transition-opacity group-hover:opacity-100 md:p-4 lg:absolute lg:inset-0 lg:opacity-0">
           <div className="text-lg font-medium lg:text-2xl">
-            {locale === "en" ? work.title : work.titleRu}
+            {locale === "en" ? work.title : (work.titleRu ?? work.title)}
           </div>
-          <p>{locale === "en" ? work.previewDescription : work.previewDescriptionRu}</p>
+          <p>{locale === "en" ? work.previewDescription : (work.previewDescriptionRu ?? work.previewDescription)}</p>
         </figcaption>
       </figure>
     </Link>
