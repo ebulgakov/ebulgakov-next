@@ -35,13 +35,14 @@ function Header({ locate }: HeaderProps) {
   return (
     <Fragment>
       <header className="sticky top-0 z-20 bg-gray-900/70 text-white backdrop-blur">
-        <div className="flex justify-between p-4">
+        <div className="flex justify-between items-center p-4 gap-4">
           <Link href="/">
-            <Image width={33} height={30} src="/img/logo.svg" alt="Ebulgakov Logo" />
+            <Image className="block" width={33} height={30} src="/img/logo.svg" alt="Ebulgakov Logo" />
           </Link>
 
-          <ChangeLocationSelector locate={locate} />
-
+          <div className="mr-auto">
+            <ChangeLocationSelector locate={locate} />
+          </div>
           <button
             className="group relative size-8 cursor-pointer rounded-md p-1 transition hover:bg-gray-900"
             aria-label="Toggle Menu"
