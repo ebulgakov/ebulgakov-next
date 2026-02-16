@@ -4,6 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
+import { getLocale } from "next-intl/server";
 import { StrictMode } from "react";
 
 import { Footer } from "@/app/components/footer";
@@ -63,20 +64,22 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+
   return (
     <StrictMode>
-      <html lang="en" className={openSans.variable} suppressHydrationWarning>
-        <NextIntlClientProvider>
+      <NextIntlClientProvider>
+        <html lang={locale} className={openSans.variable} suppressHydrationWarning>
           <body className="antialiased">
             <NeonAuthUIProvider authClient={authClient} redirectTo="/admin" emailOTP>
               <div className="grid min-h-screen">
                 <div className="pb-12">
-                  <Header />
+                  <Header locale={locale} />
                   {children}
                 </div>
                 <Footer />
@@ -85,8 +88,8 @@ export default function RootLayout({
             <SpeedInsights />
           </body>
           {process.env.GA_ID && <GoogleAnalytics gaId={process.env.GA_ID} />}
-        </NextIntlClientProvider>
-      </html>
+        </html>
+      </NextIntlClientProvider>
     </StrictMode>
   );
 }

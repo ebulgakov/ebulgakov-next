@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getLocale } from "next-intl/server";
 
 import { Container } from "@/app/components/ui/container";
 import { Title } from "@/app/components/ui/title";
@@ -22,6 +23,7 @@ type WorksPageProps = {
 };
 
 async function WorksPage({ searchParams }: WorksPageProps) {
+  const locale = await getLocale();
   const { year = "", category = "" } = await searchParams;
   const filters = { year, category: Number(category), isPublished: true };
   const works = await getWorks(filters);
@@ -87,7 +89,7 @@ async function WorksPage({ searchParams }: WorksPageProps) {
         </div>
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
           {works.map(work => (
-            <WorkPreview slugPrefix="/works/" key={work.id} work={work} />
+            <WorkPreview locale={locale} slugPrefix="/works/" key={work.id} work={work} />
           ))}
         </div>
       </Container>

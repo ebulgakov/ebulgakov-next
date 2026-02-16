@@ -4,10 +4,18 @@ import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useState } from "react";
+import { useTranslations } from "use-intl";
 
+import { ChangeLocationSelector } from "@/app/components/change-location-selector";
 import { cn } from "@/app/lib/utils";
 
-function Header() {
+type HeaderProps = {
+  locale?: string;
+};
+
+function Header({ locale }: HeaderProps) {
+  const t = useTranslations("Header");
+  const tCVAL = useTranslations("CVAL");
   const [showMenu, setShowMenu] = useState(false);
 
   const handleToggleMenu = () => {
@@ -15,23 +23,35 @@ function Header() {
   };
 
   const menuLinks = [
-    { name: "Works", url: "/works" },
-    { name: "LinkedIn Profile", url: "https://www.linkedin.com/in/eugene-bulgakov" },
-    { name: "Curriculum Vitae", url: "https://static.ebulgakov.com/resume/CV_Evgenii_Bulgakov_Senior_Frontend.pdf" },
+    { name: t("worksTitle"), url: "/works" },
+    { name: t("linkedinTitle"), url: "https://www.linkedin.com/in/ebulgakov/" },
     {
-      name: "Application Letter",
-      url: "https://static.ebulgakov.com/resume/Application-Letter-Eugene-Bulgakov-EN.pdf"
+      name: tCVAL("cvShortTitle"),
+      url: tCVAL("cvLink")
+    },
+    {
+      name: tCVAL("alShortTitle"),
+      url: tCVAL("alLink")
     }
   ];
 
   return (
     <Fragment>
       <header className="sticky top-0 z-20 bg-gray-900/70 text-white backdrop-blur">
-        <div className="flex justify-between p-4">
+        <div className="flex items-center justify-between gap-4 p-4">
           <Link href="/">
-            <Image width={33} height={30} src="/img/logo.svg" alt="Ebulgakov Logo" />
+            <Image
+              className="block"
+              width={33}
+              height={30}
+              src="/img/logo.svg"
+              alt={t("logoAlt")}
+            />
           </Link>
 
+          <div className="mr-auto">
+            <ChangeLocationSelector locale={locale} />
+          </div>
           <button
             className="group relative size-8 cursor-pointer rounded-md p-1 transition hover:bg-gray-900"
             aria-label="Toggle Menu"
@@ -49,10 +69,10 @@ function Header() {
         })}
       >
         <button className="absolute inset-0" onClick={handleToggleMenu} />
-        <nav className="relative w-70 md:w-80 rounded-sm rounded-tr-none bg-white shadow-lg p-2">
+        <nav className="relative w-70 rounded-sm rounded-tr-none bg-white p-2 shadow-lg md:w-80">
           <button
             className="absolute -top-8 -right-8 size-8 cursor-pointer rounded-md rounded-bl-none bg-white p-1 transition hover:bg-gray-200"
-            aria-label="Close Menu"
+            aria-label={t("closeMenu")}
             onClick={handleToggleMenu}
           >
             <X className="size-full" />
@@ -63,7 +83,7 @@ function Header() {
               <li key={link.name} className="text-center">
                 {link.url.startsWith("http") ? (
                   <a
-                    className="block text-lg py-3 hover:bg-gray-900 hover:text-white"
+                    className="block py-3 text-lg hover:bg-gray-900 hover:text-white"
                     href={link.url}
                     rel="noopener noreferrer"
                     target="_blank"
@@ -72,7 +92,7 @@ function Header() {
                   </a>
                 ) : (
                   <Link
-                    className="block  text-lg py-3 hover:bg-gray-900 hover:text-white"
+                    className="block py-3 text-lg hover:bg-gray-900 hover:text-white"
                     onClick={handleToggleMenu}
                     href={link.url}
                   >

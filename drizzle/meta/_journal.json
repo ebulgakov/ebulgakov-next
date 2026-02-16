@@ -57,6 +57,13 @@
       "when": 1769286066526,
       "tag": "0007_moaning_spacker_dave",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1771252362333,
+      "tag": "0008_smooth_redwing",
+      "breakpoints": true
     }
   ]
 }

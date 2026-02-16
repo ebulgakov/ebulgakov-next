@@ -1,9 +1,12 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "use-intl";
 
 import { Container } from "@/app/components/ui/container";
 
 function Footer() {
+  const t = useTranslations("Footer");
   return (
     <footer className="mt-auto bg-gray-900 py-6 text-white">
       <Container>
@@ -18,7 +21,7 @@ function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Made with love &copy; 2026
+            {t("copyright")}
           </a>
         </div>
       </Container>

@@ -14,7 +14,9 @@ async function getWorks(filter: Filter = {}) {
     columns: {
       id: true,
       title: true,
+      titleRu: true,
       previewDescription: true,
+      previewDescriptionRu: true,
       slug: true,
       previewImage: true
     }

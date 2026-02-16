@@ -1,5 +1,6 @@
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
+import { getLocale } from "next-intl/server";
 import ReactMarkdown from "react-markdown";
 
 import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
 };
 
 async function WorkPage({ params }: WorkPageProps) {
+  const locale = await getLocale();
   const { id } = await params;
 
   const workResponse = await getWorkBySlug(id);
@@ -35,10 +37,12 @@ async function WorkPage({ params }: WorkPageProps) {
   const {
     year,
     title,
+    titleRu,
     category,
     categoryName,
     productionUrl,
     description,
+    descriptionRu,
     workTags,
     images,
     staticUrl
@@ -55,7 +59,7 @@ async function WorkPage({ params }: WorkPageProps) {
         </div>
 
         <Title variant="h1" className="mt-3">
-          {title}
+          {locale === "en" ? title : (titleRu ?? title)}
         </Title>
 
         <div className="flex flex-col gap-2 lg:flex-row lg:gap-8">
@@ -118,7 +122,7 @@ async function WorkPage({ params }: WorkPageProps) {
         <div className="my-6">
           <Title variant="h3">Description</Title>
           <div className={styles.wrapper}>
-            <ReactMarkdown>{description}</ReactMarkdown>
+            <ReactMarkdown>{locale === "en" ? description : (descriptionRu ?? description)}</ReactMarkdown>
           </div>
         </div>
 

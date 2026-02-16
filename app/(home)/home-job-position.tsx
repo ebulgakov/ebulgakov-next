@@ -1,85 +1,83 @@
+"use client";
+
 import { CirclePlay } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import { useTranslations } from "use-intl";
 
 import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
 import { Title } from "@/app/components/ui/title";
 
+import styles from "./home-job-position.module.css";
+
 function HomeJobPosition() {
+  const t = useTranslations("HomePage.experience");
+  const tCVAL = useTranslations("CVAL");
+
   return (
     <section>
-      <Title variant="h1">Recent Experience</Title>
+      <Title variant="h1">{t("title")}</Title>
 
       <div className="flex flex-col gap-8 md:flex-row">
         <div className="flex-1 space-y-3">
           <Title variant="h3" className="mt-0 mb-6">
-            Senior Frontend Developer
+            {t("jobTitle")}
           </Title>
 
           <a
             className="flex flex-col gap-3"
-            href="https://www.jiffyshirts.com/"
+            href={t("companyLink")}
             target="_blank"
             rel="noopener noreferrer"
-            title="JiffyShirts"
+            title={t("company")}
           >
             <CloudinaryImage
               width="150"
               height="150"
-              src="bulgakov/jiffyshirts"
-              alt="Jiffyshirts.com Logo"
+              src={t("companyLogoSrc")}
+              alt={`${t("company")} Logo`}
             />
 
-            <em>
-              JiffyShirts.com &mdash; a large e-commerce site for custom printed apparel and
-              accessories.
-            </em>
+            <em>{t("companyDescription")}</em>
           </a>
 
           <dl>
-            <dt className="font-medium">Employed: </dt>
-            <dd>November 2019 &mdash; December 2025</dd>
+            <dt className="font-medium">{t("employedTitle")}</dt>
+            <dd>{t("employedDescription")}</dd>
           </dl>
 
-          <dl className="current-job_info">
-            <dt className="font-medium">Location: </dt>
-            <dd>Remote</dd>
+          <dl>
+            <dt className="font-medium">{t("locationTitle")}</dt>
+            <dd>{t("locationDescription")}</dd>
           </dl>
         </div>
         <div className="flex-2">
           <Title variant="h3" className="mt-0 mb-6">
-            My responsibility:
+            {t("responsibilityTitle")}
           </Title>
-          <ul className="list-disc space-y-1 pl-5">
-            <li>
-              Developed a Print-on-Demand PoC in just two weeks, which evolved into a primary
-              revenue stream.
-            </li>
-            <li>
-              Revamped frontend architecture, improving critical metrics by 2x in PageSpeed
-              Insights.
-            </li>
-            <li>Maintained a large-scale e-commerce site with 100k+ users per day.</li>
-          </ul>
+          <div className={styles.wrapper}>
+            <ReactMarkdown>{t("responsibilityDescription")}</ReactMarkdown>
+          </div>
 
           <div className="mt-4 flex justify-end gap-6">
             <a
               className="text-primary flex gap-1"
-              href="https://static.ebulgakov.com/resume/CV_Evgenii_Bulgakov_Senior_Frontend.pdf"
+              href={tCVAL("cvLink")}
               target="_blank"
               rel="noopener noreferrer"
-              title="JiffyShirts"
+              title={tCVAL("cvShortTitle")}
             >
               <CirclePlay />
-              <span className="underline hover:no-underline">Read my CV</span>
+              <span className="underline hover:no-underline">{tCVAL("cvTitle")}</span>
             </a>
             <a
               className="text-primary flex gap-1"
-              href="https://static.ebulgakov.com/resume/Application-Letter-Eugene-Bulgakov-EN.pdf"
+              href={tCVAL("alLink")}
               target="_blank"
               rel="noopener noreferrer"
-              title="JiffyShirts"
+              title={tCVAL("alShortTitle")}
             >
               <CirclePlay />
-              <span className="underline hover:no-underline">Read my Application Letter</span>
+              <span className="underline hover:no-underline">{tCVAL("alTitle")}</span>
             </a>
           </div>
         </div>

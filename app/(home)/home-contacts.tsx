@@ -1,8 +1,12 @@
+"use client";
+
 import { AtSign, Send, Facebook, FlagTriangleRight, Github, Linkedin } from "lucide-react";
+import { useTranslations } from "use-intl";
 
 import { Title } from "@/app/components/ui/title";
 
 function HomeContacts() {
+  const t = useTranslations("HomePage.contacts");
   const list = [
     {
       label: "Email",
@@ -35,17 +39,17 @@ function HomeContacts() {
       display: "Eugene Bulgakov"
     },
     {
-      label: "Location",
+      label: t("locationTitle"),
       href: "https://www.google.com/maps/@41.7321292,44.7613927,14z",
       icon: <FlagTriangleRight className="size-full" />,
-      display: "Tbilisi, Georgia"
+      display: t("locationDescription")
     }
   ];
   return (
     <section>
-      <Title variant="h1">Contacts and social</Title>
+      <Title variant="h1">{t("title")}</Title>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-4">
+      <div className="grid grid-cols-1 gap-y-4 md:grid-cols-2 lg:grid-cols-3">
         {list.map(item => (
           <div key={item.label} className="flex items-center gap-4">
             <a className="size-10" rel="noopener noreferrer" target="_blank" href={item.href}>
@@ -55,7 +59,12 @@ function HomeContacts() {
             <dl className="">
               <dt>{item.label}:</dt>
               <dd>
-                <a className="text-primary hover:underline" rel="noopener noreferrer" target="_blank" href={item.href}>
+                <a
+                  className="text-primary hover:underline"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href={item.href}
+                >
                   {item.display}
                 </a>
               </dd>
