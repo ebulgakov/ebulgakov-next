@@ -12,10 +12,10 @@ import {
 } from "@/app/components/ui/dropdown-menu";
 
 type ChangeLocationSelectorProps = {
-  locate?: string;
+  locale?: string;
 };
 
-function ChangeLocationSelector({ locate = "ru" }: ChangeLocationSelectorProps) {
+function ChangeLocationSelector({ locale = "ru" }: ChangeLocationSelectorProps) {
   const t = useTranslations("Header");
   const handleChangeLanguage = (value: string) => {
     document.cookie = `locale=${value}; path=/; max-age=31536000`;
@@ -25,7 +25,7 @@ function ChangeLocationSelector({ locate = "ru" }: ChangeLocationSelectorProps) 
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button  className="flex text-2xl items-center">
-          {locate === "ru" ? "🇷🇺" : "🇬🇧"}
+          {locale === "ru" ? "🇷🇺" : "🇬🇧"}
           <ChevronDown className="block text-secondary size-4" />
         </button>
       </DropdownMenuTrigger>
@@ -33,15 +33,15 @@ function ChangeLocationSelector({ locate = "ru" }: ChangeLocationSelectorProps) 
         <DropdownMenuGroup>
           <DropdownMenuLabel>{t('changeLanguage')}</DropdownMenuLabel>
           <DropdownMenuCheckboxItem
-            checked={locate === "en"}
-            disabled={locate === "en"}
+            checked={locale === "en"}
+            disabled={locale === "en"}
             onCheckedChange={() => handleChangeLanguage("en")}
           >
            English 🇬🇧
           </DropdownMenuCheckboxItem>
           <DropdownMenuCheckboxItem
-            checked={locate === "ru"}
-            disabled={locate === "ru"}
+            checked={locale === "ru"}
+            disabled={locale === "ru"}
             onCheckedChange={() => handleChangeLanguage("ru")}
           >
            Русский 🇷🇺

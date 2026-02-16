@@ -139,7 +139,7 @@ function WorkForm({ work, tags, workTags, categories, onSubmit, onRemove }: Work
                 defaultValue={`${work.description}`}
               />
 
-              <FieldLabel htmlFor="input-description">Description Ru</FieldLabel>
+              <FieldLabel htmlFor="input-description-ru">Description Ru</FieldLabel>
               <Textarea
                 name="descriptionRu"
                 id="input-description-ru"

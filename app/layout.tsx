@@ -79,7 +79,7 @@ export default async function RootLayout({
             <NeonAuthUIProvider authClient={authClient} redirectTo="/admin" emailOTP>
               <div className="grid min-h-screen">
                 <div className="pb-12">
-                  <Header locate={locale} />
+                  <Header locale={locale} />
                   {children}
                 </div>
                 <Footer />

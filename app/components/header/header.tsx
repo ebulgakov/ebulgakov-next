@@ -10,10 +10,10 @@ import { ChangeLocationSelector } from "@/app/components/change-location-selecto
 import { cn } from "@/app/lib/utils";
 
 type HeaderProps = {
-  locate?: string;
+  locale?: string;
 };
 
-function Header({ locate }: HeaderProps) {
+function Header({ locale }: HeaderProps) {
   const t = useTranslations("Header");
   const tCVAL = useTranslations("CVAL");
   const [showMenu, setShowMenu] = useState(false);
@@ -50,7 +50,7 @@ function Header({ locate }: HeaderProps) {
           </Link>
 
           <div className="mr-auto">
-            <ChangeLocationSelector locate={locate} />
+            <ChangeLocationSelector locale={locale} />
           </div>
           <button
             className="group relative size-8 cursor-pointer rounded-md p-1 transition hover:bg-gray-900"
