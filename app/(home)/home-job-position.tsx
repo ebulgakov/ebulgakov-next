@@ -42,7 +42,7 @@ function HomeJobPosition() {
 
           <dl>
             <dt className="font-medium">{t("employedTitle")}</dt>
-            <dd>{t("employedDescription")}</dd>
+            <dd><ReactMarkdown>{t("employedDescription")}</ReactMarkdown></dd>
           </dl>
 
           <dl>
