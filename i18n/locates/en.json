@@ -32,16 +32,16 @@
     "experience": {
       "title": "Recent Experience",
       "jobTitle": "Senior Frontend Developer",
-      "companyLink": "https://www.jiffyshirts.com/",
-      "companyLogoSrc": "bulgakov/jiffyshirts",
-      "company": "JiffyShirts.com",
-      "companyDescription": "JiffyShirts.com — a large e-commerce site for custom printed apparel and accessories.",
-      "employedTitle": "Employed:",
-      "employedDescription": "November 2019 — December 2025",
+      "companyLink": "https://www.maxbitsolution.com/",
+      "companyLogoSrc": "bulgakov/maxbitsolution",
+      "company": "MAXBITSOLUTION",
+      "companyDescription": "MAXBITSOLUTION is an IT company building projects in the iGaming industry. We develop high-load systems and also manage traffic generation and lead generation.",
+      "employedTitle": "Period:",
+      "employedDescription": "March 2026 — June 2026 \n\n*(company ceased operations in June 2026)*",
       "locationTitle": "Location:",
-      "locationDescription": "Remote",
+      "locationDescription": "Belarus, Minsk",
       "responsibilityTitle": "My responsibility:",
-      "responsibilityDescription": "* Developed a Print-on-Demand PoC in just two weeks, which evolved into a primary revenue stream.\n* Revamped frontend architecture, improving critical metrics by 2x in PageSpeed Insights.\n* Maintained a large-scale e-commerce site with 100k+ users per day."
+      "responsibilityDescription": "* Migrated critical components from Vue 3 Options API to Composition API, moving business logic into composables — cut the time needed to make changes in half and made the architecture more flexible\n * Covered key components with unit tests and introduced a team-wide standard for testing Vue components, reducing regression risk and simplifying maintenance\n * Developed a shared Vue component library used across 20+ company projects, unifying the implementation of common business rules\n * Introduced a practice of feature decomposition and estimation with 80%+ accuracy relative to actual effort, improving release predictability"
     },
     "contacts": {
       "title": "Contacts and social",
