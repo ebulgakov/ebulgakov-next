@@ -40,7 +40,7 @@
       "employedDescription": "March 2026 — June 2026 \n\n*(company ceased operations in June 2026)*",
       "locationTitle": "Location:",
       "locationDescription": "Belarus, Minsk",
-      "responsibilityTitle": "My areas of responsibility:",
+      "responsibilityTitle": "My responsibility:",
       "responsibilityDescription": "* Migrated critical components from Vue 3 Options API to Composition API, moving business logic into composables — cut the time needed to make changes in half and made the architecture more flexible\n * Covered key components with unit tests and introduced a team-wide standard for testing Vue components, reducing regression risk and simplifying maintenance\n * Developed a shared Vue component library used across 20+ company projects, unifying the implementation of common business rules\n * Introduced a practice of feature decomposition and estimation with 80%+ accuracy relative to actual effort, improving release predictability"
     },
     "contacts": {
