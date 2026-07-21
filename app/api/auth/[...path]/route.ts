@@ -1,15 +1,3 @@
-import { authServer } from "@/app/lib/auth/server";
-async function GET() {
-  const { data } = await authServer.getSession();
-  if (data?.session) {
-    return new Response(JSON.stringify({ session: data.session, user: data.user }), {
-      headers: { "Content-Type": "application/json" }
-    });
-  }
-  return new Response(JSON.stringify({ error: "Unauthenticated" }), {
-    headers: { "Content-Type": "application/json" },
-    status: 401
-  });
-}
+import { authApiHandler } from "@neondatabase/auth/next/server";
 
-export { GET };
+export const { GET, POST, PUT, DELETE, PATCH } = authApiHandler();
