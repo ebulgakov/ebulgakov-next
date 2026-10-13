@@ -75,7 +75,7 @@ export default async function RootLayout({
     <StrictMode>
       <NextIntlClientProvider>
         <html lang={locale} className={openSans.variable} suppressHydrationWarning>
-          <body className="antialiased">
+          <body className="antialiased" suppressHydrationWarning>
             <NeonAuthUIProvider authClient={authClient} redirectTo="/admin" emailOTP>
               <div className="grid min-h-screen">
                 <div className="pb-12">

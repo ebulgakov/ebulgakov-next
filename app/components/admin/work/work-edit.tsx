@@ -4,17 +4,17 @@ import { updateWork, deleteWork } from "@/db/mutations/work";
 
 import { WorkForm } from "./work-form";
 
-import type { Category, Tag, Work, WorkTag } from "@/db/schema";
-import type { PayloadWork } from "@/types/common";
+import type { WorkFormValues } from "@/app/components/admin/work/schema";
+import type { Category, Tag, Work, WorkTagWithTag } from "@/db/schema";
 
 type AdminEditWorkProps = {
   work: Work;
   categories: Category[];
   tags: Tag[];
-  workTags: (WorkTag & { tag: Tag })[];
+  workTags: WorkTagWithTag[];
 };
 function AdminEditWork({ work, categories, tags, workTags }: AdminEditWorkProps) {
-  const onSubmit = async (payload: PayloadWork) => {
+  const onSubmit = async (payload: WorkFormValues) => {
     return updateWork(work.id, payload);
   };
 

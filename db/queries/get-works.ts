@@ -5,7 +5,7 @@ import { works } from "@/db/schema";
 
 import { createWorkFilter, type Filter } from "./helpers";
 
-import type { Work, Category, WorkTag, Tag } from "@/db/schema";
+import type { Work, Category, WorkTagWithTag } from "@/db/schema";
 
 async function getWorks(filter: Filter = {}) {
   return db.query.works.findMany({
@@ -55,9 +55,7 @@ async function getWorkBySlug(slug: string) {
     }
   }) as unknown as Work & {
     categoryName: Category;
-    workTags: (WorkTag & {
-      tag: Tag;
-    })[];
+    workTags: WorkTagWithTag[];
   };
 }
 

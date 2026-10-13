@@ -70,8 +70,9 @@ export type NewWork = typeof works.$inferInsert;
 export type Tag = typeof tags.$inferSelect;
 export type NewTag = typeof tags.$inferInsert;
 
-export type WorkTag = typeof workTags.$inferInsert;
+export type WorkTag = typeof workTags.$inferSelect;
 export type NewWorkTag = typeof workTags.$inferInsert;
+export type WorkTagWithTag = WorkTag & { tag: Tag };
 
 export type Category = typeof category.$inferSelect;
 export type NewCategory = typeof category.$inferInsert;

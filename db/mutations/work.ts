@@ -3,30 +3,57 @@
 import { neonAuth } from "@neondatabase/auth/next/server";
 import { eq } from "drizzle-orm";
 
+import { workFormSchema } from "@/app/components/admin/work/schema";
 import db from "@/db";
 import { works, workTags } from "@/db/schema";
 
-import type { NewWork } from "@/db/schema";
-import type { PayloadWork } from "@/types/common";
+import type { WorkActionResult, WorkFormValues } from "@/app/components/admin/work/schema";
+import type { BatchItem } from "drizzle-orm/batch";
 
-async function updateWork(workId: number, workData: NewWork & { tags: number[] }) {
+const invalidData: WorkActionResult = { success: false, message: "Invalid work data" };
+const slugTaken: WorkActionResult = {
+  success: false,
+  message: "Work with this slug already exists",
+  field: "slug"
+};
+
+// Postgres unique_violation on works.slug; other unique violations (e.g. work_tags) are not slug conflicts
+function isSlugConflict(error: unknown) {
+  const cause = error instanceof Error && error.cause ? error.cause : error;
+  return (
+    typeof cause === "object" &&
+    cause !== null &&
+    "code" in cause &&
+    cause.code === "23505" &&
+    "constraint" in cause &&
+    cause.constraint === "works_slug_unique"
+  );
+}
+
+async function updateWork(workId: number, workData: WorkFormValues): Promise<WorkActionResult> {
   const { user } = await neonAuth();
 
   if (!user) throw new Error("Unauthorized");
 
-  // Update work tags
-  const { tags, ...updatedWork } = workData;
-  await db.delete(workTags).where(eq(workTags.workId, workId));
-  if (Array.isArray(tags)) {
-    for (const tagId of tags) {
-      await db.insert(workTags).values({
-        workId: workId,
-        tagId: Number(tagId)
-      });
-    }
-  }
+  const parsed = workFormSchema.safeParse(workData);
+  if (!parsed.success) return invalidData;
 
-  await db.update(works).set(updatedWork).where(eq(works.id, workId));
+  const { tags, ...updatedWork } = parsed.data;
+  const tagRows = [...new Set(tags)].map(tagId => ({ workId, tagId }));
+
+  // neon-http has no interactive transactions; batch runs all queries in a single one
+  const queries: [BatchItem<"pg">, ...BatchItem<"pg">[]] = [
+    db.update(works).set(updatedWork).where(eq(works.id, workId)),
+    db.delete(workTags).where(eq(workTags.workId, workId))
+  ];
+  if (tagRows.length) queries.push(db.insert(workTags).values(tagRows));
+
+  try {
+    await db.batch(queries);
+  } catch (error) {
+    if (isSlugConflict(error)) return slugTaken;
+    throw error;
+  }
 
   return {
     success: true,
@@ -34,23 +61,26 @@ async function updateWork(workId: number, workData: NewWork & { tags: number[] }
   };
 }
 
-async function addWork(workData: PayloadWork) {
+async function addWork(workData: WorkFormValues): Promise<WorkActionResult> {
   const { user } = await neonAuth();
 
   if (!user) throw new Error("Unauthorized");
 
-  // Update work tags
-  const { tags, ...updatedWork } = workData;
-  const [newWork] = await db.insert(works).values(updatedWork).returning({ insertedId: works.id });
+  const parsed = workFormSchema.safeParse(workData);
+  if (!parsed.success) return invalidData;
 
-  if (Array.isArray(tags)) {
-    for (const tagId of tags) {
-      await db.insert(workTags).values({
-        workId: newWork.insertedId,
-        tagId: Number(tagId)
-      });
-    }
+  const { tags, ...updatedWork } = parsed.data;
+  let newWork;
+  try {
+    [newWork] = await db.insert(works).values(updatedWork).returning({ insertedId: works.id });
+  } catch (error) {
+    if (isSlugConflict(error)) return slugTaken;
+    throw error;
   }
+
+  // Update work tags
+  const tagRows = [...new Set(tags)].map(tagId => ({ workId: newWork.insertedId, tagId }));
+  if (tagRows.length) await db.insert(workTags).values(tagRows);
 
   return {
     success: true,
