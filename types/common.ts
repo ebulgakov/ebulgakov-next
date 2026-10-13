@@ -1,5 +1,3 @@
-import type { NewWork } from "@/db/schema";
-
 export type PreviewImage = { preview: string; source: File; caption?: string };
 
 export type WorkImage = {
@@ -7,5 +5,3 @@ export type WorkImage = {
   preview: string;
   public_id: string;
 };
-
-export type PayloadWork = NewWork & { tags: number[] };

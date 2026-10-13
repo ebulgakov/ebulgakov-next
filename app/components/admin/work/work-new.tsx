@@ -3,8 +3,8 @@
 import { WorkForm } from "@/app/components/admin/work/work-form";
 import { addWork } from "@/db/mutations/work";
 
+import type { WorkFormValues } from "@/app/components/admin/work/schema";
 import type { Category, NewWork, Tag } from "@/db/schema";
-import type { PayloadWork } from "@/types/common";
 
 type AdminNewWorkProps = {
   categories: Category[];
@@ -27,7 +27,7 @@ function AdminNewWork({ categories, tags }: AdminNewWorkProps) {
     images: []
   };
 
-  const onSubmit = async (payload: PayloadWork) => {
+  const onSubmit = async (payload: WorkFormValues) => {
     return addWork(payload);
   };
 

@@ -1,14 +1,17 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { Controller, useController, useForm } from "react-hook-form";
 
-import { formatDataToWork } from "@/app/components/admin/work/helper";
+import { toFormValues } from "@/app/components/admin/work/helper";
+import { workFormSchema } from "@/app/components/admin/work/schema";
 import { Button } from "@/app/components/ui/button";
 import { CheckboxWithLabel } from "@/app/components/ui/control-with-label";
 import {
   Field,
   FieldDescription,
+  FieldError,
   FieldGroup,
   FieldLabel,
   FieldLegend,
@@ -29,43 +32,44 @@ import { Title } from "@/app/components/ui/title";
 
 import { UpdateMedia } from "./update-media";
 
+import type { WorkActionResult, WorkFormValues } from "@/app/components/admin/work/schema";
 import type { NewWork, Tag, WorkTag, Category } from "@/db/schema";
-import type { PayloadWork, WorkImage } from "@/types/common";
 
 type WorkFormProps = {
   work: NewWork;
   categories: Category[];
   tags: Tag[];
   workTags: (WorkTag & { tag: Tag })[];
-  onSubmit: (payload: PayloadWork) => Promise<{
-    message: string;
-    success: boolean;
-  }>;
-  onRemove?: () => Promise<{
-    message: string;
-    success: boolean;
-  }>;
+  onSubmit: (payload: WorkFormValues) => Promise<WorkActionResult>;
+  onRemove?: () => Promise<WorkActionResult>;
 };
 
 function WorkForm({ work, tags, workTags, categories, onSubmit, onRemove }: WorkFormProps) {
   const router = useRouter();
-  const [pImage, setPImage] = useState<WorkImage | undefined>(work.previewImage);
-  const [wImages, setWImages] = useState(work.images || []);
+  const {
+    control,
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isSubmitting }
+  } = useForm<WorkFormValues>({
+    resolver: zodResolver(workFormSchema),
+    defaultValues: toFormValues(work, workTags)
+  });
+  const { field: previewImage } = useController({ control, name: "previewImage" });
+  const { field: images } = useController({ control, name: "images" });
 
-  const handleSubmit = async (formData: FormData) => {
-    if (!formData) return;
-    if (!pImage) {
-      alert("Please upload a preview image");
-      return;
-    }
-
+  const handleValid = async (values: WorkFormValues) => {
     try {
-      await onSubmit(formatDataToWork(formData, pImage, wImages));
+      const result = await onSubmit(values);
+      if (!result.success) {
+        setError(result.field ?? "root", { message: result.message }, { shouldFocus: true });
+        return;
+      }
       router.push("/admin/works");
     } catch (error) {
       console.error("Failed to submit work:", error);
-      alert("Failed to submit work. Please try again.");
-      return;
+      setError("root", { message: "Failed to submit work. Please try again." });
     }
   };
 
@@ -83,47 +87,40 @@ function WorkForm({ work, tags, workTags, categories, onSubmit, onRemove }: Work
   };
 
   return (
-    <form action={handleSubmit}>
+    <form onSubmit={handleSubmit(handleValid)} noValidate>
       <Title>{work.title}</Title>
       <FieldGroup>
         <FieldSet>
           <FieldLegend>Work data</FieldLegend>
           <FieldGroup>
-            <Field>
+            <Field data-invalid={!!errors.title}>
               <FieldLabel htmlFor="input-title">Title En</FieldLabel>
               <Input
-                name="title"
                 id="input-title"
                 placeholder="Title"
-                defaultValue={`${work.title}`}
-                required
+                aria-invalid={!!errors.title}
+                {...register("title")}
               />
+              <FieldError errors={[errors.title]} />
               <FieldLabel htmlFor="input-title-ru">Title Ru</FieldLabel>
-              <Input
-                name="titleRu"
-                id="input-title-ru"
-                placeholder="TitleRu"
-                defaultValue={`${work.titleRu}`}
-                required
-              />
+              <Input id="input-title-ru" placeholder="TitleRu" {...register("titleRu")} />
             </Field>
 
-            <Field>
+            <Field data-invalid={!!errors.previewDescription}>
               <FieldLabel htmlFor="input-preview-description">Preview Description En</FieldLabel>
               <Input
-                name="previewDescription"
                 id="input-preview-description"
                 placeholder="Preview Description"
-                required
-                defaultValue={`${work.previewDescription}`}
+                aria-invalid={!!errors.previewDescription}
+                {...register("previewDescription")}
               />
+              <FieldError errors={[errors.previewDescription]} />
 
               <FieldLabel htmlFor="input-preview-description-ru">Preview Description Ru</FieldLabel>
               <Input
-                name="previewDescriptionRu"
                 id="input-preview-description-ru"
                 placeholder="Preview Description"
-                defaultValue={`${work.previewDescriptionRu}`}
+                {...register("previewDescriptionRu")}
               />
 
               <FieldDescription>You`ll see it on the works/ page</FieldDescription>
@@ -132,19 +129,16 @@ function WorkForm({ work, tags, workTags, categories, onSubmit, onRemove }: Work
             <Field>
               <FieldLabel htmlFor="input-description">Description En</FieldLabel>
               <Textarea
-                name="description"
                 id="input-description"
                 placeholder="Long text description"
-                required
-                defaultValue={`${work.description}`}
+                {...register("description")}
               />
 
               <FieldLabel htmlFor="input-description-ru">Description Ru</FieldLabel>
               <Textarea
-                name="descriptionRu"
                 id="input-description-ru"
                 placeholder="Long text description"
-                defaultValue={`${work.descriptionRu}`}
+                {...register("descriptionRu")}
               />
 
               <FieldDescription>You`ll see it on the work/[slug] page</FieldDescription>
@@ -158,92 +152,137 @@ function WorkForm({ work, tags, workTags, categories, onSubmit, onRemove }: Work
           <FieldLegend>Additional info</FieldLegend>
           <FieldGroup>
             <div className="grid grid-cols-3 gap-4">
-              <Field>
+              <Field data-invalid={!!errors.year}>
                 <FieldLabel htmlFor="input-year">Year</FieldLabel>
-                <Select name="year" defaultValue={work.year}>
-                  <SelectTrigger id="input-year">
-                    <SelectValue placeholder="Year" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      {[
-                        2027, 2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016,
-                        2015, 2014, 2013, 2012, 2011, 2000
-                      ].map(item => (
-                        <SelectItem key={item} value={item.toString()}>
-                          {item}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
+                <Controller
+                  control={control}
+                  name="year"
+                  render={({ field }) => (
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger
+                        id="input-year"
+                        ref={field.ref}
+                        onBlur={field.onBlur}
+                        aria-invalid={!!errors.year}
+                      >
+                        <SelectValue placeholder="Year" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {[
+                            2027, 2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016,
+                            2015, 2014, 2013, 2012, 2011, 2000
+                          ].map(item => (
+                            <SelectItem key={item} value={item.toString()}>
+                              {item}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+                <FieldError errors={[errors.year]} />
               </Field>
 
-              <Field>
+              <Field data-invalid={!!errors.category}>
                 <FieldLabel htmlFor="input-category">Category</FieldLabel>
-                <Select name="category" defaultValue={`${work.category}`}>
-                  <SelectTrigger id="input-category">
-                    <SelectValue placeholder="Category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      {categories.map(item => (
-                        <SelectItem key={item.id} value={`${item.id}`}>
-                          {item.name}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
+                <Controller
+                  control={control}
+                  name="category"
+                  render={({ field }) => (
+                    <Select
+                      value={field.value ? `${field.value}` : ""}
+                      onValueChange={value => field.onChange(Number(value))}
+                    >
+                      <SelectTrigger
+                        id="input-category"
+                        ref={field.ref}
+                        onBlur={field.onBlur}
+                        aria-invalid={!!errors.category}
+                      >
+                        <SelectValue placeholder="Category" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {categories.map(item => (
+                            <SelectItem key={item.id} value={`${item.id}`}>
+                              {item.name}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+                <FieldError errors={[errors.category]} />
               </Field>
 
               <Field>
-                <FieldLabel htmlFor="input-category">Is published</FieldLabel>
+                <FieldLabel>Is published</FieldLabel>
                 <div className="mt-2">
-                  <CheckboxWithLabel
+                  <Controller
+                    control={control}
                     name="isPublished"
-                    label="Published"
-                    defaultChecked={work.isPublished}
+                    render={({ field }) => (
+                      <CheckboxWithLabel
+                        label="Published"
+                        ref={field.ref}
+                        checked={field.value}
+                        onBlur={field.onBlur}
+                        onCheckedChange={checked => field.onChange(checked === true)}
+                      />
+                    )}
                   />
                 </div>
               </Field>
             </div>
 
             <Field>
-              <FieldLabel htmlFor="input-category">Tags</FieldLabel>
-              <div className="flex gap-3">
-                {tags.map(tag => (
-                  <CheckboxWithLabel
-                    name="tag[]"
-                    key={tag.id}
-                    label={tag.name}
-                    value={tag.id}
-                    defaultChecked={workTags.some(({ tag: t }) => t.id === tag.id)}
-                  />
-                ))}
-              </div>
+              <FieldLabel>Tags</FieldLabel>
+              <Controller
+                control={control}
+                name="tags"
+                render={({ field }) => (
+                  <div className="flex gap-3">
+                    {tags.map(tag => (
+                      <CheckboxWithLabel
+                        key={tag.id}
+                        label={tag.name}
+                        checked={field.value.includes(tag.id)}
+                        onCheckedChange={checked =>
+                          field.onChange(
+                            checked === true
+                              ? [...field.value, tag.id]
+                              : field.value.filter(id => id !== tag.id)
+                          )
+                        }
+                      />
+                    ))}
+                  </div>
+                )}
+              />
             </Field>
 
             <div className="grid grid-cols-3 gap-4">
-              <Field>
+              <Field data-invalid={!!errors.slug}>
                 <FieldLabel htmlFor="input-slug">Slug</FieldLabel>
                 <Input
-                  name="slug"
                   id="input-slug"
                   placeholder="Slug"
-                  required
-                  defaultValue={work.slug}
+                  aria-invalid={!!errors.slug}
+                  {...register("slug")}
                 />
                 <FieldDescription>Link works/[slug] page</FieldDescription>
+                <FieldError errors={[errors.slug]} />
               </Field>
 
               <Field>
                 <FieldLabel htmlFor="input-prod-link">Production Link</FieldLabel>
                 <Input
-                  name="productionUrl"
                   id="input-prod-link"
                   placeholder="Production Link"
-                  defaultValue={`${work.productionUrl}`}
+                  {...register("productionUrl")}
                 />
                 <FieldDescription>Link to the production site</FieldDescription>
               </Field>
@@ -251,10 +290,9 @@ function WorkForm({ work, tags, workTags, categories, onSubmit, onRemove }: Work
               <Field>
                 <FieldLabel htmlFor="input-static-link">Static Link</FieldLabel>
                 <Input
-                  name="staticUrl"
                   id="input-static-link"
                   placeholder="Static Link"
-                  defaultValue={`${work.staticUrl}`}
+                  {...register("staticUrl")}
                 />
                 <FieldDescription>Link to to the static markup</FieldDescription>
               </Field>
@@ -263,17 +301,20 @@ function WorkForm({ work, tags, workTags, categories, onSubmit, onRemove }: Work
         </FieldSet>
 
         <UpdateMedia
-          previewImage={pImage}
-          workImages={wImages}
-          onSetPreviewImage={setPImage}
-          onSetWorkImages={setWImages}
+          previewImage={previewImage.value}
+          workImages={images.value}
+          onSetPreviewImage={previewImage.onChange}
+          onSetWorkImages={images.onChange}
         />
+        <FieldError errors={[errors.previewImage]} />
+        {errors.images && <FieldError>Some gallery images are invalid</FieldError>}
 
         <FieldSeparator />
 
         <FieldGroup>
+          <FieldError errors={[errors.root]} />
           <div className="flex gap-4">
-            <Button className="flex-1" type="submit">
+            <Button className="flex-1" type="submit" disabled={isSubmitting}>
               Save Work
             </Button>
 
