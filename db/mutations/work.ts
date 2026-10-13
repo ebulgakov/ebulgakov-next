@@ -8,6 +8,7 @@ import db from "@/db";
 import { works, workTags } from "@/db/schema";
 
 import type { WorkActionResult, WorkFormValues } from "@/app/components/admin/work/schema";
+import type { BatchItem } from "drizzle-orm/batch";
 
 const invalidData: WorkActionResult = { success: false, message: "Invalid work data" };
 const slugTaken: WorkActionResult = {
@@ -16,10 +17,17 @@ const slugTaken: WorkActionResult = {
   field: "slug"
 };
 
-// Postgres unique_violation; slug is the only unique column on works
-function isUniqueViolation(error: unknown) {
+// Postgres unique_violation on works.slug; other unique violations (e.g. work_tags) are not slug conflicts
+function isSlugConflict(error: unknown) {
   const cause = error instanceof Error && error.cause ? error.cause : error;
-  return typeof cause === "object" && cause !== null && "code" in cause && cause.code === "23505";
+  return (
+    typeof cause === "object" &&
+    cause !== null &&
+    "code" in cause &&
+    cause.code === "23505" &&
+    "constraint" in cause &&
+    cause.constraint === "works_slug_unique"
+  );
 }
 
 async function updateWork(workId: number, workData: WorkFormValues): Promise<WorkActionResult> {
@@ -31,20 +39,20 @@ async function updateWork(workId: number, workData: WorkFormValues): Promise<Wor
   if (!parsed.success) return invalidData;
 
   const { tags, ...updatedWork } = parsed.data;
-  try {
-    await db.update(works).set(updatedWork).where(eq(works.id, workId));
-  } catch (error) {
-    if (isUniqueViolation(error)) return slugTaken;
-    throw error;
-  }
+  const tagRows = [...new Set(tags)].map(tagId => ({ workId, tagId }));
 
-  // Update work tags
-  await db.delete(workTags).where(eq(workTags.workId, workId));
-  for (const tagId of tags) {
-    await db.insert(workTags).values({
-      workId: workId,
-      tagId
-    });
+  // neon-http has no interactive transactions; batch runs all queries in a single one
+  const queries: [BatchItem<"pg">, ...BatchItem<"pg">[]] = [
+    db.update(works).set(updatedWork).where(eq(works.id, workId)),
+    db.delete(workTags).where(eq(workTags.workId, workId))
+  ];
+  if (tagRows.length) queries.push(db.insert(workTags).values(tagRows));
+
+  try {
+    await db.batch(queries);
+  } catch (error) {
+    if (isSlugConflict(error)) return slugTaken;
+    throw error;
   }
 
   return {
@@ -66,17 +74,13 @@ async function addWork(workData: WorkFormValues): Promise<WorkActionResult> {
   try {
     [newWork] = await db.insert(works).values(updatedWork).returning({ insertedId: works.id });
   } catch (error) {
-    if (isUniqueViolation(error)) return slugTaken;
+    if (isSlugConflict(error)) return slugTaken;
     throw error;
   }
 
   // Update work tags
-  for (const tagId of tags) {
-    await db.insert(workTags).values({
-      workId: newWork.insertedId,
-      tagId
-    });
-  }
+  const tagRows = [...new Set(tags)].map(tagId => ({ workId: newWork.insertedId, tagId }));
+  if (tagRows.length) await db.insert(workTags).values(tagRows);
 
   return {
     success: true,
