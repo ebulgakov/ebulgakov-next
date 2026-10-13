@@ -3,6 +3,7 @@
 import { DndContext } from "@dnd-kit/core";
 import { restrictToHorizontalAxis } from "@dnd-kit/modifiers";
 import { SortableContext, horizontalListSortingStrategy, arrayMove } from "@dnd-kit/sortable";
+import { useId } from "react";
 
 import { UploadImagePlaceholder } from "@/app/components/admin/work/upload-image-placeholder";
 import { UploadImagePreview } from "@/app/components/admin/work/upload-image-preview";
@@ -23,6 +24,9 @@ function UpdateMedia({
   onSetPreviewImage,
   onSetWorkImages
 }: UpdateMediaProps) {
+  // Stable id: DndContext falls back to a module-level counter that differs between SSR and client
+  const dndId = useId();
+
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
@@ -58,7 +62,7 @@ function UpdateMedia({
         <Field>
           <FieldLabel htmlFor="input-static-link">Gallery Images</FieldLabel>
           <div className="flex gap-4">
-            <DndContext onDragEnd={handleDragEnd} modifiers={[restrictToHorizontalAxis]}>
+            <DndContext id={dndId} onDragEnd={handleDragEnd} modifiers={[restrictToHorizontalAxis]}>
               <SortableContext
                 strategy={horizontalListSortingStrategy}
                 items={workImages.map(image => ({ id: image.public_id }))}
