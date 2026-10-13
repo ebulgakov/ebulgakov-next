@@ -1,10 +1,10 @@
 import type { WorkFormValues } from "./schema";
-import type { NewWork, Tag, WorkTag } from "@/db/schema";
+import type { NewWork, WorkTagWithTag } from "@/db/schema";
 import type { DefaultValues } from "react-hook-form";
 
 export const toFormValues = (
   work: NewWork,
-  workTags: (WorkTag & { tag: Tag })[]
+  workTags: WorkTagWithTag[]
 ): DefaultValues<WorkFormValues> => ({
   title: work.title,
   titleRu: work.titleRu ?? "",

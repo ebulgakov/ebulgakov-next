@@ -33,13 +33,13 @@ import { Title } from "@/app/components/ui/title";
 import { UpdateMedia } from "./update-media";
 
 import type { WorkActionResult, WorkFormValues } from "@/app/components/admin/work/schema";
-import type { NewWork, Tag, WorkTag, Category } from "@/db/schema";
+import type { NewWork, Tag, WorkTagWithTag, Category } from "@/db/schema";
 
 type WorkFormProps = {
   work: NewWork;
   categories: Category[];
   tags: Tag[];
-  workTags: (WorkTag & { tag: Tag })[];
+  workTags: WorkTagWithTag[];
   onSubmit: (payload: WorkFormValues) => Promise<WorkActionResult>;
   onRemove?: () => Promise<WorkActionResult>;
 };
