@@ -16,6 +16,8 @@ import {
   Typography
 } from "@mui/material";
 
+import { ActionButton } from "@/app/components/ui/action-button";
+
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -174,17 +176,6 @@ function SectionHeader({ id, number, title, caption, dark }: SectionHeaderProps)
   );
 }
 
-const actionSx = {
-  height: 54,
-  px: "22px",
-  borderRadius: 0,
-  fontFamily: "brandSans",
-  fontSize: 15,
-  fontWeight: 400,
-  "& .MuiButton-endIcon": { ml: 3 },
-  "& .MuiButton-endIcon svg": { fontSize: 18 }
-};
-
 function HomeNew() {
   return (
     <>
@@ -206,7 +197,10 @@ function HomeNew() {
             >
               ЕБ
             </Typography>
-            <Typography component="span" sx={{ fontFamily: "brandMono", fontSize: 12, color: "brand.ink" }}>
+            <Typography
+              component="span"
+              sx={{ fontFamily: "brandMono", fontSize: 12, color: "brand.ink" }}
+            >
               ebulgakov.com
             </Typography>
           </Link>
@@ -313,29 +307,16 @@ function HomeNew() {
             </Typography>
 
             <Stack direction={{ xs: "column", sm: "row" }} sx={{ gap: 1.5 }}>
-              <Button
-                variant="contained"
-                href="/works"
-                endIcon={<ArrowDownwardIcon />}
-                sx={{
-                  ...actionSx,
-                  bgcolor: "brand.blue",
-                  color: "brand.bg",
-                  borderWidth: 1,
-                  borderStyle: "solid",
-                  borderColor: "brand.blue"
-                }}
-              >
+              <ActionButton variant="contained" href="/works" endIcon={<ArrowDownwardIcon />}>
                 Смотреть проекты
-              </Button>
-              <Button
+              </ActionButton>
+              <ActionButton
                 variant="outlined"
                 href="mailto:me@ebulgakov.com"
                 endIcon={<NorthEastIcon />}
-                sx={{ ...actionSx, color: "brand.ink", borderColor: "brand.line" }}
               >
                 Связаться
-              </Button>
+              </ActionButton>
             </Stack>
           </Stack>
 
@@ -434,7 +415,12 @@ function HomeNew() {
                 </Typography>
                 <Typography
                   component="p"
-                  sx={{ fontFamily: "brandMono", fontSize: 11, lineHeight: 1.6, color: "brand.muted" }}
+                  sx={{
+                    fontFamily: "brandMono",
+                    fontSize: 11,
+                    lineHeight: 1.6,
+                    color: "brand.muted"
+                  }}
                 >
                   {stat.label}
                 </Typography>
@@ -472,7 +458,12 @@ function HomeNew() {
               <Stack
                 key={rowIndex}
                 direction={{ xs: "column", md: "row" }}
-                sx={{ gap: { md: 9 }, borderWidth: "1px 0 0", borderStyle: "solid", borderColor: "brand.line" }}
+                sx={{
+                  gap: { md: 9 },
+                  borderWidth: "1px 0 0",
+                  borderStyle: "solid",
+                  borderColor: "brand.line"
+                }}
               >
                 {row.map((item, index) => {
                   const number = String(rowIndex * 2 + index + 1).padStart(2, "0");
@@ -662,32 +653,27 @@ function HomeNew() {
               >
                 https://dns.ebulgakov.com/ ↗
               </Link>
-              <Button
+              <ActionButton
                 variant="contained"
                 href={dnsLink}
                 {...external}
                 endIcon={<NorthEastIcon />}
-                sx={{ ...actionSx, bgcolor: "brand.blue", color: "brand.bg" }}
               >
                 Открыть проект
-              </Button>
+              </ActionButton>
             </Stack>
           </Stack>
 
           <Stack direction="row" sx={{ justifyContent: "flex-end" }}>
-            <Button
+            <ActionButton
               variant="outlined"
               href="/works"
               endIcon={<NorthEastIcon />}
-              sx={{
-                ...actionSx,
-                width: { xs: "100%", sm: "auto" },
-                color: "brand.bg",
-                borderColor: "brand.darkBorder"
-              }}
+              dark
+              sx={{ width: { xs: "100%", sm: "auto" } }}
             >
               Показать все работы
-            </Button>
+            </ActionButton>
           </Stack>
         </Container>
       </Box>
@@ -714,7 +700,12 @@ function HomeNew() {
             <Stack sx={{ flexShrink: 0, width: { xs: "100%", lg: 416 }, gap: 3.5 }}>
               <Typography
                 component="h3"
-                sx={{ m: 0, fontFamily: "brandSans", fontSize: { xs: 26, md: 30 }, color: "brand.ink" }}
+                sx={{
+                  m: 0,
+                  fontFamily: "brandSans",
+                  fontSize: { xs: 26, md: 30 },
+                  color: "brand.ink"
+                }}
               >
                 MAXBITSOLUTION
               </Typography>
@@ -729,7 +720,12 @@ function HomeNew() {
                 Senior Frontend Developer
               </Typography>
               <Typography
-                sx={{ fontFamily: "brandSans", fontSize: 16, lineHeight: 1.6, color: "brand.muted" }}
+                sx={{
+                  fontFamily: "brandSans",
+                  fontSize: 16,
+                  lineHeight: 1.6,
+                  color: "brand.muted"
+                }}
               >
                 MAXBITSOLUTION — IT-компания, создающая проекты в сфере iGaming. Мы разрабатываем
                 высоконагруженные системы, а также управляем трафикообразованием и лидогенерацией.
@@ -743,7 +739,12 @@ function HomeNew() {
                   Март 2026 — Июнь 2026
                 </Typography>
                 <Typography
-                  sx={{ fontFamily: "brandSans", fontSize: 13, lineHeight: 1.5, color: "brand.muted" }}
+                  sx={{
+                    fontFamily: "brandSans",
+                    fontSize: 13,
+                    lineHeight: 1.5,
+                    color: "brand.muted"
+                  }}
                 >
                   Компания прекратила деятельность в июне 2026
                 </Typography>
@@ -772,19 +773,30 @@ function HomeNew() {
                       alignItems: "flex-start",
                       gap: { xs: 2, sm: 3.5 },
                       py: "26px",
-                      borderWidth: "1px 0 0", borderStyle: "solid", borderColor: "brand.line"
+                      borderWidth: "1px 0 0",
+                      borderStyle: "solid",
+                      borderColor: "brand.line"
                     }}
                   >
                     <Stack sx={{ flexShrink: 0, width: 144, gap: 1 }}>
                       <Typography
                         component="span"
-                        sx={{ fontFamily: "brandSans", fontSize: { xs: 36, md: 42 }, color: "brand.blue" }}
+                        sx={{
+                          fontFamily: "brandSans",
+                          fontSize: { xs: 36, md: 42 },
+                          color: "brand.blue"
+                        }}
                       >
                         {result.value}
                       </Typography>
                       <Typography
                         component="span"
-                        sx={{ fontFamily: "brandMono", fontSize: 9, lineHeight: 1.5, color: "brand.muted" }}
+                        sx={{
+                          fontFamily: "brandMono",
+                          fontSize: 9,
+                          lineHeight: 1.5,
+                          color: "brand.muted"
+                        }}
                       >
                         {result.label}
                       </Typography>
@@ -828,24 +840,22 @@ function HomeNew() {
               {"ПРОФЕССИОНАЛЬНЫЙ ОПЫТ\nИ ПОДХОД К РАБОТЕ"}
             </Typography>
             <Stack direction={{ xs: "column", sm: "row" }} sx={{ gap: 1.5 }}>
-              <Button
+              <ActionButton
                 variant="contained"
                 href={cvLink}
                 {...external}
                 endIcon={<NorthEastIcon />}
-                sx={{ ...actionSx, bgcolor: "brand.blue", color: "brand.bg" }}
               >
                 Читать резюме
-              </Button>
-              <Button
+              </ActionButton>
+              <ActionButton
                 variant="outlined"
                 href={alLink}
                 {...external}
                 endIcon={<NorthEastIcon />}
-                sx={{ ...actionSx, color: "brand.ink", borderColor: "brand.line" }}
               >
                 Читать сопроводительное письмо
-              </Button>
+              </ActionButton>
             </Stack>
           </Stack>
         </Container>
