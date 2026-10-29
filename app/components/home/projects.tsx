@@ -1,13 +1,27 @@
+"use client";
+
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 import { Box, Container, Divider, Link, Paper, Stack, Typography } from "@mui/material";
+import NextLink from "next/link";
+import { useTranslations } from "use-intl";
 
 import { ActionButton } from "@/app/components/ui/action-button";
+import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
 import { SectionHeader } from "@/app/components/ui/section-header";
 import { externalLinkProps } from "@/app/lib/constants";
 
-import { dnsLink } from "./links";
+import type { Category, Work } from "@/db/schema";
 
-function Projects() {
+type ProjectsProps = {
+  locale: string;
+  work: Work & { categoryName: Category };
+};
+
+function Projects({ work, locale }: ProjectsProps) {
+  const t = useTranslations("HomePage.featuredWork");
+  //const tWork = useTranslations("Work");
+  const linkToWork = `/works/${work.slug}`;
+
   return (
     <Box component="section" aria-labelledby="projects-title" sx={{ bgcolor: "brand.dark" }}>
       <Container
@@ -20,7 +34,7 @@ function Projects() {
       >
         <SectionHeader
           id="projects-title"
-          title="Избранные проекты"
+          title={t("title")}
           caption={["SELECTED WORK", "2026 / FULL STACK"]}
           dark
         />
@@ -29,9 +43,8 @@ function Projects() {
 
         <Stack direction={{ xs: "column", lg: "row" }} sx={{ gap: { xs: 4, lg: 7 } }}>
           <Paper
-            component="a"
-            href={dnsLink}
-            {...externalLinkProps}
+            component={NextLink}
+            href={linkToWork}
             square
             elevation={0}
             aria-label="DNS — открыть проект"
@@ -41,6 +54,8 @@ function Projects() {
               justifyContent: "space-between",
               flexShrink: 0,
               gap: 3,
+              position: "relative",
+              zIndex: 0,
               width: { xs: "100%", lg: 472 },
               height: { xs: 320, sm: 390 },
               p: { xs: 2.5, sm: 3.5 },
@@ -50,6 +65,15 @@ function Projects() {
               fontFamily: "brandMono"
             }}
           >
+            <Box className="absolute top-0 left-0 -z-1 h-full w-full flex-none opacity-50">
+              <CloudinaryImage
+                className="size-full object-cover"
+                width={350}
+                height={350}
+                src={work.previewImage.public_id}
+                alt={locale === "en" ? work.title : (work.titleRu ?? work.title)}
+              />
+            </Box>
             <Stack direction="row" sx={{ justifyContent: "space-between" }}>
               <Typography component="span" sx={{ font: "inherit", fontSize: 11 }}>
                 АНАЛИТИКА ЦЕН
@@ -64,9 +88,7 @@ function Projects() {
                 fontSize: { xs: 96, sm: 146 },
                 lineHeight: 1
               }}
-            >
-              DNS
-            </Typography>
+            ></Typography>
             <Stack
               direction="row"
               sx={{ alignItems: "flex-end", justifyContent: "space-between", fontSize: 12 }}
@@ -106,7 +128,7 @@ function Projects() {
                 color: "brand.bg"
               }}
             >
-              Отслеживание скидок и аналитика цен в DNS
+              {locale === "en" ? work.title : (work.titleRu ?? work.title)}
             </Typography>
             <Typography
               sx={{
@@ -120,18 +142,14 @@ function Projects() {
               Самаре.
             </Typography>
             <Link
-              href={dnsLink}
+              href={work.productionUrl!}
               {...externalLinkProps}
               sx={{ fontFamily: "brandMono", fontSize: 13, color: "brand.bg" }}
             >
-              https://dns.ebulgakov.com/ ↗
+              {work.productionUrl}
+              <NorthEastIcon aria-hidden sx={{ fontSize: 14, marginLeft: 1 }} />
             </Link>
-            <ActionButton
-              variant="contained"
-              href={dnsLink}
-              {...externalLinkProps}
-              endIcon={<NorthEastIcon />}
-            >
+            <ActionButton variant="contained" href={linkToWork} {...externalLinkProps}>
               Открыть проект
             </ActionButton>
           </Stack>
@@ -141,7 +159,6 @@ function Projects() {
           <ActionButton
             variant="outlined"
             href="/works"
-            endIcon={<NorthEastIcon />}
             dark
             sx={{ width: { xs: "100%", sm: "auto" } }}
           >

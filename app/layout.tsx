@@ -97,7 +97,7 @@ export default async function RootLayout({
               <ThemeProvider theme={theme}>
                 <CssBaseline />
                 <Stack sx={{ minHeight: "100vh" }}>
-                  <Box sx={{ pb: 6, backgroundColor: "brand.bg" }}>
+                  <Box sx={{ backgroundColor: "brand.bg" }}>
                     <Header locale={locale} />
                     {children}
                   </Box>
