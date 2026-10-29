@@ -1,3 +1,7 @@
+import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
+import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import ViewTimelineOutlinedIcon from "@mui/icons-material/ViewTimelineOutlined";
 import { Box, Container, Stack, Typography } from "@mui/material";
 
 import { SectionHeader } from "@/app/components/ui/section-header";
@@ -5,21 +9,25 @@ import { SectionHeader } from "@/app/components/ui/section-header";
 const competencies = [
   {
     tag: "PIXEL-PERFECT / UI",
+    icon: <GroupsOutlinedIcon />,
     title: "Связь дизайна\nи инжиниринга",
     text: "Я не просто внедряю макеты — я навожу мосты между продуктами, дизайнерами и разработчиками. Превращаю статику в pixel-perfect, поддерживаемые UI-компоненты, гарантируя, что финальный продукт соответствует видению, даже если спецификации неполны."
   },
   {
     tag: "PERFORMANCE / SCALE",
+    icon: <ViewTimelineOutlinedIcon />,
     title: "Производительность\nи архитектура",
     text: "Мой фокус — веб-производительность и масштабируемость. У меня есть опыт рефакторинга архитектуры, который улучшил критические метрики PageSpeed Insights в 2 раза. Монолит или микросервисы — я выбираю инструмент, подходящий потребностям продукта."
   },
   {
     tag: "B2B / PRINT-ON-DEMAND",
+    icon: <ShoppingCartOutlinedIcon />,
     title: "Бизнес-критичные\nрешения",
     text: "Я создаю решения, приносящие прибыль. От создания PoC для Print-on-Demand за две недели, ставшего основным источником дохода, до поддержки крупных B2B платформ. Я понимаю цену ошибки в UI, поэтому ставлю в приоритет тестирование и стабильность."
   },
   {
     tag: "OWNERSHIP / DELIVERY",
+    icon: <PsychologyOutlinedIcon />,
     title: "Мой подход",
     text: "Вы можете дать мне задачу, описанную на салфетке, и я самостоятельно организую этапы, истории и задачи. Я не «программист по тикетам» — я решаю проблемы бизнеса с помощью технологий."
   }
@@ -62,8 +70,6 @@ function Competencies() {
               }}
             >
               {row.map((item, index) => {
-                const number = String(rowIndex * 2 + index + 1).padStart(2, "0");
-
                 return (
                   <Stack
                     key={item.tag}
@@ -86,7 +92,7 @@ function Competencies() {
                         component="span"
                         sx={{ font: "inherit", fontSize: 12, color: "brand.blue" }}
                       >
-                        {number}
+                        {item.icon}
                       </Typography>
                       <Typography
                         component="span"

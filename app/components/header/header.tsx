@@ -88,7 +88,7 @@ function Header({ locale }: HeaderProps) {
           </Stack>
 
           <Stack direction="row" sx={{ alignItems: "center", gap: 3 }}>
-            <ChangeLocationSelector locale={locale} />
+            {false && <ChangeLocationSelector locale={locale} />}
             <Link
               href="https://static.ebulgakov.com/resume/CV_Evgenii_Bulgakov_Senior_Frontend_ru.pdf"
               target="_blank"
