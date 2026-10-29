@@ -1,44 +1,24 @@
-import { Container } from "@mui/material";
 import { getLocale } from "next-intl/server";
 
-import { HomeCompetencies } from "@/app/(home)/home-competencies";
-import { HomeContacts } from "@/app/(home)/home-contacts";
-import { HomeJobPosition } from "@/app/(home)/home-job-position";
-import { HomeRandomWork } from "@/app/(home)/home-random-work";
-import { HomeWall } from "@/app/(home)/home-wall";
-import { Divide } from "@/app/components/ui/divide";
+import { Competencies, Experience, Hero, Projects } from "@/app/components/home";
 import { getFeaturedWork } from "@/db/queries/get-works";
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Евгений Булгаков — Senior Frontend Engineer & System Architect"
+};
 
 async function Home() {
   const locale = await getLocale();
   const featuredWork = await getFeaturedWork();
-
   return (
-    <main>
-      <HomeWall />
-
-      <Container>
-        <HomeCompetencies />
-      </Container>
-
-      <Divide />
-
-      <Container>
-        <HomeRandomWork locale={locale} work={featuredWork} />
-      </Container>
-
-      <Divide />
-
-      <Container>
-        <HomeJobPosition />
-      </Container>
-
-      <Divide />
-
-      <Container>
-        <HomeContacts />
-      </Container>
-    </main>
+    <>
+      <Hero />
+      <Competencies />
+      <Projects work={featuredWork} locale={locale} />
+      <Experience />
+    </>
   );
 }
 

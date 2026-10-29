@@ -3,7 +3,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Open_Sans } from "next/font/google";
+import { IBM_Plex_Mono, Inter, Open_Sans } from "next/font/google";
 import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
@@ -18,6 +18,17 @@ import type { Metadata } from "next";
 const openSans = Open_Sans({
   variable: "--font-sans",
   subsets: ["cyrillic", "latin"]
+});
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["cyrillic", "latin"],
+  weight: ["400", "800"]
+});
+
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
+  subsets: ["cyrillic", "latin"],
+  weight: "400"
 });
 
 export const metadata: Metadata = {
@@ -76,18 +87,22 @@ export default async function RootLayout({
   return (
     <StrictMode>
       <NextIntlClientProvider>
-        <html lang={locale} className={openSans.variable} suppressHydrationWarning>
+        <html
+          lang={locale}
+          className={`${inter.variable} ${plexMono.variable} ${openSans.variable}`}
+          suppressHydrationWarning
+        >
           <body suppressHydrationWarning>
             <AppRouterCacheProvider options={{ enableCssLayer: true }}>
               <ThemeProvider theme={theme}>
                 <CssBaseline />
                 <Stack sx={{ minHeight: "100vh" }}>
-                  <Box sx={{ pb: 6 }}>
+                  <Box sx={{ backgroundColor: "brand.bg" }}>
                     <Header locale={locale} />
                     {children}
                   </Box>
-                  <Footer />
                 </Stack>
+                <Footer />
               </ThemeProvider>
             </AppRouterCacheProvider>
             <SpeedInsights />
