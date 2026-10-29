@@ -3,6 +3,7 @@ import NorthEastIcon from "@mui/icons-material/NorthEast";
 import { Box, Container, Divider, Stack, Typography } from "@mui/material";
 
 import { ActionButton } from "@/app/components/ui/action-button";
+import { externalLinkProps } from "@/app/lib/constants";
 
 import { Stats } from "./stats";
 import { SystemCard } from "./system-card";
@@ -22,10 +23,10 @@ function Hero() {
         }}
       >
         <Typography component="p" sx={{ font: "inherit", color: "brand.blue" }}>
-          FRONTEND ENGINEERING / SYSTEM ARCHITECTURE
+          FRONTEND ENGINEERING / SYSTEM ARCHITECTURE / PRODUCT MINDSET
         </Typography>
         <Typography component="p" sx={{ font: "inherit", color: "brand.muted" }}>
-          ТБИЛИСИ, ГРУЗИЯ
+          ТБИЛИСИ, ГРУЗИЯ / РФ, САМАРА
         </Typography>
       </Stack>
 
@@ -52,7 +53,7 @@ function Hero() {
           component="p"
           sx={{ fontFamily: "brandSans", fontSize: { xs: 18, md: 25 }, color: "brand.ink" }}
         >
-          Senior Frontend Engineer &amp; System Architect
+          Senior Frontend / Product Engineer
         </Typography>
       </Stack>
 
@@ -69,9 +70,11 @@ function Hero() {
               color: "brand.ink"
             }}
           >
-            Более 10 лет опыта разработки масштабируемых, высоконагруженных e-commerce платформ с
-            аудиторией 100k+ в день. Превращаю сложные бизнес-требования в производительные
-            веб-решения.
+            Senior Frontend Engineer: React, Next.js, Vue, Nuxt, TypeScript. Делаю интерфейсы для
+            e-commerce, B2B-порталов, CRM и админ-консолей, которые живут под A/B-тестами и
+            требованиями, меняющимися на ходу. В JiffyShirts (100k+ визитов в день) за 2 недели
+            собрал прототип сервиса кастомной печати. Потом он вырос в главный источник дохода
+            компании.
           </Typography>
 
           <Stack direction={{ xs: "column", sm: "row" }} sx={{ gap: 1.5 }}>
@@ -80,10 +83,11 @@ function Hero() {
             </ActionButton>
             <ActionButton
               variant="outlined"
-              href="mailto:me@ebulgakov.com"
+              href="https://t.me/ebulgakov"
+              {...externalLinkProps}
               endIcon={<NorthEastIcon />}
             >
-              Связаться
+              Связаться в TG
             </ActionButton>
           </Stack>
         </Stack>

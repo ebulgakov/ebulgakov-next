@@ -2,9 +2,9 @@ import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
 import { List, ListItem, Paper, Stack, Typography } from "@mui/material";
 
 const systemLayers = [
-  { name: "UI / Vue-компоненты", active: false },
-  { name: "Логика / Composables", active: true },
-  { name: "Архитектура / Масштабирование", active: false }
+  { name: "UI -> ES6/React/Vue-компоненты, Storybook", active: false },
+  { name: "Логика -> Hooks, Composables, Entities", active: true },
+  { name: "Архитектура -> FSD, C4 Model, Компромисс", active: false }
 ];
 
 function SystemCard() {
