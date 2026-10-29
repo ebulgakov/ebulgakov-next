@@ -22,8 +22,6 @@ export const metadata: Metadata = {
   title: "Евгений Булгаков — Senior Frontend Engineer & System Architect"
 };
 
-const border = (color: string) => `1px solid var(--mui-palette-brand-${color})`;
-
 const navLinks = [
   { name: "Компетенции", href: "/" },
   { name: "Проекты", href: "/works" },
@@ -323,7 +321,9 @@ function HomeNew() {
                   ...actionSx,
                   bgcolor: "brand.blue",
                   color: "brand.bg",
-                  border: border("blue")
+                  borderWidth: 1,
+                  borderStyle: "solid",
+                  borderColor: "brand.blue"
                 }}
               >
                 Смотреть проекты
@@ -374,7 +374,9 @@ function HomeNew() {
                     mt: index ? "18px" : 0,
                     px: "14px",
                     py: 1,
-                    border: border(layer.active ? "blue" : "darkBorder"),
+                    borderWidth: 1,
+                    borderStyle: "solid",
+                    borderColor: layer.active ? "brand.blue" : "brand.darkBorder",
                     bgcolor: layer.active ? "brand.blue" : "transparent",
                     fontSize: 12,
                     "&::before": index
@@ -445,7 +447,7 @@ function HomeNew() {
       <Box
         component="section"
         aria-labelledby="competencies-title"
-        sx={{ borderTop: border("line") }}
+        sx={{ borderWidth: "1px 0 0", borderStyle: "solid", borderColor: "brand.line" }}
       >
         <Container
           maxWidth={false}
@@ -470,7 +472,7 @@ function HomeNew() {
               <Stack
                 key={rowIndex}
                 direction={{ xs: "column", md: "row" }}
-                sx={{ gap: { md: 9 }, borderTop: border("line") }}
+                sx={{ gap: { md: 9 }, borderWidth: "1px 0 0", borderStyle: "solid", borderColor: "brand.line" }}
               >
                 {row.map((item, index) => {
                   const number = String(rowIndex * 2 + index + 1).padStart(2, "0");
@@ -484,7 +486,9 @@ function HomeNew() {
                         gap: "22px",
                         pt: 3,
                         pb: 4,
-                        borderTop: index ? { xs: border("line"), md: "none" } : "none"
+                        borderWidth: index ? { xs: "1px 0 0", md: 0 } : 0,
+                        borderStyle: "solid",
+                        borderColor: "brand.line"
                       }}
                     >
                       <Stack
@@ -768,7 +772,7 @@ function HomeNew() {
                       alignItems: "flex-start",
                       gap: { xs: 2, sm: 3.5 },
                       py: "26px",
-                      borderTop: border("line")
+                      borderWidth: "1px 0 0", borderStyle: "solid", borderColor: "brand.line"
                     }}
                   >
                     <Stack sx={{ flexShrink: 0, width: 144, gap: 1 }}>
