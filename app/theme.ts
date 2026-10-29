@@ -3,6 +3,27 @@
 import { createTheme } from "@mui/material/styles";
 import NextLink from "next/link";
 
+type BrandPalette = {
+  blue: string;
+  blueLight: string;
+  ink: string;
+  muted: string;
+  line: string;
+  bg: string;
+  dark: string;
+  darkBorder: string;
+  darkMuted: string;
+};
+
+declare module "@mui/material/styles" {
+  interface Palette {
+    brand: BrandPalette;
+  }
+  interface PaletteOptions {
+    brand?: BrandPalette;
+  }
+}
+
 const headingColor = "#162456";
 
 const theme = createTheme({
@@ -29,7 +50,18 @@ const theme = createTheme({
       primary: "#3e3e3e",
       secondary: "#71717b"
     },
-    divider: "#e4e4e7"
+    divider: "#e4e4e7",
+    brand: {
+      blue: "#2458ef",
+      blueLight: "#e4eaf9",
+      ink: "#202221",
+      muted: "#696d6b",
+      line: "#d0d2cc",
+      bg: "#f3f2ed",
+      dark: "#202523",
+      darkBorder: "#414743",
+      darkMuted: "#adb5af"
+    }
   },
   shape: {
     borderRadius: 10

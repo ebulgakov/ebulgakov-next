@@ -22,16 +22,7 @@ export const metadata: Metadata = {
   title: "Евгений Булгаков — Senior Frontend Engineer & System Architect"
 };
 
-const colors = {
-  blue: "#2458ef",
-  ink: "#202221",
-  muted: "#696d6b",
-  line: "#d0d2cc",
-  bg: "#f3f2ed",
-  dark: "#202523",
-  darkBorder: "#414743",
-  darkMuted: "#adb5af"
-};
+const border = (color: string) => `1px solid var(--mui-palette-brand-${color})`;
 
 const sans = "var(--font-inter), sans-serif";
 const mono = "var(--font-plex-mono), monospace";
@@ -149,7 +140,7 @@ function SectionHeader({ id, number, title, caption, dark }: SectionHeaderProps)
             fontFamily: mono,
             fontSize: { xs: 24, md: 36 },
             lineHeight: 1.4,
-            color: dark ? colors.darkMuted : colors.blue
+            color: dark ? "brand.darkMuted" : "brand.blue"
           }}
         >
           {number}
@@ -163,7 +154,7 @@ function SectionHeader({ id, number, title, caption, dark }: SectionHeaderProps)
             fontWeight: 500,
             fontSize: { xs: 32, md: 44, lg: 52 },
             lineHeight: 1.1,
-            color: dark ? colors.bg : colors.ink
+            color: dark ? "brand.bg" : "brand.ink"
           }}
         >
           {title}
@@ -179,7 +170,7 @@ function SectionHeader({ id, number, title, caption, dark }: SectionHeaderProps)
           lineHeight: 1.6,
           textAlign: { md: "right" },
           whiteSpace: "pre-line",
-          color: dark ? colors.darkMuted : colors.muted
+          color: dark ? "brand.darkMuted" : "brand.muted"
         }}
       >
         {caption.join("\n")}
@@ -216,11 +207,11 @@ function HomeNew() {
           <Link href="/" underline="none" sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
             <Typography
               component="span"
-              sx={{ fontFamily: sans, fontWeight: 800, fontSize: 28, color: colors.blue }}
+              sx={{ fontFamily: sans, fontWeight: 800, fontSize: 28, color: "brand.blue" }}
             >
               ЕБ
             </Typography>
-            <Typography component="span" sx={{ fontFamily: mono, fontSize: 12, color: colors.ink }}>
+            <Typography component="span" sx={{ fontFamily: mono, fontSize: 12, color: "brand.ink" }}>
               ebulgakov.com
             </Typography>
           </Link>
@@ -235,7 +226,7 @@ function HomeNew() {
               <Link
                 key={link.name}
                 href={link.href}
-                sx={{ fontFamily: sans, fontSize: 14, color: colors.ink }}
+                sx={{ fontFamily: sans, fontSize: 14, color: "brand.ink" }}
               >
                 {link.name}
               </Link>
@@ -245,7 +236,7 @@ function HomeNew() {
           <Stack direction="row" sx={{ alignItems: "center", gap: 3 }}>
             <Typography
               component="span"
-              sx={{ fontFamily: mono, fontSize: 12, color: colors.muted }}
+              sx={{ fontFamily: mono, fontSize: 12, color: "brand.muted" }}
             >
               RU ↓
             </Typography>
@@ -253,14 +244,14 @@ function HomeNew() {
               href="https://static.ebulgakov.com/resume/CV_Evgenii_Bulgakov_Senior_Frontend_ru.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              sx={{ fontFamily: sans, fontSize: 14, color: colors.blue }}
+              sx={{ fontFamily: sans, fontSize: 14, color: "brand.blue" }}
             >
               Резюме ↗
             </Link>
           </Stack>
         </Stack>
 
-        <Divider sx={{ borderColor: colors.line }} />
+        <Divider sx={{ borderColor: "brand.line" }} />
 
         <Stack
           direction={{ xs: "column", sm: "row" }}
@@ -273,10 +264,10 @@ function HomeNew() {
             fontSize: 12
           }}
         >
-          <Typography component="p" sx={{ font: "inherit", color: colors.blue }}>
+          <Typography component="p" sx={{ font: "inherit", color: "brand.blue" }}>
             FRONTEND ENGINEERING / SYSTEM ARCHITECTURE
           </Typography>
-          <Typography component="p" sx={{ font: "inherit", color: colors.muted }}>
+          <Typography component="p" sx={{ font: "inherit", color: "brand.muted" }}>
             ТБИЛИСИ, ГРУЗИЯ
           </Typography>
         </Stack>
@@ -289,7 +280,7 @@ function HomeNew() {
             fontWeight: 400,
             fontSize: { xs: 48, sm: 72, md: 96, lg: 112 },
             lineHeight: 1.02,
-            color: colors.ink
+            color: "brand.ink"
           }}
         >
           Евгений Булгаков
@@ -299,10 +290,10 @@ function HomeNew() {
           direction="row"
           sx={{ alignItems: "center", gap: 2, pt: { xs: 2, md: 2.5 }, pb: { xs: 4, md: 5.5 } }}
         >
-          <Box sx={{ flexShrink: 0, width: 36, height: 3, bgcolor: colors.blue }} />
+          <Box sx={{ flexShrink: 0, width: 36, height: 3, bgcolor: "brand.blue" }} />
           <Typography
             component="p"
-            sx={{ fontFamily: sans, fontSize: { xs: 18, md: 25 }, color: colors.ink }}
+            sx={{ fontFamily: sans, fontSize: { xs: 18, md: 25 }, color: "brand.ink" }}
           >
             Senior Frontend Engineer &amp; System Architect
           </Typography>
@@ -318,7 +309,7 @@ function HomeNew() {
                 fontFamily: sans,
                 fontSize: { xs: 18, md: 25 },
                 lineHeight: 1.45,
-                color: colors.ink
+                color: "brand.ink"
               }}
             >
               Более 10 лет опыта разработки масштабируемых, высоконагруженных e-commerce платформ с
@@ -333,9 +324,9 @@ function HomeNew() {
                 endIcon={<ArrowDownwardIcon />}
                 sx={{
                   ...actionSx,
-                  bgcolor: colors.blue,
-                  color: colors.bg,
-                  border: `1px solid ${colors.blue}`
+                  bgcolor: "brand.blue",
+                  color: "brand.bg",
+                  border: border("blue")
                 }}
               >
                 Смотреть проекты
@@ -344,7 +335,7 @@ function HomeNew() {
                 variant="outlined"
                 href="mailto:me@ebulgakov.com"
                 endIcon={<NorthEastIcon />}
-                sx={{ ...actionSx, color: colors.ink, borderColor: colors.line }}
+                sx={{ ...actionSx, color: "brand.ink", borderColor: "brand.line" }}
               >
                 Связаться
               </Button>
@@ -363,8 +354,8 @@ function HomeNew() {
               gap: 3,
               width: { xs: "100%", lg: 416 },
               p: { xs: 2.5, sm: 3.5 },
-              bgcolor: colors.dark,
-              color: colors.darkMuted,
+              bgcolor: "brand.dark",
+              color: "brand.darkMuted",
               fontFamily: mono
             }}
           >
@@ -386,8 +377,8 @@ function HomeNew() {
                     mt: index ? "18px" : 0,
                     px: "14px",
                     py: 1,
-                    border: `1px solid ${layer.active ? colors.blue : colors.darkBorder}`,
-                    bgcolor: layer.active ? colors.blue : "transparent",
+                    border: border(layer.active ? "blue" : "darkBorder"),
+                    bgcolor: layer.active ? "brand.blue" : "transparent",
                     fontSize: 12,
                     "&::before": index
                       ? {
@@ -397,12 +388,12 @@ function HomeNew() {
                           left: "50%",
                           width: "1px",
                           height: 18,
-                          bgcolor: colors.darkMuted
+                          bgcolor: "brand.darkMuted"
                         }
                       : undefined
                   }}
                 >
-                  <Typography component="span" sx={{ font: "inherit", color: colors.bg }}>
+                  <Typography component="span" sx={{ font: "inherit", color: "brand.bg" }}>
                     {layer.name}
                   </Typography>
                   <Typography component="span" aria-hidden sx={{ font: "inherit" }}>
@@ -418,7 +409,7 @@ function HomeNew() {
           </Paper>
         </Stack>
 
-        <Divider sx={{ borderColor: colors.line }} />
+        <Divider sx={{ borderColor: "brand.line" }} />
 
         <Grid
           component="section"
@@ -437,14 +428,14 @@ function HomeNew() {
                     fontFamily: sans,
                     fontSize: { xs: 40, md: 52 },
                     lineHeight: "normal",
-                    color: colors.ink
+                    color: "brand.ink"
                   }}
                 >
                   {stat.value}
                 </Typography>
                 <Typography
                   component="p"
-                  sx={{ fontFamily: mono, fontSize: 11, lineHeight: 1.6, color: colors.muted }}
+                  sx={{ fontFamily: mono, fontSize: 11, lineHeight: 1.6, color: "brand.muted" }}
                 >
                   {stat.label}
                 </Typography>
@@ -457,7 +448,7 @@ function HomeNew() {
       <Box
         component="section"
         aria-labelledby="competencies-title"
-        sx={{ borderTop: `1px solid ${colors.line}` }}
+        sx={{ borderTop: border("line") }}
       >
         <Container
           maxWidth={false}
@@ -482,7 +473,7 @@ function HomeNew() {
               <Stack
                 key={rowIndex}
                 direction={{ xs: "column", md: "row" }}
-                sx={{ gap: { md: 9 }, borderTop: `1px solid ${colors.line}` }}
+                sx={{ gap: { md: 9 }, borderTop: border("line") }}
               >
                 {row.map((item, index) => {
                   const number = String(rowIndex * 2 + index + 1).padStart(2, "0");
@@ -496,7 +487,7 @@ function HomeNew() {
                         gap: "22px",
                         pt: 3,
                         pb: 4,
-                        borderTop: index ? { xs: `1px solid ${colors.line}`, md: "none" } : "none"
+                        borderTop: index ? { xs: border("line"), md: "none" } : "none"
                       }}
                     >
                       <Stack
@@ -505,13 +496,13 @@ function HomeNew() {
                       >
                         <Typography
                           component="span"
-                          sx={{ font: "inherit", fontSize: 12, color: colors.blue }}
+                          sx={{ font: "inherit", fontSize: 12, color: "brand.blue" }}
                         >
                           {number}
                         </Typography>
                         <Typography
                           component="span"
-                          sx={{ font: "inherit", fontSize: 10, color: colors.muted }}
+                          sx={{ font: "inherit", fontSize: 10, color: "brand.muted" }}
                         >
                           {item.tag}
                         </Typography>
@@ -526,7 +517,7 @@ function HomeNew() {
                           fontSize: { xs: 24, md: 31 },
                           lineHeight: 1.2,
                           whiteSpace: "pre-line",
-                          color: colors.ink
+                          color: "brand.ink"
                         }}
                       >
                         {item.title}
@@ -536,7 +527,7 @@ function HomeNew() {
                           fontFamily: sans,
                           fontSize: 16,
                           lineHeight: 1.6,
-                          color: colors.muted
+                          color: "brand.muted"
                         }}
                       >
                         {item.text}
@@ -550,7 +541,7 @@ function HomeNew() {
         </Container>
       </Box>
 
-      <Box component="section" aria-labelledby="projects-title" sx={{ bgcolor: colors.dark }}>
+      <Box component="section" aria-labelledby="projects-title" sx={{ bgcolor: "brand.dark" }}>
         <Container
           maxWidth={false}
           sx={{
@@ -569,7 +560,7 @@ function HomeNew() {
             dark
           />
 
-          <Divider sx={{ borderColor: colors.darkBorder }} />
+          <Divider sx={{ borderColor: "brand.darkBorder" }} />
 
           <Stack direction={{ xs: "column", lg: "row" }} sx={{ gap: { xs: 4, lg: 7 } }}>
             <Paper
@@ -588,8 +579,8 @@ function HomeNew() {
                 width: { xs: "100%", lg: 472 },
                 height: { xs: 320, sm: 390 },
                 p: { xs: 2.5, sm: 3.5 },
-                bgcolor: colors.blue,
-                color: colors.bg,
+                bgcolor: "brand.blue",
+                color: "brand.bg",
                 textDecoration: "none",
                 fontFamily: mono
               }}
@@ -630,7 +621,7 @@ function HomeNew() {
             <Stack component="article" sx={{ flex: 1, alignItems: "flex-start", gap: "26px" }}>
               <Stack
                 direction="row"
-                sx={{ gap: 3, fontFamily: mono, fontSize: 12, color: colors.darkMuted }}
+                sx={{ gap: 3, fontFamily: mono, fontSize: 12, color: "brand.darkMuted" }}
               >
                 <Typography component="span" sx={{ font: "inherit" }}>
                   2026
@@ -647,7 +638,7 @@ function HomeNew() {
                   fontWeight: 500,
                   fontSize: { xs: 28, md: 40 },
                   lineHeight: 1.16,
-                  color: colors.bg
+                  color: "brand.bg"
                 }}
               >
                 Отслеживание скидок и аналитика цен в DNS
@@ -657,7 +648,7 @@ function HomeNew() {
                   fontFamily: sans,
                   fontSize: { xs: 16, md: 18 },
                   lineHeight: 1.6,
-                  color: colors.darkMuted
+                  color: "brand.darkMuted"
                 }}
               >
                 Это неофициальная платформа аналитики DNS, созданная для поиска товаров со скидками
@@ -666,7 +657,7 @@ function HomeNew() {
               <Link
                 href={dnsLink}
                 {...external}
-                sx={{ fontFamily: mono, fontSize: 13, color: colors.bg }}
+                sx={{ fontFamily: mono, fontSize: 13, color: "brand.bg" }}
               >
                 https://dns.ebulgakov.com/ ↗
               </Link>
@@ -675,7 +666,7 @@ function HomeNew() {
                 href={dnsLink}
                 {...external}
                 endIcon={<NorthEastIcon />}
-                sx={{ ...actionSx, bgcolor: colors.blue, color: colors.bg }}
+                sx={{ ...actionSx, bgcolor: "brand.blue", color: "brand.bg" }}
               >
                 Открыть проект
               </Button>
@@ -690,8 +681,8 @@ function HomeNew() {
               sx={{
                 ...actionSx,
                 width: { xs: "100%", sm: "auto" },
-                color: colors.bg,
-                borderColor: colors.darkBorder
+                color: "brand.bg",
+                borderColor: "brand.darkBorder"
               }}
             >
               Показать все работы
@@ -722,7 +713,7 @@ function HomeNew() {
             <Stack sx={{ flexShrink: 0, width: { xs: "100%", lg: 416 }, gap: 3.5 }}>
               <Typography
                 component="h3"
-                sx={{ m: 0, fontFamily: sans, fontSize: { xs: 26, md: 30 }, color: colors.ink }}
+                sx={{ m: 0, fontFamily: sans, fontSize: { xs: 26, md: 30 }, color: "brand.ink" }}
               >
                 MAXBITSOLUTION
               </Typography>
@@ -731,43 +722,43 @@ function HomeNew() {
                   fontFamily: sans,
                   fontSize: { xs: 20, md: 24 },
                   lineHeight: 1.3,
-                  color: colors.ink
+                  color: "brand.ink"
                 }}
               >
                 Senior Frontend Developer
               </Typography>
               <Typography
-                sx={{ fontFamily: sans, fontSize: 16, lineHeight: 1.6, color: colors.muted }}
+                sx={{ fontFamily: sans, fontSize: 16, lineHeight: 1.6, color: "brand.muted" }}
               >
                 MAXBITSOLUTION — IT-компания, создающая проекты в сфере iGaming. Мы разрабатываем
                 высоконагруженные системы, а также управляем трафикообразованием и лидогенерацией.
               </Typography>
-              <Divider sx={{ borderColor: colors.line }} />
+              <Divider sx={{ borderColor: "brand.line" }} />
               <Stack sx={{ gap: 1 }}>
-                <Typography sx={{ fontFamily: mono, fontSize: 10, color: colors.muted }}>
+                <Typography sx={{ fontFamily: mono, fontSize: 10, color: "brand.muted" }}>
                   ПЕРИОД РАБОТЫ
                 </Typography>
-                <Typography sx={{ fontFamily: sans, fontSize: 18, color: colors.ink }}>
+                <Typography sx={{ fontFamily: sans, fontSize: 18, color: "brand.ink" }}>
                   Март 2026 — Июнь 2026
                 </Typography>
                 <Typography
-                  sx={{ fontFamily: sans, fontSize: 13, lineHeight: 1.5, color: colors.muted }}
+                  sx={{ fontFamily: sans, fontSize: 13, lineHeight: 1.5, color: "brand.muted" }}
                 >
                   Компания прекратила деятельность в июне 2026
                 </Typography>
               </Stack>
               <Stack sx={{ gap: 1 }}>
-                <Typography sx={{ fontFamily: mono, fontSize: 10, color: colors.muted }}>
+                <Typography sx={{ fontFamily: mono, fontSize: 10, color: "brand.muted" }}>
                   ЛОКАЦИЯ
                 </Typography>
-                <Typography sx={{ fontFamily: sans, fontSize: 16, color: colors.ink }}>
+                <Typography sx={{ fontFamily: sans, fontSize: 16, color: "brand.ink" }}>
                   Беларусь, Минск
                 </Typography>
               </Stack>
             </Stack>
 
             <Stack sx={{ flex: 1, gap: 2.5 }}>
-              <Typography sx={{ fontFamily: mono, fontSize: 12, color: colors.muted }}>
+              <Typography sx={{ fontFamily: mono, fontSize: 12, color: "brand.muted" }}>
                 МОЯ ЗОНА ОТВЕТСТВЕННОСТИ
               </Typography>
               <List disablePadding>
@@ -780,19 +771,19 @@ function HomeNew() {
                       alignItems: "flex-start",
                       gap: { xs: 2, sm: 3.5 },
                       py: "26px",
-                      borderTop: `1px solid ${colors.line}`
+                      borderTop: border("line")
                     }}
                   >
                     <Stack sx={{ flexShrink: 0, width: 144, gap: 1 }}>
                       <Typography
                         component="span"
-                        sx={{ fontFamily: sans, fontSize: { xs: 36, md: 42 }, color: colors.blue }}
+                        sx={{ fontFamily: sans, fontSize: { xs: 36, md: 42 }, color: "brand.blue" }}
                       >
                         {result.value}
                       </Typography>
                       <Typography
                         component="span"
-                        sx={{ fontFamily: mono, fontSize: 9, lineHeight: 1.5, color: colors.muted }}
+                        sx={{ fontFamily: mono, fontSize: 9, lineHeight: 1.5, color: "brand.muted" }}
                       >
                         {result.label}
                       </Typography>
@@ -803,7 +794,7 @@ function HomeNew() {
                         fontFamily: sans,
                         fontSize: 16,
                         lineHeight: 1.6,
-                        color: colors.ink
+                        color: "brand.ink"
                       }}
                     >
                       {result.text}
@@ -821,7 +812,7 @@ function HomeNew() {
               justifyContent: "space-between",
               gap: 3,
               p: { xs: 2.5, sm: 4 },
-              bgcolor: "#e4eaf9"
+              bgcolor: "brand.blueLight"
             }}
           >
             <Typography
@@ -830,7 +821,7 @@ function HomeNew() {
                 fontSize: 12,
                 lineHeight: 1.7,
                 whiteSpace: "pre-line",
-                color: colors.blue
+                color: "brand.blue"
               }}
             >
               {"ПРОФЕССИОНАЛЬНЫЙ ОПЫТ\nИ ПОДХОД К РАБОТЕ"}
@@ -841,7 +832,7 @@ function HomeNew() {
                 href={cvLink}
                 {...external}
                 endIcon={<NorthEastIcon />}
-                sx={{ ...actionSx, bgcolor: colors.blue, color: colors.bg }}
+                sx={{ ...actionSx, bgcolor: "brand.blue", color: "brand.bg" }}
               >
                 Читать резюме
               </Button>
@@ -850,7 +841,7 @@ function HomeNew() {
                 href={alLink}
                 {...external}
                 endIcon={<NorthEastIcon />}
-                sx={{ ...actionSx, color: colors.ink, borderColor: colors.line }}
+                sx={{ ...actionSx, color: "brand.ink", borderColor: "brand.line" }}
               >
                 Читать сопроводительное письмо
               </Button>
@@ -859,7 +850,7 @@ function HomeNew() {
         </Container>
       </Box>
 
-      <Box component="section" aria-labelledby="contacts-title" sx={{ bgcolor: colors.dark }}>
+      <Box component="section" aria-labelledby="contacts-title" sx={{ bgcolor: "brand.dark" }}>
         <Container
           maxWidth={false}
           sx={{
@@ -891,7 +882,7 @@ function HomeNew() {
                 fontSize: { xs: 40, sm: 56, md: 78 },
                 lineHeight: 1.06,
                 whiteSpace: "pre-line",
-                color: colors.bg
+                color: "brand.bg"
               }}
             >
               {"Есть задача?\nДавайте обсудим."}
@@ -906,8 +897,8 @@ function HomeNew() {
                 width: { xs: 64, md: 104 },
                 height: { xs: 64, md: 104 },
                 borderRadius: 0,
-                bgcolor: colors.blue,
-                color: colors.bg
+                bgcolor: "brand.blue",
+                color: "brand.bg"
               }}
             >
               <NorthEastIcon sx={{ fontSize: { xs: 32, md: 52 } }} />
@@ -921,7 +912,7 @@ function HomeNew() {
               alignSelf: "flex-start",
               fontFamily: sans,
               fontSize: { xs: 26, md: 43 },
-              color: colors.bg,
+              color: "brand.bg",
               textDecorationColor: "currentColor",
               wordBreak: "break-word"
             }}
@@ -933,13 +924,13 @@ function HomeNew() {
             {contacts.map(contact => (
               <Grid key={contact.channel} component="li" size={{ xs: 12, sm: 6, md: 4 }}>
                 <Stack sx={{ gap: 2, py: "26px" }}>
-                  <Divider sx={{ borderColor: colors.darkBorder }} />
+                  <Divider sx={{ borderColor: "brand.darkBorder" }} />
                   <Stack
                     direction="row"
                     sx={{
                       alignItems: "center",
                       justifyContent: "space-between",
-                      color: colors.darkMuted
+                      color: "brand.darkMuted"
                     }}
                   >
                     <Typography component="span" sx={{ fontFamily: mono, fontSize: 11 }}>
@@ -958,7 +949,7 @@ function HomeNew() {
                       fontFamily: sans,
                       fontSize: { xs: 20, md: 24 },
                       lineHeight: 1.2,
-                      color: colors.bg
+                      color: "brand.bg"
                     }}
                   >
                     {contact.value}
@@ -969,14 +960,14 @@ function HomeNew() {
           </Grid>
 
           <Stack component="footer" sx={{ gap: 3 }}>
-            <Divider sx={{ borderColor: colors.darkBorder }} />
+            <Divider sx={{ borderColor: "brand.darkBorder" }} />
             <Stack
               direction="row"
               sx={{ alignItems: "center", justifyContent: "space-between", gap: 2 }}
             >
               <Typography
                 component="span"
-                sx={{ fontFamily: sans, fontWeight: 800, fontSize: 26, color: colors.bg }}
+                sx={{ fontFamily: sans, fontWeight: 800, fontSize: 26, color: "brand.bg" }}
               >
                 ЕБ
               </Typography>
@@ -986,7 +977,7 @@ function HomeNew() {
                   fontFamily: mono,
                   fontSize: 11,
                   textAlign: "center",
-                  color: colors.darkMuted
+                  color: "brand.darkMuted"
                 }}
               >
                 Сделано с любовью © 2026
@@ -994,7 +985,7 @@ function HomeNew() {
               <Link
                 href="#"
                 underline="none"
-                sx={{ flexShrink: 0, fontFamily: mono, fontSize: 11, color: colors.bg }}
+                sx={{ flexShrink: 0, fontFamily: mono, fontSize: 11, color: "brand.bg" }}
               >
                 НАВЕРХ ↑
               </Link>
