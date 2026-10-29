@@ -22,6 +22,14 @@ declare module "@mui/material/styles" {
   interface PaletteOptions {
     brand?: BrandPalette;
   }
+  interface TypographyVariants {
+    brandSans: string;
+    brandMono: string;
+  }
+  interface TypographyVariantsOptions {
+    brandSans?: string;
+    brandMono?: string;
+  }
 }
 
 const headingColor = "#162456";
@@ -68,6 +76,8 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: "var(--font-sans), sans-serif",
+    brandSans: "var(--font-inter), sans-serif",
+    brandMono: "var(--font-plex-mono), monospace",
     h1: {
       fontSize: "1.5rem",
       fontWeight: 500,

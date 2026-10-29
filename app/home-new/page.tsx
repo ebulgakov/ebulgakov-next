@@ -24,9 +24,6 @@ export const metadata: Metadata = {
 
 const border = (color: string) => `1px solid var(--mui-palette-brand-${color})`;
 
-const sans = "var(--font-inter), sans-serif";
-const mono = "var(--font-plex-mono), monospace";
-
 const navLinks = [
   { name: "Компетенции", href: "/" },
   { name: "Проекты", href: "/works" },
@@ -137,7 +134,7 @@ function SectionHeader({ id, number, title, caption, dark }: SectionHeaderProps)
           sx={{
             flexShrink: 0,
             width: { md: 80 },
-            fontFamily: mono,
+            fontFamily: "brandMono",
             fontSize: { xs: 24, md: 36 },
             lineHeight: 1.4,
             color: dark ? "brand.darkMuted" : "brand.blue"
@@ -150,7 +147,7 @@ function SectionHeader({ id, number, title, caption, dark }: SectionHeaderProps)
           component="h2"
           sx={{
             m: 0,
-            fontFamily: sans,
+            fontFamily: "brandSans",
             fontWeight: 500,
             fontSize: { xs: 32, md: 44, lg: 52 },
             lineHeight: 1.1,
@@ -165,7 +162,7 @@ function SectionHeader({ id, number, title, caption, dark }: SectionHeaderProps)
         sx={{
           flexShrink: 0,
           width: { md: 220 },
-          fontFamily: mono,
+          fontFamily: "brandMono",
           fontSize: 11,
           lineHeight: 1.6,
           textAlign: { md: "right" },
@@ -183,7 +180,7 @@ const actionSx = {
   height: 54,
   px: "22px",
   borderRadius: 0,
-  fontFamily: sans,
+  fontFamily: "brandSans",
   fontSize: 15,
   fontWeight: 400,
   "& .MuiButton-endIcon": { ml: 3 },
@@ -207,11 +204,11 @@ function HomeNew() {
           <Link href="/" underline="none" sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
             <Typography
               component="span"
-              sx={{ fontFamily: sans, fontWeight: 800, fontSize: 28, color: "brand.blue" }}
+              sx={{ fontFamily: "brandSans", fontWeight: 800, fontSize: 28, color: "brand.blue" }}
             >
               ЕБ
             </Typography>
-            <Typography component="span" sx={{ fontFamily: mono, fontSize: 12, color: "brand.ink" }}>
+            <Typography component="span" sx={{ fontFamily: "brandMono", fontSize: 12, color: "brand.ink" }}>
               ebulgakov.com
             </Typography>
           </Link>
@@ -226,7 +223,7 @@ function HomeNew() {
               <Link
                 key={link.name}
                 href={link.href}
-                sx={{ fontFamily: sans, fontSize: 14, color: "brand.ink" }}
+                sx={{ fontFamily: "brandSans", fontSize: 14, color: "brand.ink" }}
               >
                 {link.name}
               </Link>
@@ -236,7 +233,7 @@ function HomeNew() {
           <Stack direction="row" sx={{ alignItems: "center", gap: 3 }}>
             <Typography
               component="span"
-              sx={{ fontFamily: mono, fontSize: 12, color: "brand.muted" }}
+              sx={{ fontFamily: "brandMono", fontSize: 12, color: "brand.muted" }}
             >
               RU ↓
             </Typography>
@@ -244,7 +241,7 @@ function HomeNew() {
               href="https://static.ebulgakov.com/resume/CV_Evgenii_Bulgakov_Senior_Frontend_ru.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              sx={{ fontFamily: sans, fontSize: 14, color: "brand.blue" }}
+              sx={{ fontFamily: "brandSans", fontSize: 14, color: "brand.blue" }}
             >
               Резюме ↗
             </Link>
@@ -260,7 +257,7 @@ function HomeNew() {
             gap: 1,
             pt: { xs: 3, md: 5 },
             pb: { xs: 2, md: 3.5 },
-            fontFamily: mono,
+            fontFamily: "brandMono",
             fontSize: 12
           }}
         >
@@ -276,7 +273,7 @@ function HomeNew() {
           component="h1"
           sx={{
             m: 0,
-            fontFamily: sans,
+            fontFamily: "brandSans",
             fontWeight: 400,
             fontSize: { xs: 48, sm: 72, md: 96, lg: 112 },
             lineHeight: 1.02,
@@ -293,7 +290,7 @@ function HomeNew() {
           <Box sx={{ flexShrink: 0, width: 36, height: 3, bgcolor: "brand.blue" }} />
           <Typography
             component="p"
-            sx={{ fontFamily: sans, fontSize: { xs: 18, md: 25 }, color: "brand.ink" }}
+            sx={{ fontFamily: "brandSans", fontSize: { xs: 18, md: 25 }, color: "brand.ink" }}
           >
             Senior Frontend Engineer &amp; System Architect
           </Typography>
@@ -306,7 +303,7 @@ function HomeNew() {
           <Stack sx={{ maxWidth: 716, gap: 4 }}>
             <Typography
               sx={{
-                fontFamily: sans,
+                fontFamily: "brandSans",
                 fontSize: { xs: 18, md: 25 },
                 lineHeight: 1.45,
                 color: "brand.ink"
@@ -356,7 +353,7 @@ function HomeNew() {
               p: { xs: 2.5, sm: 3.5 },
               bgcolor: "brand.dark",
               color: "brand.darkMuted",
-              fontFamily: mono
+              fontFamily: "brandMono"
             }}
           >
             <Stack direction="row" sx={{ alignItems: "center", justifyContent: "space-between" }}>
@@ -425,7 +422,7 @@ function HomeNew() {
                   component="p"
                   sx={{
                     flexShrink: 0,
-                    fontFamily: sans,
+                    fontFamily: "brandSans",
                     fontSize: { xs: 40, md: 52 },
                     lineHeight: "normal",
                     color: "brand.ink"
@@ -435,7 +432,7 @@ function HomeNew() {
                 </Typography>
                 <Typography
                   component="p"
-                  sx={{ fontFamily: mono, fontSize: 11, lineHeight: 1.6, color: "brand.muted" }}
+                  sx={{ fontFamily: "brandMono", fontSize: 11, lineHeight: 1.6, color: "brand.muted" }}
                 >
                   {stat.label}
                 </Typography>
@@ -492,7 +489,7 @@ function HomeNew() {
                     >
                       <Stack
                         direction="row"
-                        sx={{ justifyContent: "space-between", gap: 2, fontFamily: mono }}
+                        sx={{ justifyContent: "space-between", gap: 2, fontFamily: "brandMono" }}
                       >
                         <Typography
                           component="span"
@@ -512,7 +509,7 @@ function HomeNew() {
                         sx={{
                           m: 0,
                           minHeight: { md: 76 },
-                          fontFamily: sans,
+                          fontFamily: "brandSans",
                           fontWeight: 500,
                           fontSize: { xs: 24, md: 31 },
                           lineHeight: 1.2,
@@ -524,7 +521,7 @@ function HomeNew() {
                       </Typography>
                       <Typography
                         sx={{
-                          fontFamily: sans,
+                          fontFamily: "brandSans",
                           fontSize: 16,
                           lineHeight: 1.6,
                           color: "brand.muted"
@@ -582,7 +579,7 @@ function HomeNew() {
                 bgcolor: "brand.blue",
                 color: "brand.bg",
                 textDecoration: "none",
-                fontFamily: mono
+                fontFamily: "brandMono"
               }}
             >
               <Stack direction="row" sx={{ justifyContent: "space-between" }}>
@@ -594,7 +591,7 @@ function HomeNew() {
               <Typography
                 component="span"
                 sx={{
-                  fontFamily: sans,
+                  fontFamily: "brandSans",
                   fontWeight: 600,
                   fontSize: { xs: 96, sm: 146 },
                   lineHeight: 1
@@ -621,7 +618,7 @@ function HomeNew() {
             <Stack component="article" sx={{ flex: 1, alignItems: "flex-start", gap: "26px" }}>
               <Stack
                 direction="row"
-                sx={{ gap: 3, fontFamily: mono, fontSize: 12, color: "brand.darkMuted" }}
+                sx={{ gap: 3, fontFamily: "brandMono", fontSize: 12, color: "brand.darkMuted" }}
               >
                 <Typography component="span" sx={{ font: "inherit" }}>
                   2026
@@ -634,7 +631,7 @@ function HomeNew() {
                 component="h3"
                 sx={{
                   m: 0,
-                  fontFamily: sans,
+                  fontFamily: "brandSans",
                   fontWeight: 500,
                   fontSize: { xs: 28, md: 40 },
                   lineHeight: 1.16,
@@ -645,7 +642,7 @@ function HomeNew() {
               </Typography>
               <Typography
                 sx={{
-                  fontFamily: sans,
+                  fontFamily: "brandSans",
                   fontSize: { xs: 16, md: 18 },
                   lineHeight: 1.6,
                   color: "brand.darkMuted"
@@ -657,7 +654,7 @@ function HomeNew() {
               <Link
                 href={dnsLink}
                 {...external}
-                sx={{ fontFamily: mono, fontSize: 13, color: "brand.bg" }}
+                sx={{ fontFamily: "brandMono", fontSize: 13, color: "brand.bg" }}
               >
                 https://dns.ebulgakov.com/ ↗
               </Link>
@@ -713,13 +710,13 @@ function HomeNew() {
             <Stack sx={{ flexShrink: 0, width: { xs: "100%", lg: 416 }, gap: 3.5 }}>
               <Typography
                 component="h3"
-                sx={{ m: 0, fontFamily: sans, fontSize: { xs: 26, md: 30 }, color: "brand.ink" }}
+                sx={{ m: 0, fontFamily: "brandSans", fontSize: { xs: 26, md: 30 }, color: "brand.ink" }}
               >
                 MAXBITSOLUTION
               </Typography>
               <Typography
                 sx={{
-                  fontFamily: sans,
+                  fontFamily: "brandSans",
                   fontSize: { xs: 20, md: 24 },
                   lineHeight: 1.3,
                   color: "brand.ink"
@@ -728,37 +725,37 @@ function HomeNew() {
                 Senior Frontend Developer
               </Typography>
               <Typography
-                sx={{ fontFamily: sans, fontSize: 16, lineHeight: 1.6, color: "brand.muted" }}
+                sx={{ fontFamily: "brandSans", fontSize: 16, lineHeight: 1.6, color: "brand.muted" }}
               >
                 MAXBITSOLUTION — IT-компания, создающая проекты в сфере iGaming. Мы разрабатываем
                 высоконагруженные системы, а также управляем трафикообразованием и лидогенерацией.
               </Typography>
               <Divider sx={{ borderColor: "brand.line" }} />
               <Stack sx={{ gap: 1 }}>
-                <Typography sx={{ fontFamily: mono, fontSize: 10, color: "brand.muted" }}>
+                <Typography sx={{ fontFamily: "brandMono", fontSize: 10, color: "brand.muted" }}>
                   ПЕРИОД РАБОТЫ
                 </Typography>
-                <Typography sx={{ fontFamily: sans, fontSize: 18, color: "brand.ink" }}>
+                <Typography sx={{ fontFamily: "brandSans", fontSize: 18, color: "brand.ink" }}>
                   Март 2026 — Июнь 2026
                 </Typography>
                 <Typography
-                  sx={{ fontFamily: sans, fontSize: 13, lineHeight: 1.5, color: "brand.muted" }}
+                  sx={{ fontFamily: "brandSans", fontSize: 13, lineHeight: 1.5, color: "brand.muted" }}
                 >
                   Компания прекратила деятельность в июне 2026
                 </Typography>
               </Stack>
               <Stack sx={{ gap: 1 }}>
-                <Typography sx={{ fontFamily: mono, fontSize: 10, color: "brand.muted" }}>
+                <Typography sx={{ fontFamily: "brandMono", fontSize: 10, color: "brand.muted" }}>
                   ЛОКАЦИЯ
                 </Typography>
-                <Typography sx={{ fontFamily: sans, fontSize: 16, color: "brand.ink" }}>
+                <Typography sx={{ fontFamily: "brandSans", fontSize: 16, color: "brand.ink" }}>
                   Беларусь, Минск
                 </Typography>
               </Stack>
             </Stack>
 
             <Stack sx={{ flex: 1, gap: 2.5 }}>
-              <Typography sx={{ fontFamily: mono, fontSize: 12, color: "brand.muted" }}>
+              <Typography sx={{ fontFamily: "brandMono", fontSize: 12, color: "brand.muted" }}>
                 МОЯ ЗОНА ОТВЕТСТВЕННОСТИ
               </Typography>
               <List disablePadding>
@@ -777,13 +774,13 @@ function HomeNew() {
                     <Stack sx={{ flexShrink: 0, width: 144, gap: 1 }}>
                       <Typography
                         component="span"
-                        sx={{ fontFamily: sans, fontSize: { xs: 36, md: 42 }, color: "brand.blue" }}
+                        sx={{ fontFamily: "brandSans", fontSize: { xs: 36, md: 42 }, color: "brand.blue" }}
                       >
                         {result.value}
                       </Typography>
                       <Typography
                         component="span"
-                        sx={{ fontFamily: mono, fontSize: 9, lineHeight: 1.5, color: "brand.muted" }}
+                        sx={{ fontFamily: "brandMono", fontSize: 9, lineHeight: 1.5, color: "brand.muted" }}
                       >
                         {result.label}
                       </Typography>
@@ -791,7 +788,7 @@ function HomeNew() {
                     <Typography
                       sx={{
                         flex: 1,
-                        fontFamily: sans,
+                        fontFamily: "brandSans",
                         fontSize: 16,
                         lineHeight: 1.6,
                         color: "brand.ink"
@@ -817,7 +814,7 @@ function HomeNew() {
           >
             <Typography
               sx={{
-                fontFamily: mono,
+                fontFamily: "brandMono",
                 fontSize: 12,
                 lineHeight: 1.7,
                 whiteSpace: "pre-line",
@@ -877,7 +874,7 @@ function HomeNew() {
             <Typography
               component="p"
               sx={{
-                fontFamily: sans,
+                fontFamily: "brandSans",
                 fontWeight: 500,
                 fontSize: { xs: 40, sm: 56, md: 78 },
                 lineHeight: 1.06,
@@ -910,7 +907,7 @@ function HomeNew() {
             underline="always"
             sx={{
               alignSelf: "flex-start",
-              fontFamily: sans,
+              fontFamily: "brandSans",
               fontSize: { xs: 26, md: 43 },
               color: "brand.bg",
               textDecorationColor: "currentColor",
@@ -933,7 +930,7 @@ function HomeNew() {
                       color: "brand.darkMuted"
                     }}
                   >
-                    <Typography component="span" sx={{ fontFamily: mono, fontSize: 11 }}>
+                    <Typography component="span" sx={{ fontFamily: "brandMono", fontSize: 11 }}>
                       {contact.channel}
                     </Typography>
                     {contact.isLocation ? (
@@ -946,7 +943,7 @@ function HomeNew() {
                     href={contact.href}
                     {...(contact.href.startsWith("http") ? external : {})}
                     sx={{
-                      fontFamily: sans,
+                      fontFamily: "brandSans",
                       fontSize: { xs: 20, md: 24 },
                       lineHeight: 1.2,
                       color: "brand.bg"
@@ -967,14 +964,14 @@ function HomeNew() {
             >
               <Typography
                 component="span"
-                sx={{ fontFamily: sans, fontWeight: 800, fontSize: 26, color: "brand.bg" }}
+                sx={{ fontFamily: "brandSans", fontWeight: 800, fontSize: 26, color: "brand.bg" }}
               >
                 ЕБ
               </Typography>
               <Typography
                 component="span"
                 sx={{
-                  fontFamily: mono,
+                  fontFamily: "brandMono",
                   fontSize: 11,
                   textAlign: "center",
                   color: "brand.darkMuted"
@@ -985,7 +982,7 @@ function HomeNew() {
               <Link
                 href="#"
                 underline="none"
-                sx={{ flexShrink: 0, fontFamily: mono, fontSize: 11, color: "brand.bg" }}
+                sx={{ flexShrink: 0, fontFamily: "brandMono", fontSize: 11, color: "brand.bg" }}
               >
                 НАВЕРХ ↑
               </Link>
