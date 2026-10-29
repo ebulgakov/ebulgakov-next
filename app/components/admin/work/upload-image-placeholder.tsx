@@ -1,5 +1,7 @@
 "use client";
 
+import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
+import { Button } from "@mui/material";
 import { CldUploadWidget } from "next-cloudinary";
 
 import type { WorkImage } from "@/types/common";
@@ -31,13 +33,15 @@ function UploadImagePlaceholder({ onAdd }: UploadImagePlaceholderProps) {
     >
       {({ open }) => {
         return (
-          <button
-            type="button"
+          <Button
+            variant="outlined"
+            color="inherit"
             onClick={() => open()}
-            className="flex size-50 cursor-pointer items-center justify-center rounded border-2 border-dashed border-gray-300 transition hover:border-gray-800"
+            startIcon={<AddPhotoAlternateOutlinedIcon />}
+            className="size-50 flex-none border-2 border-dashed text-gray-500"
           >
-            <span className="text-gray-500">Add Image</span>
-          </button>
+            Add Image
+          </Button>
         );
       }}
     </CldUploadWidget>

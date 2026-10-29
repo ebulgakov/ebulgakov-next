@@ -1,6 +1,6 @@
-import Link from "next/link";
+import { Stack, Typography } from "@mui/material";
 
-import { cn } from "@/app/lib/utils";
+import { FilterChip } from "./filter-chip";
 
 type FilterRowProps = {
   items: {
@@ -15,23 +15,17 @@ type FilterRowProps = {
 
 function FilterRow({ items, title, getUrl, selectedItem, prop }: FilterRowProps) {
   return (
-    <div className="flex flex-wrap">
-      <div className="mr-4 self-center text-lg w-full md:w-auto">{title}</div>
+    <Stack direction="row" useFlexGap spacing={1} sx={{ flexWrap: "wrap", alignItems: "center" }}>
+      <Typography className="mr-3 w-full text-lg md:w-auto">{title}</Typography>
       {items.map(item => (
-        <Link
-          href={getUrl({ [prop]: item.value === selectedItem ? "-" : item.value })}
+        <FilterChip
           key={item.value}
-          className={cn(
-            "m-1 cursor-pointer rounded border border-gray-300 bg-gray-100 px-3 py-1 text-sm hover:bg-gray-200",
-            {
-              "bg-gray-300": item.value === selectedItem
-            }
-          )}
-        >
-          {item.label}
-        </Link>
+          href={getUrl({ [prop]: item.value === selectedItem ? "-" : item.value })}
+          label={item.label}
+          selected={item.value === selectedItem}
+        />
       ))}
-    </div>
+    </Stack>
   );
 }
 

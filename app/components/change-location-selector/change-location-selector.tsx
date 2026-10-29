@@ -1,54 +1,62 @@
 "use client";
-import { ChevronDown } from "lucide-react";
+import CheckIcon from "@mui/icons-material/Check";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { Button, ListItemIcon, ListItemText, ListSubheader, Menu, MenuItem } from "@mui/material";
+import { useState } from "react";
 import { useTranslations } from "use-intl";
-
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuLabel,
-  DropdownMenuCheckboxItem
-} from "@/app/components/ui/dropdown-menu";
 
 type ChangeLocationSelectorProps = {
   locale?: string;
 };
 
+const languages = [
+  { value: "en", label: "English 🇬🇧" },
+  { value: "ru", label: "Русский 🇷🇺" }
+];
+
+function handleChangeLanguage(value: string) {
+  document.cookie = `locale=${value}; path=/; max-age=31536000`;
+  window.location.reload();
+}
+
 function ChangeLocationSelector({ locale = "ru" }: ChangeLocationSelectorProps) {
   const t = useTranslations("Header");
-  const handleChangeLanguage = (value: string) => {
-    document.cookie = `locale=${value}; path=/; max-age=31536000`;
-    window.location.reload();
-  };
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <button  className="flex text-2xl items-center">
-          {locale === "ru" ? "🇷🇺" : "🇬🇧"}
-          <ChevronDown className="block text-secondary size-4" />
-        </button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-40">
-        <DropdownMenuGroup>
-          <DropdownMenuLabel>{t('changeLanguage')}</DropdownMenuLabel>
-          <DropdownMenuCheckboxItem
-            checked={locale === "en"}
-            disabled={locale === "en"}
-            onCheckedChange={() => handleChangeLanguage("en")}
+    <>
+      <Button
+        color="inherit"
+        aria-haspopup="menu"
+        aria-expanded={!!anchorEl}
+        onClick={e => setAnchorEl(e.currentTarget)}
+        endIcon={<KeyboardArrowDownIcon className="text-secondary" />}
+        className="min-w-0 px-1 text-2xl"
+      >
+        {locale === "ru" ? "🇷🇺" : "🇬🇧"}
+      </Button>
+      <Menu
+        anchorEl={anchorEl}
+        open={!!anchorEl}
+        onClose={() => setAnchorEl(null)}
+        slotProps={{ list: { dense: true, className: "w-40" } }}
+      >
+        <ListSubheader>{t("changeLanguage")}</ListSubheader>
+        {languages.map(language => (
+          <MenuItem
+            key={language.value}
+            selected={locale === language.value}
+            disabled={locale === language.value}
+            onClick={() => handleChangeLanguage(language.value)}
           >
-           English 🇬🇧
-          </DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem
-            checked={locale === "ru"}
-            disabled={locale === "ru"}
-            onCheckedChange={() => handleChangeLanguage("ru")}
-          >
-           Русский 🇷🇺
-          </DropdownMenuCheckboxItem>
-        </DropdownMenuGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
+            <ListItemIcon>
+              {locale === language.value && <CheckIcon fontSize="small" />}
+            </ListItemIcon>
+            <ListItemText>{language.label}</ListItemText>
+          </MenuItem>
+        ))}
+      </Menu>
+    </>
   );
 }
 

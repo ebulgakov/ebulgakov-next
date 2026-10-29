@@ -1,8 +1,6 @@
-import Link from "next/link";
+import { Button, Container, Grid, Stack, Typography } from "@mui/material";
 import { getLocale } from "next-intl/server";
 
-import { Container } from "@/app/components/ui/container";
-import { Title } from "@/app/components/ui/title";
 import { WorkPreview } from "@/app/components/work-preview";
 import { getWorks } from "@/db/queries/get-works";
 
@@ -13,16 +11,20 @@ async function AdminWorksPage() {
   return (
     <main>
       <Container>
-        <div className="flex justify-between items-baseline">
-          <Title variant="h1">Admin Works Page</Title>
-          <Link href="/admin/works/new" className="text-primary text-lg font-bold hover:underline">Add New Work</Link>
-        </div>
+        <Stack direction="row" sx={{ justifyContent: "space-between", alignItems: "baseline" }}>
+          <Typography variant="h1">Admin Works Page</Typography>
+          <Button href="/admin/works/new" variant="contained" size="large">
+            Add New Work
+          </Button>
+        </Stack>
 
-        <div className="grid grid-cols-3 gap-2">
+        <Grid container spacing={1}>
           {worksResponse.map(work => (
-            <WorkPreview locale={locale} key={work.id} work={work} slugPrefix="/admin/works/" />
+            <Grid key={work.id} size={4}>
+              <WorkPreview locale={locale} work={work} slugPrefix="/admin/works/" />
+            </Grid>
           ))}
-        </div>
+        </Grid>
       </Container>
     </main>
   );

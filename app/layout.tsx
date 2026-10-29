@@ -1,4 +1,6 @@
-import { NeonAuthUIProvider } from "@neondatabase/auth/react";
+import { Box, CssBaseline, Stack } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Open_Sans } from "next/font/google";
@@ -9,7 +11,7 @@ import { StrictMode } from "react";
 
 import { Footer } from "@/app/components/footer";
 import { Header } from "@/app/components/header";
-import { authClient } from "@/app/lib/auth/client";
+import { theme } from "@/app/theme";
 
 import type { Metadata } from "next";
 
@@ -75,16 +77,19 @@ export default async function RootLayout({
     <StrictMode>
       <NextIntlClientProvider>
         <html lang={locale} className={openSans.variable} suppressHydrationWarning>
-          <body className="antialiased" suppressHydrationWarning>
-            <NeonAuthUIProvider authClient={authClient} redirectTo="/admin" emailOTP>
-              <div className="grid min-h-screen">
-                <div className="pb-12">
-                  <Header locale={locale} />
-                  {children}
-                </div>
-                <Footer />
-              </div>
-            </NeonAuthUIProvider>
+          <body suppressHydrationWarning>
+            <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+              <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <Stack sx={{ minHeight: "100vh" }}>
+                  <Box sx={{ pb: 6 }}>
+                    <Header locale={locale} />
+                    {children}
+                  </Box>
+                  <Footer />
+                </Stack>
+              </ThemeProvider>
+            </AppRouterCacheProvider>
             <SpeedInsights />
           </body>
           {process.env.GA_ID && <GoogleAnalytics gaId={process.env.GA_ID} />}
