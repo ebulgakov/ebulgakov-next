@@ -297,7 +297,6 @@ function HomeNew() {
         >
           <SectionHeader
             id="competencies-title"
-            number="01"
             title="Компетенции"
             caption={["ПОДХОД К РАЗРАБОТКЕ", "ОТ ИДЕИ ДО СИСТЕМЫ"]}
           />
@@ -393,7 +392,6 @@ function HomeNew() {
         >
           <SectionHeader
             id="projects-title"
-            number="02"
             title="Избранные проекты"
             caption={["SELECTED WORK", "2026 / FULL STACK"]}
             dark
@@ -536,7 +534,6 @@ function HomeNew() {
         >
           <SectionHeader
             id="experience-title"
-            number="03"
             title="Последний опыт"
             caption={["ПРАКТИКА И РЕЗУЛЬТАТЫ", "МАРТ — ИЮНЬ 2026"]}
           />
