@@ -1,7 +1,7 @@
 "use client";
 import CheckIcon from "@mui/icons-material/Check";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { Button, ListItemIcon, ListItemText, ListSubheader, Menu, MenuItem } from "@mui/material";
+import { Button, ListItemIcon, ListItemText, ListSubheader, Menu, MenuItem, Typography } from "@mui/material";
 import { useState } from "react";
 import { useTranslations } from "use-intl";
 
@@ -30,10 +30,14 @@ function ChangeLocationSelector({ locale = "ru" }: ChangeLocationSelectorProps) 
         aria-haspopup="menu"
         aria-expanded={!!anchorEl}
         onClick={e => setAnchorEl(e.currentTarget)}
-        endIcon={<KeyboardArrowDownIcon className="text-secondary" />}
-        className="min-w-0 px-1 text-2xl"
+        className="min-w-0 p-0"
       >
-        {locale === "ru" ? "🇷🇺" : "🇬🇧"}
+        <Typography
+          component="span"
+          sx={{ fontFamily: "brandMono", fontSize: 12, color: "brand.muted" }}
+        >
+          {locale === "ru" ? "RU" : "EN"} ↓
+        </Typography>
       </Button>
       <Menu
         anchorEl={anchorEl}

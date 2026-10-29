@@ -121,68 +121,6 @@ function HomeNew() {
     <>
       <Container>
         <Stack
-          component="header"
-          direction="row"
-          sx={{
-            minHeight: { xs: 72, md: 104 },
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 2
-          }}
-        >
-          <Link href="/" underline="none" sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
-            <Typography
-              component="span"
-              sx={{ fontFamily: "brandSans", fontWeight: 800, fontSize: 28, color: "brand.blue" }}
-            >
-              ЕБ
-            </Typography>
-            <Typography
-              component="span"
-              sx={{ fontFamily: "brandMono", fontSize: 12, color: "brand.ink" }}
-            >
-              ebulgakov.com
-            </Typography>
-          </Link>
-
-          <Stack
-            component="nav"
-            direction="row"
-            aria-label="Разделы"
-            sx={{ display: { xs: "none", md: "flex" }, gap: 4 }}
-          >
-            {navLinks.map(link => (
-              <Link
-                key={link.name}
-                href={link.href}
-                sx={{ fontFamily: "brandSans", fontSize: 14, color: "brand.ink" }}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </Stack>
-
-          <Stack direction="row" sx={{ alignItems: "center", gap: 3 }}>
-            <Typography
-              component="span"
-              sx={{ fontFamily: "brandMono", fontSize: 12, color: "brand.muted" }}
-            >
-              RU ↓
-            </Typography>
-            <Link
-              href="https://static.ebulgakov.com/resume/CV_Evgenii_Bulgakov_Senior_Frontend_ru.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{ fontFamily: "brandSans", fontSize: 14, color: "brand.blue" }}
-            >
-              Резюме ↗
-            </Link>
-          </Stack>
-        </Stack>
-
-        <Divider sx={{ borderColor: "brand.line" }} />
-
-        <Stack
           direction={{ xs: "column", sm: "row" }}
           sx={{
             justifyContent: "space-between",

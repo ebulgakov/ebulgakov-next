@@ -5,16 +5,20 @@ import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
   Box,
+  Container,
+  Link,
   Dialog,
+  Divider,
   IconButton,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
-  Toolbar
+  Stack,
+  Toolbar,
+  Typography
 } from "@mui/material";
 import Image from "next/image";
-import Link from "next/link";
 import { Fragment, useState } from "react";
 import { useTranslations } from "use-intl";
 
@@ -26,7 +30,6 @@ type HeaderProps = {
 
 function Header({ locale }: HeaderProps) {
   const t = useTranslations("Header");
-  const tCVAL = useTranslations("CVAL");
   const [showMenu, setShowMenu] = useState(false);
 
   const handleToggleMenu = () => {
@@ -35,22 +38,23 @@ function Header({ locale }: HeaderProps) {
 
   const menuLinks = [
     { name: t("worksTitle"), url: "/works" },
-    { name: t("linkedinTitle"), url: "https://www.linkedin.com/in/ebulgakov/" },
-    {
-      name: tCVAL("cvShortTitle"),
-      url: tCVAL("cvLink")
-    },
-    {
-      name: tCVAL("alShortTitle"),
-      url: tCVAL("alLink")
-    }
+    { name: t("linkedinTitle"), url: "https://www.linkedin.com/in/ebulgakov/" }
   ];
 
   return (
     <Fragment>
-      <AppBar position="sticky" elevation={0} className="z-20 bg-gray-900/70 backdrop-blur">
-        <Toolbar className="gap-4 px-4">
-          <Link href="/">
+      <Container>
+        <Stack
+          component="header"
+          direction="row"
+          sx={{
+            minHeight: { xs: 72, md: 104 },
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 2
+          }}
+        >
+          <Link href="/" underline="none" sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
             <Image
               className="block"
               width={33}
@@ -58,16 +62,55 @@ function Header({ locale }: HeaderProps) {
               src="/img/logo.svg"
               alt={t("logoAlt")}
             />
+            <Typography
+              component="span"
+              sx={{ fontFamily: "brandMono", fontSize: 12, color: "brand.ink" }}
+            >
+              ebulgakov.com
+            </Typography>
           </Link>
 
-          <Box className="mr-auto">
+          <Stack
+            component="nav"
+            direction="row"
+            aria-label="Разделы"
+            sx={{ display: { xs: "none", md: "flex" }, gap: 4 }}
+          >
+            {menuLinks.map(link => (
+              <Link
+                key={link.name}
+                href={link.url}
+                sx={{ fontFamily: "brandSans", fontSize: 14, color: "brand.ink" }}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </Stack>
+
+          <Stack direction="row" sx={{ alignItems: "center", gap: 3 }}>
             <ChangeLocationSelector locale={locale} />
-          </Box>
-          <IconButton color="inherit" aria-label="Toggle Menu" onClick={handleToggleMenu}>
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+            <Link
+              href="https://static.ebulgakov.com/resume/CV_Evgenii_Bulgakov_Senior_Frontend_ru.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{ fontFamily: "brandSans", fontSize: 14, color: "brand.blue" }}
+            >
+              Резюме ↗
+            </Link>
+
+            <IconButton
+              sx={{ display: { md: "none" } }}
+              color="inherit"
+              aria-label="Toggle Menu"
+              onClick={handleToggleMenu}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Stack>
+        </Stack>
+
+        <Divider sx={{ borderColor: "brand.line" }} />
+      </Container>
 
       <Dialog
         open={showMenu}
