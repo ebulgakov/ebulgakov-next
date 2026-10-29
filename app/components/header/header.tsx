@@ -1,13 +1,24 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
+import {
+  AppBar,
+  Box,
+  Dialog,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Toolbar
+} from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useState } from "react";
 import { useTranslations } from "use-intl";
 
 import { ChangeLocationSelector } from "@/app/components/change-location-selector";
-import { cn } from "@/app/lib/utils";
 
 type HeaderProps = {
   locale?: string;
@@ -37,8 +48,8 @@ function Header({ locale }: HeaderProps) {
 
   return (
     <Fragment>
-      <header className="sticky top-0 z-20 bg-gray-900/70 text-white backdrop-blur">
-        <div className="flex items-center justify-between gap-4 p-4">
+      <AppBar position="sticky" elevation={0} className="z-20 bg-gray-900/70 backdrop-blur">
+        <Toolbar className="gap-4 px-4">
           <Link href="/">
             <Image
               className="block"
@@ -49,61 +60,55 @@ function Header({ locale }: HeaderProps) {
             />
           </Link>
 
-          <div className="mr-auto">
+          <Box className="mr-auto">
             <ChangeLocationSelector locale={locale} />
-          </div>
-          <button
-            className="group relative size-8 cursor-pointer rounded-md p-1 transition hover:bg-gray-900"
-            aria-label="Toggle Menu"
-            onClick={handleToggleMenu}
-          >
-            <Menu className="size-full" />
-          </button>
-        </div>
-      </header>
+          </Box>
+          <IconButton color="inherit" aria-label="Toggle Menu" onClick={handleToggleMenu}>
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
 
-      <div
-        className={cn("fixed inset-0 z-50 items-center justify-center bg-gray-900/70 p-5", {
-          hidden: !showMenu,
-          flex: showMenu
-        })}
+      <Dialog
+        open={showMenu}
+        onClose={handleToggleMenu}
+        slotProps={{ paper: { className: "w-70 overflow-visible rounded-tr-none md:w-80" } }}
       >
-        <button className="absolute inset-0" onClick={handleToggleMenu} />
-        <nav className="relative w-70 rounded-sm rounded-tr-none bg-white p-2 shadow-lg md:w-80">
-          <button
-            className="absolute -top-8 -right-8 size-8 cursor-pointer rounded-md rounded-bl-none bg-white p-1 transition hover:bg-gray-200"
-            aria-label={t("closeMenu")}
-            onClick={handleToggleMenu}
-          >
-            <X className="size-full" />
-          </button>
+        <IconButton
+          className="absolute -top-10 -right-10 rounded-bl-none bg-white hover:bg-gray-200"
+          aria-label={t("closeMenu")}
+          onClick={handleToggleMenu}
+        >
+          <CloseIcon />
+        </IconButton>
 
-          <ul>
-            {menuLinks.map(link => (
-              <li key={link.name} className="text-center">
-                {link.url.startsWith("http") ? (
-                  <a
-                    className="block py-3 text-lg hover:bg-gray-900 hover:text-white"
-                    href={link.url}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    {link.name}
-                  </a>
-                ) : (
-                  <Link
-                    className="block py-3 text-lg hover:bg-gray-900 hover:text-white"
-                    onClick={handleToggleMenu}
-                    href={link.url}
-                  >
-                    {link.name}
-                  </Link>
-                )}
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
+        <List component="nav" className="p-2">
+          {menuLinks.map(link => (
+            <ListItem key={link.name} disablePadding>
+              {link.url.startsWith("http") ? (
+                <ListItemButton
+                  component="a"
+                  className="text-center"
+                  href={link.url}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <ListItemText primary={link.name} slotProps={{ primary: { variant: "h6" } }} />
+                </ListItemButton>
+              ) : (
+                <ListItemButton
+                  component={Link}
+                  className="text-center"
+                  onClick={handleToggleMenu}
+                  href={link.url}
+                >
+                  <ListItemText primary={link.name} slotProps={{ primary: { variant: "h6" } }} />
+                </ListItemButton>
+              )}
+            </ListItem>
+          ))}
+        </List>
+      </Dialog>
     </Fragment>
   );
 }

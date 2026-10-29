@@ -1,21 +1,25 @@
+import { Box, Container, Paper, Typography } from "@mui/material";
 import { neonAuth } from "@neondatabase/auth/next/server";
+
 async function ServerRenderedPage() {
   const { session, user } = await neonAuth();
   return (
-    <div className="mx-auto max-w-xl space-y-4 p-6">
-      <h1 className="text-2xl font-semibold">Server Rendered Page</h1>
-      <p className="text-gray-400">
+    <Container maxWidth="sm" className="space-y-4 py-6">
+      <Typography variant="h1" className="my-0 text-2xl font-semibold">
+        Server Rendered Page
+      </Typography>
+      <Typography color="text.secondary">
         Authenticated:{" "}
-        <span className={session ? "text-green-500" : "text-red-500"}>
+        <Box component="span" sx={{ color: session ? "success.main" : "error.main" }}>
           {session ? "Yes" : "No"}
-        </span>
-      </p>
-      {user && <p className="text-gray-400">User ID: {user.id}</p>}
-      <p className="font-medium text-gray-700 dark:text-gray-200">Session and User Data:</p>
-      <pre className="overflow-x-auto rounded bg-gray-100 p-4 text-sm text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+        </Box>
+      </Typography>
+      {user && <Typography color="text.secondary">User ID: {user.id}</Typography>}
+      <Typography sx={{ fontWeight: 500 }}>Session and User Data:</Typography>
+      <Paper variant="outlined" component="pre" className="overflow-x-auto bg-gray-100 p-4 text-sm">
         {JSON.stringify({ session, user }, null, 2)}
-      </pre>
-    </div>
+      </Paper>
+    </Container>
   );
 }
 

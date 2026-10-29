@@ -1,5 +1,6 @@
+import { Container } from "@mui/material";
+
 import { AdminEditWork } from "@/app/components/admin/work";
-import { Container } from "@/app/components/ui/container";
 import { getAllCategories } from "@/db/queries/get-categories";
 import { getAllTags, getTagsByWorkId } from "@/db/queries/get-tags";
 import { getWorkBySlug } from "@/db/queries/get-works";

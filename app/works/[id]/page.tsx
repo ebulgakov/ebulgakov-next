@@ -1,13 +1,12 @@
-import { ArrowLeft, ExternalLink } from "lucide-react";
-import Link from "next/link";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import { Box, Container, Link, Stack, Typography } from "@mui/material";
 import { getLocale } from "next-intl/server";
 import ReactMarkdown from "react-markdown";
 
 import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
-import { Container } from "@/app/components/ui/container";
 import { Divide } from "@/app/components/ui/divide";
 import { FrameContainer } from "@/app/components/ui/frame-container";
-import { Title } from "@/app/components/ui/title";
 import { getWorkBySlug } from "@/db/queries/get-works";
 
 import styles from "./work.module.css";
@@ -51,33 +50,29 @@ async function WorkPage({ params }: WorkPageProps) {
   return (
     <main>
       <Container>
-        <div className="mt-8">
-          <Link href="/works" className="text-primary inline-flex gap-2 hover:underline">
-            <ArrowLeft />
+        <Box sx={{ mt: 4 }}>
+          <Link href="/works" className="inline-flex gap-2">
+            <ArrowBackIcon />
             Back to all works
           </Link>
-        </div>
+        </Box>
 
-        <Title variant="h1" className="mt-3">
+        <Typography variant="h1" className="mt-3">
           {locale === "en" ? title : (titleRu ?? title)}
-        </Title>
+        </Typography>
 
-        <div className="flex flex-col gap-2 lg:flex-row lg:gap-8">
+        <Stack direction={{ xs: "column", lg: "row" }} spacing={{ xs: 1, lg: 4 }}>
           <dl className="flex gap-2">
             <dt className="font-medium">Category:</dt>
             <dd>
-              <Link href={`/works?category=${category}`} className="text-primary hover:underline">
-                {categoryName.name}
-              </Link>
+              <Link href={`/works?category=${category}`}>{categoryName.name}</Link>
             </dd>
           </dl>
 
           <dl className="flex gap-2">
             <dt className="font-medium">Year:</dt>
             <dd>
-              <Link className="text-primary hover:underline" href={`/works?year=${year}`}>
-                {year === "2000" ? "…–2010" : year}
-              </Link>
+              <Link href={`/works?year=${year}`}>{year === "2000" ? "…–2010" : year}</Link>
             </dd>
           </dl>
 
@@ -85,14 +80,14 @@ async function WorkPage({ params }: WorkPageProps) {
             <dl className="flex gap-2">
               <dt className="font-medium">Link to site:</dt>
               <dd>
-                <a
+                <Link
                   href={productionUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary inline-flex hover:underline"
+                  className="inline-flex"
                 >
-                  {productionUrl} <ExternalLink className="ml-1 size-4 self-center" />
-                </a>
+                  {productionUrl} <OpenInNewIcon className="ml-1 size-4 self-center" />
+                </Link>
               </dd>
             </dl>
           )}
@@ -101,14 +96,15 @@ async function WorkPage({ params }: WorkPageProps) {
             <dl className="flex gap-2">
               <dt className="font-medium">Link to live code:</dt>
               <dd>
-                <a
+                <Link
                   href={staticUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary inline-flex hover:underline"
+                  className="inline-flex"
                 >
-                  https://static.ebulgakov.com/ <ExternalLink className="ml-1 size-4 self-center" />
-                </a>
+                  https://static.ebulgakov.com/{" "}
+                  <OpenInNewIcon className="ml-1 size-4 self-center" />
+                </Link>
               </dd>
             </dl>
           )}
@@ -117,21 +113,23 @@ async function WorkPage({ params }: WorkPageProps) {
             <dt className="font-medium">Used technologies:</dt>
             <dd>{workTags.map(({ tag }) => tag.name).join(", ")}</dd>
           </dl>
-        </div>
+        </Stack>
 
-        <div className="my-6">
-          <Title variant="h3">Description</Title>
+        <Box sx={{ my: 3 }}>
+          <Typography variant="h3">Description</Typography>
           <div className={styles.wrapper}>
-            <ReactMarkdown>{locale === "en" ? description : (descriptionRu ?? description)}</ReactMarkdown>
+            <ReactMarkdown>
+              {locale === "en" ? description : (descriptionRu ?? description)}
+            </ReactMarkdown>
           </div>
-        </div>
+        </Box>
 
         {images?.map(image => (
           <figure key={image.public_id} className="mb-10">
             {image.caption && (
-              <figcaption className="mt-2 text-center text-2xl font-bold">
+              <Typography component="figcaption" className="mt-2 text-center text-2xl font-bold">
                 {image.caption}
-              </figcaption>
+              </Typography>
             )}
             <CloudinaryImage
               className="block w-full"

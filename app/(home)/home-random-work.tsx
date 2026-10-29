@@ -1,11 +1,11 @@
 "use client";
 
-import { CirclePlay } from "lucide-react";
-import Link from "next/link";
+import PlayCircleOutlinedIcon from "@mui/icons-material/PlayCircleOutlined";
+import { Box, Link, Stack, Typography } from "@mui/material";
+import NextLink from "next/link";
 import { useTranslations } from "use-intl";
 
 import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
-import { Title } from "@/app/components/ui/title";
 
 import type { Work, Category } from "@/db/schema";
 
@@ -19,10 +19,10 @@ function HomeRandomWork({ work, locale }: HomeRandomWorkProps) {
   const linkToWork = `/works/${work.slug}`;
   return (
     <section>
-      <Title variant="h1">{t("title")}</Title>
+      <Typography variant="h1">{t("title")}</Typography>
 
-      <div className="flex flex-col gap-10 md:flex-row">
-        <Link href={linkToWork} className="h-50 w-full flex-none md:w-70">
+      <Stack direction={{ xs: "column", md: "row" }} spacing={5}>
+        <NextLink href={linkToWork} className="h-50 w-full flex-none md:w-70">
           <CloudinaryImage
             className="size-full object-cover"
             width={350}
@@ -30,28 +30,27 @@ function HomeRandomWork({ work, locale }: HomeRandomWorkProps) {
             src={work.previewImage.public_id}
             alt={locale === "en" ? work.title : (work.titleRu ?? work.title)}
           />
-        </Link>
+        </NextLink>
 
-        <div className="flex-1">
-          <Title variant="h2">
-            <Link href={linkToWork} className="text-primary hover:underline">
+        <Box className="flex-1">
+          <Typography variant="h2">
+            <Link href={linkToWork}>
               {locale === "en" ? work.title : (work.titleRu ?? work.title)}
             </Link>
-          </Title>
+          </Typography>
 
-          <div className="my-3 flex flex-col gap-4 md:flex-row md:gap-10">
+          <Stack
+            direction={{ xs: "column", md: "row" }}
+            spacing={{ xs: 2, md: 5 }}
+            sx={{ my: 1.5 }}
+          >
             {work.productionUrl && (
               <dl>
                 <dt className="text-lg font-medium md:text-xl">{tWork("linkToSite")}</dt>
                 <dd>
-                  <a
-                    href={work.productionUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
+                  <Link href={work.productionUrl} target="_blank" rel="noopener noreferrer">
                     {work.productionUrl}
-                  </a>
+                  </Link>
                 </dd>
               </dl>
             )}
@@ -60,14 +59,9 @@ function HomeRandomWork({ work, locale }: HomeRandomWorkProps) {
               <dl>
                 <dt className="text-lg font-medium md:text-xl">{tWork("linkToLiveCode")}</dt>
                 <dd>
-                  <a
-                    href={work.staticUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
+                  <Link href={work.staticUrl} target="_blank" rel="noopener noreferrer">
                     https://static.ebulgakov.com/
-                  </a>
+                  </Link>
                 </dd>
               </dl>
             )}
@@ -81,19 +75,25 @@ function HomeRandomWork({ work, locale }: HomeRandomWorkProps) {
               <dt className="text-lg font-medium md:text-xl">{tWork("category")}</dt>
               <dd>{work.categoryName.name}</dd>
             </dl>
-          </div>
+          </Stack>
 
-          <h3 className="mt-4 text-lg font-medium md:text-xl">{tWork("shortDescription")}</h3>
-          <p>{locale === "en" ? work.previewDescription : (work.previewDescriptionRu ?? work.previewDescription)}</p>
+          <Typography component="h3" className="mt-4 text-lg font-medium md:text-xl">
+            {tWork("shortDescription")}
+          </Typography>
+          <Typography>
+            {locale === "en"
+              ? work.previewDescription
+              : (work.previewDescriptionRu ?? work.previewDescription)}
+          </Typography>
 
-          <div className="mt-4 flex justify-end">
-            <Link href="/works" className="text-primary flex gap-1">
-              <CirclePlay />
-              <span className="underline hover:no-underline">{t("showAllWorks")}</span>
+          <Stack direction="row" sx={{ justifyContent: "flex-end", mt: 2 }}>
+            <Link href="/works" className="flex gap-1">
+              <PlayCircleOutlinedIcon />
+              {t("showAllWorks")}
             </Link>
-          </div>
-        </div>
-      </div>
+          </Stack>
+        </Box>
+      </Stack>
     </section>
   );
 }

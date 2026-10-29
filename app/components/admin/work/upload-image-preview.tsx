@@ -2,10 +2,10 @@
 
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { X } from "lucide-react";
+import CloseIcon from "@mui/icons-material/Close";
+import { Box, IconButton, TextField } from "@mui/material";
 
 import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
-import { Input } from "@/app/components/ui/input";
 import { WorkImage } from "@/types/common";
 
 type UploadImagePreviewProps = {
@@ -25,14 +25,15 @@ function UploadImagePreview({ image, onDelete, onUpdateCaption }: UploadImagePre
   };
 
   return (
-    <div className="relative w-50 bg-white" ref={setNodeRef} style={style} {...attributes}>
-      <button
-        type="button"
+    <Box className="relative w-50 flex-none" ref={setNodeRef} style={style} {...attributes}>
+      <IconButton
+        size="small"
+        aria-label="Remove image"
         onClick={() => onDelete(image.public_id)}
-        className="absolute -top-1 -right-1 z-10 size-5 cursor-pointer rounded-full bg-red-600 p-1 text-white hover:bg-red-700"
+        className="absolute -top-2 -right-2 z-10 bg-red-600 p-0.5 text-white hover:bg-red-700"
       >
-        <X className="size-full" />
-      </button>
+        <CloseIcon fontSize="small" />
+      </IconButton>
       <div className="size-50" {...listeners}>
         <CloudinaryImage
           width={200}
@@ -43,15 +44,15 @@ function UploadImagePreview({ image, onDelete, onUpdateCaption }: UploadImagePre
         />
       </div>
       {onUpdateCaption && (
-        <Input
+        <TextField
           className="mt-2"
           placeholder="Caption"
-          defaultValue={`${image.caption}`}
+          defaultValue={image.caption ?? ""}
           onBlur={e => onUpdateCaption(e.target.value)}
           required
         />
       )}
-    </div>
+    </Box>
   );
 }
 

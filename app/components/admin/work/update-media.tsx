@@ -3,11 +3,11 @@
 import { DndContext } from "@dnd-kit/core";
 import { restrictToHorizontalAxis } from "@dnd-kit/modifiers";
 import { SortableContext, horizontalListSortingStrategy, arrayMove } from "@dnd-kit/sortable";
+import { FormControl, FormLabel, Stack, Typography } from "@mui/material";
 import { useId } from "react";
 
 import { UploadImagePlaceholder } from "@/app/components/admin/work/upload-image-placeholder";
 import { UploadImagePreview } from "@/app/components/admin/work/upload-image-preview";
-import { Field, FieldGroup, FieldLabel, FieldLegend, FieldSet } from "@/app/components/ui/field";
 
 import type { WorkImage } from "@/types/common";
 import type { DragEndEvent } from "@dnd-kit/core/dist/types";
@@ -39,11 +39,13 @@ function UpdateMedia({
     }
   };
   return (
-    <FieldSet>
-      <FieldLegend>Media</FieldLegend>
-      <FieldGroup>
-        <Field>
-          <FieldLabel htmlFor="input-static-link">Preview Image</FieldLabel>
+    <FormControl component="fieldset" fullWidth>
+      <FormLabel component="legend" className="mb-4 text-lg font-medium">
+        Media
+      </FormLabel>
+      <Stack spacing={3}>
+        <Stack spacing={1}>
+          <Typography variant="subtitle2">Preview Image</Typography>
           <div>
             {previewImage ? (
               <UploadImagePreview
@@ -55,13 +57,11 @@ function UpdateMedia({
               <UploadImagePlaceholder onAdd={onSetPreviewImage} />
             )}
           </div>
-        </Field>
-      </FieldGroup>
+        </Stack>
 
-      <FieldGroup>
-        <Field>
-          <FieldLabel htmlFor="input-static-link">Gallery Images</FieldLabel>
-          <div className="flex gap-4">
+        <Stack spacing={1}>
+          <Typography variant="subtitle2">Gallery Images</Typography>
+          <Stack direction="row" spacing={2} className="overflow-x-auto pt-2">
             <DndContext id={dndId} onDragEnd={handleDragEnd} modifiers={[restrictToHorizontalAxis]}>
               <SortableContext
                 strategy={horizontalListSortingStrategy}
@@ -91,10 +91,10 @@ function UpdateMedia({
                 onSetWorkImages(Array.from(new Set([...workImages, data])));
               }}
             />
-          </div>
-        </Field>
-      </FieldGroup>
-    </FieldSet>
+          </Stack>
+        </Stack>
+      </Stack>
+    </FormControl>
   );
 }
 

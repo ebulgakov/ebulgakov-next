@@ -1,8 +1,6 @@
-import Link from "next/link";
+import { Box, Container, Grid, Link, Stack, Typography } from "@mui/material";
 import { getLocale } from "next-intl/server";
 
-import { Container } from "@/app/components/ui/container";
-import { Title } from "@/app/components/ui/title";
 import { WorkPreview } from "@/app/components/work-preview";
 import { getCategories } from "@/db/queries/get-categories";
 import { getUniqueWorkYears, getWorks } from "@/db/queries/get-works";
@@ -56,19 +54,19 @@ async function WorksPage({ searchParams }: WorksPageProps) {
   return (
     <main>
       <Container>
-        <Title variant="h1">All works</Title>
-        <div className="flex items-baseline gap-4">
-          <Title variant="h3" className="mt-0">
+        <Typography variant="h1">All works</Typography>
+        <Stack direction="row" spacing={2} sx={{ alignItems: "baseline" }}>
+          <Typography variant="h3" className="mt-0">
             Filters
-          </Title>
+          </Typography>
           {(year || category) && (
-            <Link className="underline" href="/works">
+            <Link underline="always" href="/works">
               Clear all
             </Link>
           )}
-        </div>
+        </Stack>
 
-        <div className="mb-2">
+        <Box sx={{ mb: 1 }}>
           <FilterRow
             prop="newYear"
             title="Year:"
@@ -76,9 +74,9 @@ async function WorksPage({ searchParams }: WorksPageProps) {
             selectedItem={year}
             getUrl={getUrl}
           />
-        </div>
+        </Box>
 
-        <div className="mb-6">
+        <Box sx={{ mb: 3 }}>
           <FilterRow
             prop="newCategory"
             title="Category:"
@@ -86,12 +84,14 @@ async function WorksPage({ searchParams }: WorksPageProps) {
             selectedItem={category}
             getUrl={getUrl}
           />
-        </div>
-        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+        </Box>
+        <Grid container spacing={1}>
           {works.map(work => (
-            <WorkPreview locale={locale} slugPrefix="/works/" key={work.id} work={work} />
+            <Grid key={work.id} size={{ xs: 12, md: 6, lg: 4 }}>
+              <WorkPreview locale={locale} slugPrefix="/works/" work={work} />
+            </Grid>
           ))}
-        </div>
+        </Grid>
       </Container>
     </main>
   );

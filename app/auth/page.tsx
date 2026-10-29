@@ -1,15 +1,12 @@
-import { AuthView } from "@neondatabase/auth/react";
+import { Container } from "@mui/material";
 
-import { cn } from "@/app/lib/utils";
+import { SignInForm } from "./sign-in-form";
 
-import styles from "./auth-page.module.css";
-
-async function AuthPage({ params }: { params: Promise<{ path: string }> }) {
-  const { path } = await params;
+function AuthPage() {
   return (
-    <main className={cn(styles.auth, "flex min-h-[100%] flex-col items-center justify-center")}>
-      <AuthView className="mx-auto" path={path} />
-    </main>
+    <Container maxWidth="xs" className="flex min-h-[70vh] flex-col justify-center">
+      <SignInForm />
+    </Container>
   );
 }
 

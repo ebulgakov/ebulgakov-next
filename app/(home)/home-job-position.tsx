@@ -1,11 +1,11 @@
 "use client";
 
-import { CirclePlay } from "lucide-react";
+import PlayCircleOutlinedIcon from "@mui/icons-material/PlayCircleOutlined";
+import { Box, Link, Stack, Typography } from "@mui/material";
 import ReactMarkdown from "react-markdown";
 import { useTranslations } from "use-intl";
 
 import { CloudinaryImage } from "@/app/components/ui/cloudinary-image";
-import { Title } from "@/app/components/ui/title";
 
 import styles from "./home-job-position.module.css";
 
@@ -15,15 +15,17 @@ function HomeJobPosition() {
 
   return (
     <section>
-      <Title variant="h1">{t("title")}</Title>
+      <Typography variant="h1">{t("title")}</Typography>
 
-      <div className="flex flex-col gap-8 md:flex-row">
-        <div className="flex-1 space-y-3">
-          <Title variant="h3" className="mt-0 mb-6">
+      <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
+        <Box className="flex-1 space-y-3">
+          <Typography variant="h3" className="mt-0 mb-6">
             {t("jobTitle")}
-          </Title>
+          </Typography>
 
-          <a
+          <Link
+            color="inherit"
+            underline="none"
             className="flex flex-col gap-3"
             href={t("companyLink")}
             target="_blank"
@@ -38,50 +40,52 @@ function HomeJobPosition() {
             />
 
             <em>{t("companyDescription")}</em>
-          </a>
+          </Link>
 
           <dl>
             <dt className="font-medium">{t("employedTitle")}</dt>
-            <dd><ReactMarkdown>{t("employedDescription")}</ReactMarkdown></dd>
+            <dd>
+              <ReactMarkdown>{t("employedDescription")}</ReactMarkdown>
+            </dd>
           </dl>
 
           <dl>
             <dt className="font-medium">{t("locationTitle")}</dt>
             <dd>{t("locationDescription")}</dd>
           </dl>
-        </div>
-        <div className="flex-2">
-          <Title variant="h3" className="mt-0 mb-6">
+        </Box>
+        <Box className="flex-2">
+          <Typography variant="h3" className="mt-0 mb-6">
             {t("responsibilityTitle")}
-          </Title>
+          </Typography>
           <div className={styles.wrapper}>
             <ReactMarkdown>{t("responsibilityDescription")}</ReactMarkdown>
           </div>
 
-          <div className="mt-4 flex justify-end gap-6">
-            <a
-              className="text-primary flex gap-1"
+          <Stack direction="row" spacing={3} sx={{ justifyContent: "flex-end", mt: 2 }}>
+            <Link
+              className="flex gap-1"
               href={tCVAL("cvLink")}
               target="_blank"
               rel="noopener noreferrer"
               title={tCVAL("cvShortTitle")}
             >
-              <CirclePlay />
-              <span className="underline hover:no-underline">{tCVAL("cvTitle")}</span>
-            </a>
-            <a
-              className="text-primary flex gap-1"
+              <PlayCircleOutlinedIcon />
+              {tCVAL("cvTitle")}
+            </Link>
+            <Link
+              className="flex gap-1"
               href={tCVAL("alLink")}
               target="_blank"
               rel="noopener noreferrer"
               title={tCVAL("alShortTitle")}
             >
-              <CirclePlay />
-              <span className="underline hover:no-underline">{tCVAL("alTitle")}</span>
-            </a>
-          </div>
-        </div>
-      </div>
+              <PlayCircleOutlinedIcon />
+              {tCVAL("alTitle")}
+            </Link>
+          </Stack>
+        </Box>
+      </Stack>
     </section>
   );
 }

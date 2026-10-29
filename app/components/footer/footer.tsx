@@ -1,31 +1,31 @@
 "use client";
+import { Box, Container, Link as MuiLink, Stack } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "use-intl";
 
-import { Container } from "@/app/components/ui/container";
-
 function Footer() {
   const t = useTranslations("Footer");
   return (
-    <footer className="mt-auto bg-gray-900 py-6 text-white">
+    <Box component="footer" className="mt-auto bg-gray-900 py-6 text-white">
       <Container>
-        <div className="flex items-center gap-4">
+        <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
           <Link href="/">
             <Image width={33} height={30} src="/img/logo.svg" alt="Ebulgakov Logo" />
           </Link>
 
-          <a
+          <MuiLink
             href="https://github.com/ebulgakov/ebulgakov-next"
-            className="underline"
+            color="inherit"
+            underline="always"
             target="_blank"
             rel="noopener noreferrer"
           >
             {t("copyright")}
-          </a>
-        </div>
+          </MuiLink>
+        </Stack>
       </Container>
-    </footer>
+    </Box>
   );
 }
 

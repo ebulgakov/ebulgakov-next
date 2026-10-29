@@ -1,8 +1,0 @@
-.auth {
-
-  [data-slot="form-item"] a,
-  [data-slot="button"][type="button"],
-  [data-slot="card-footer"] {
-    display: none;
-  }
-}

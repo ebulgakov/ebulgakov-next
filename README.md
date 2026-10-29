@@ -16,7 +16,7 @@ Live: https://ebulgakov.vercel.app/
 | Area          | Tools                                                                         |
 | ------------- | ----------------------------------------------------------------------------- |
 | Framework     | Next.js 16 (App Router, React Compiler), React 19, TypeScript 5               |
-| UI            | Tailwind CSS 4, shadcn/ui (Radix UI, Base UI), lucide-react, react-markdown   |
+| UI            | Material UI 9 (Emotion, `@mui/icons-material`), Tailwind CSS 4, react-markdown |
 | Forms         | react-hook-form, zod, dnd-kit                                                 |
 | Database      | Postgres on Neon (`@neondatabase/serverless`), Drizzle ORM, drizzle-kit       |
 | Auth          | Neon Auth (`@neondatabase/auth`)                                              |
@@ -111,8 +111,9 @@ app/
   admin/           work editor (protected)
   auth/            login
   api/             auth handler, Cloudinary upload signing
-  components/      shared and feature components (ui/ is shadcn-based)
+  components/      shared and feature components (built on Material UI)
   lib/             utilities, auth client, analytics helper
+  theme.ts         Material UI theme (palette, typography, component defaults)
 db/
   schema.ts        tables: works, categories, tags, work_tags
   relations.ts     Drizzle relations
