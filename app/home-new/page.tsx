@@ -15,21 +15,8 @@ import {
   Stack,
   Typography
 } from "@mui/material";
-import { IBM_Plex_Mono, Inter } from "next/font/google";
 
 import type { Metadata } from "next";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["cyrillic", "latin"],
-  weight: ["400", "800"]
-});
-
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex-mono",
-  subsets: ["cyrillic", "latin"],
-  weight: "400"
-});
 
 export const metadata: Metadata = {
   title: "Евгений Булгаков — Senior Frontend Engineer & System Architect"
@@ -214,7 +201,7 @@ const actionSx = {
 
 function HomeNew() {
   return (
-    <Box component="main" className={`${inter.variable} ${plexMono.variable}`}>
+    <>
       <Container maxWidth={false} sx={containerSx}>
         <Stack
           component="header"
@@ -1015,7 +1002,7 @@ function HomeNew() {
           </Stack>
         </Container>
       </Box>
-    </Box>
+    </>
   );
 }
 
