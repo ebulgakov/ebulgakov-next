@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useTranslations } from "use-intl";
 
 import { SectionHeader } from "@/app/components/ui/section-header";
+import { externalLinkProps } from "@/app/lib/constants";
 
 const contacts = [
   { channel: "EMAIL", value: "me@ebulgakov.com", href: "mailto:me@ebulgakov.com" },
@@ -120,7 +121,7 @@ function Footer() {
                   </Stack>
                   <Link
                     href={contact.href}
-                    {...(contact.href.startsWith("http") ? external : {})}
+                    {...(contact.href.startsWith("http") ? externalLinkProps : {})}
                     sx={{
                       fontFamily: "brandSans",
                       fontSize: { xs: 20, md: 24 },
