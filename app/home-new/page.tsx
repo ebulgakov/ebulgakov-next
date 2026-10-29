@@ -116,12 +116,10 @@ const dnsLink = "https://dns.ebulgakov.com/";
 
 const external = { target: "_blank", rel: "noopener noreferrer" };
 
-const containerSx = { maxWidth: 1440, px: { xs: 2, lg: 9 } };
-
 function HomeNew() {
   return (
     <>
-      <Container maxWidth={false} sx={containerSx}>
+      <Container>
         <Stack
           component="header"
           direction="row"
@@ -378,9 +376,7 @@ function HomeNew() {
         sx={{ borderWidth: "1px 0 0", borderStyle: "solid", borderColor: "brand.line" }}
       >
         <Container
-          maxWidth={false}
           sx={{
-            ...containerSx,
             display: "flex",
             flexDirection: "column",
             gap: { xs: 4, md: 6 },
@@ -477,9 +473,7 @@ function HomeNew() {
 
       <Box component="section" aria-labelledby="projects-title" sx={{ bgcolor: "brand.dark" }}>
         <Container
-          maxWidth={false}
           sx={{
-            ...containerSx,
             display: "flex",
             flexDirection: "column",
             gap: { xs: 4, md: 6 },
@@ -622,9 +616,7 @@ function HomeNew() {
 
       <Box component="section" aria-labelledby="experience-title">
         <Container
-          maxWidth={false}
           sx={{
-            ...containerSx,
             display: "flex",
             flexDirection: "column",
             gap: { xs: 5, md: 7 },
@@ -805,9 +797,7 @@ function HomeNew() {
 
       <Box component="section" aria-labelledby="contacts-title" sx={{ bgcolor: "brand.dark" }}>
         <Container
-          maxWidth={false}
           sx={{
-            ...containerSx,
             display: "flex",
             flexDirection: "column",
             gap: { xs: 4, md: 6 },

@@ -109,8 +109,21 @@ const theme = createTheme({
   components: {
     MuiContainer: {
       defaultProps: {
-        maxWidth: "xl"
-      }
+        maxWidth: false
+      },
+      // Default site container; explicit sizes (maxWidth="xs" | "sm" ...) keep MUI's own rules
+      variants: [
+        {
+          props: { maxWidth: false },
+          style: {
+            maxWidth: 1440,
+            paddingLeft: 16,
+            paddingRight: 16,
+            "@media (min-width:640px)": { paddingLeft: 16, paddingRight: 16 },
+            "@media (min-width:1024px)": { paddingLeft: 72, paddingRight: 72 }
+          }
+        }
+      ]
     },
     MuiTypography: {
       variants: [
